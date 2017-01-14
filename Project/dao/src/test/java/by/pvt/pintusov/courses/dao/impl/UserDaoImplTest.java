@@ -36,7 +36,8 @@ public class UserDaoImplTest {
 	@Ignore
 	@Test
 	public void testAdd() throws Exception {
-		User actual = UserDaoImpl.getInstance().getByLogin(user.getLogin());
+		User actual = EntityBuilder.buildUser("TEST", "TEST","TEST", "TEST", 0);
+		UserDaoImpl.getInstance().add(actual);
 		Assert.assertEquals(user, actual);
 	}
 

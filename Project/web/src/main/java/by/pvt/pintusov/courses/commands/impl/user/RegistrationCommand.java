@@ -30,7 +30,7 @@ public class RegistrationCommand extends AbstractCommand {
 		try {
 			user = RequestParameterParser.getUser(request);
 			if (areFieldsFullStocked()) {
-				if (UserServiceImpl.getInstance().checkIsNewUser(user)) {
+				if (UserServiceImpl.getInstance().checkIsNewUser(user.getLogin())) {
 					UserServiceImpl.getInstance().add(user);
 					page = ConfigurationManager.getInstance().getProperty(PagePath.REGISTRATION_PAGE_PATH);
 					request.setAttribute(Parameters.OPERATION_MESSAGE, MessageManager.getInstance().getProperty(MessageConstants.SUCCESS_OPERATION));

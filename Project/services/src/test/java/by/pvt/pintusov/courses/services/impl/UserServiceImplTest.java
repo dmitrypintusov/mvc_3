@@ -13,15 +13,17 @@ import org.junit.*;
  * Created by USER on 09.01.17.
  */
 public class UserServiceImplTest {
-	private User user;
+	private static User user;
 
-	@Before
-	public void setUp(){
+	@BeforeClass
+	public static void setUp() throws Exception {
 		user = EntityBuilder.buildUser("TEST", "TEST", "TEST", "TEST", 0);
+		UserServiceImpl.getInstance().add(user);
 	}
 
-	@After
-	public void tearDown() throws Exception{
+	@AfterClass
+	public static void tearDown() throws Exception{
+		UserServiceImpl.getInstance().deleteByLogin(user.getLogin());
 		user = null;
 	}
 
@@ -32,38 +34,27 @@ public class UserServiceImplTest {
 		Assert.assertEquals(instance1.hashCode(), instance2.hashCode());
 	}
 
-	@Ignore
 	@Test
 	public void testCheckUserAuthorization() throws Exception {
-		UserDaoImpl.getInstance().add(user);
-		boolean expected = true;
 		boolean actual = UserServiceImpl.getInstance().checkUserAuthorization(user.getLogin(), user.getPassword());
-		Assert.assertEquals(new Boolean(expected), new Boolean(actual));
+		Assert.assertTrue(actual);
 	}
 
-	@Ignore
 	@Test
 	public void testGetUserByLogin() throws Exception {
-		UserDaoImpl.getInstance().add(user);
-		int userActualId = UserDaoImpl.getInstance().getMaxId();
-		user.setId(userActualId);
 		User actual = UserServiceImpl.getInstance().getUserByLogin(user.getLogin());
 		Assert.assertEquals(user, actual);
 	}
 
-	@Ignore
 	@Test
 	public void testCheckAccessType() throws Exception {
-		UserDaoImpl.getInstance().add(user);
 		UserType actual = UserServiceImpl.getInstance().checkAccessType(user);
 		Assert.assertEquals(user.getAccessType(), actual.ordinal());
 	}
 
-	@Ignore
 	@Test
 	public void testCheckIsNewUser() throws Exception {
-		boolean expected = true;
-		boolean actual = UserServiceImpl.getInstance().checkIsNewUser(user);
-		Assert.assertEquals(new Boolean(expected), new Boolean(actual));
+		boolean actual = UserServiceImpl.getInstance().checkIsNewUser(user.getLogin());
+		Assert.assertFalse(actual);
 	}
 }

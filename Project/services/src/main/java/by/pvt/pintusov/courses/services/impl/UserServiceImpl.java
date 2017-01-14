@@ -25,6 +25,7 @@ import java.util.List;
 
 public class UserServiceImpl extends AbstractService <User> {
 	private static UserServiceImpl instance;
+	private UserDaoImpl userDao = UserDaoImpl.getInstance();
 
 	private UserServiceImpl () {}
 
@@ -47,16 +48,17 @@ public class UserServiceImpl extends AbstractService <User> {
 	 */
 	@Override
 	public void add(User user) throws SQLException, ServiceException {
-		try (Connection connection = HikariCP.getInstance().getConnection()){
+		try {
+			connection = manager.getConnection();
 			connection.setAutoCommit(false);
 			if (user != null) {
-				UserDaoImpl.getInstance().add(user);
+				userDao.add(user);
 			}
 			connection.commit();
-			CoursesSystemLogger.getInstance().logError(getClass(), TransactionStatus.TRANSACTION_SUCCEED);
+			logger.logError(getClass(), TransactionStatus.TRANSACTION_SUCCEED);
 		} catch (SQLException | DaoException e) {
 			connection.rollback();
-			CoursesSystemLogger.getInstance().logError(getClass(), TransactionStatus.TRANSACTION_FAILED);
+			logger.logError(getClass(), TransactionStatus.TRANSACTION_FAILED);
 			throw new ServiceException(e.getMessage());
 		}
 	}
@@ -70,14 +72,15 @@ public class UserServiceImpl extends AbstractService <User> {
 	@Override
 	public List<User> getAll() throws SQLException, ServiceException {
 		List <User> users = null;
-		try (Connection connection = HikariCP.getInstance().getConnection()) {
+		try {
+			connection = manager.getConnection();
 			connection.setAutoCommit(false);
-			users = UserDaoImpl.getInstance().getAll();
+			users = userDao.getAll();
 			connection.commit();
-			CoursesSystemLogger.getInstance().logError(getClass(), TransactionStatus.TRANSACTION_SUCCEED);
+			logger.logError(getClass(), TransactionStatus.TRANSACTION_SUCCEED);
 		} catch (SQLException | DaoException e) {
 			connection.rollback();
-			CoursesSystemLogger.getInstance().logError(getClass(), TransactionStatus.TRANSACTION_FAILED);
+			logger.logError(getClass(), TransactionStatus.TRANSACTION_FAILED);
 			throw new ServiceException(e.getMessage());
 		}
 		return users;
@@ -106,15 +109,23 @@ public class UserServiceImpl extends AbstractService <User> {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * Calls Dao delete() method
-	 * @param id - id of entity
-	 * @throws SQLException
-	 * @throws UnsupportedOperationException
-	 */
 	@Override
-	public void delete(int id) throws SQLException {
+	public void delete(int id) throws SQLException, ServiceException {
 		throw new UnsupportedOperationException();
+	}
+
+	public void deleteByLogin(String login) throws SQLException, ServiceException {
+		try {
+			connection = manager.getConnection();
+			connection.setAutoCommit(false);
+			userDao.deleteByLogin(login);
+			connection.commit();
+			logger.logError(getClass(), TransactionStatus.TRANSACTION_SUCCEED);
+		} catch (SQLException | DaoException e) {
+			connection.rollback();
+			logger.logError(getClass(), TransactionStatus.TRANSACTION_FAILED);
+			throw new ServiceException(e.getMessage());
+		}
 	}
 
 	/**
@@ -127,14 +138,15 @@ public class UserServiceImpl extends AbstractService <User> {
 	 */
 	public boolean checkUserAuthorization (String login, String password) throws SQLException, ServiceException {
 		boolean isAuthorized = false;
-		try (Connection connection = HikariCP.getInstance().getConnection()) {
+		try {
+			connection = manager.getConnection();
 			connection.setAutoCommit(false);
-			isAuthorized = UserDaoImpl.getInstance().isAuthorized(login, password);
+			isAuthorized = userDao.isAuthorized(login, password);
 			connection.commit();
-			CoursesSystemLogger.getInstance().logError(getClass(), TransactionStatus.TRANSACTION_SUCCEED);
+			logger.logError(getClass(), TransactionStatus.TRANSACTION_SUCCEED);
 		} catch (SQLException | DaoException e) {
 			connection.rollback();
-			CoursesSystemLogger.getInstance().logError(getClass(), TransactionStatus.TRANSACTION_FAILED);
+			logger.logError(getClass(), TransactionStatus.TRANSACTION_FAILED);
 			throw new ServiceException(e.getMessage());
 		}
 		return  isAuthorized;
@@ -149,14 +161,15 @@ public class UserServiceImpl extends AbstractService <User> {
 	 */
 	public User getUserByLogin (String login) throws SQLException, ServiceException {
 		User user = null;
-		try (Connection connection = HikariCP.getInstance().getConnection()) {
+		try {
+			connection = manager.getConnection();
 			connection.setAutoCommit(false);
-			user = UserDaoImpl.getInstance().getByLogin(login);
+			user = userDao.getByLogin(login);
 			connection.commit();
-			CoursesSystemLogger.getInstance().logError(getClass(), TransactionStatus.TRANSACTION_SUCCEED);
+			logger.logError(getClass(), TransactionStatus.TRANSACTION_SUCCEED);
 		} catch (SQLException | DaoException e) {
 			connection.rollback();
-			CoursesSystemLogger.getInstance().logError(getClass(), TransactionStatus.TRANSACTION_FAILED);
+			logger.logError(getClass(), TransactionStatus.TRANSACTION_FAILED);
 		}
 		return user;
 	}
@@ -180,24 +193,24 @@ public class UserServiceImpl extends AbstractService <User> {
 	/**
 	 * Calls Dao isNewUser () method
 	 * Check if User is new
-	 * @param user - User instance
+	 * @param login - User login
 	 * @return isNew
 	 * @throws SQLException
 	 * @throws ServiceException
 	 */
-	public boolean checkIsNewUser (User user) throws SQLException, ServiceException {
+	public boolean checkIsNewUser (String login) throws SQLException, ServiceException {
 		boolean isNew = false;
 		try {
-			connection = PoolManager.getInstance().getConnection();
+			connection = manager.getConnection();
 			connection.setAutoCommit(false);
-			if ((CourseDaoImpl.getInstance().getById(user.getCourseId()) == null) & (UserDaoImpl.getInstance().isNewUser(user.getLogin()))) {
+			if (UserDaoImpl.getInstance().isNewUser(login)) {
 				isNew = true;
 			}
 			connection.commit();
-			CoursesSystemLogger.getInstance().logError(getClass(), TransactionStatus.TRANSACTION_SUCCEED);
+			logger.logError(getClass(), TransactionStatus.TRANSACTION_SUCCEED);
 		} catch (SQLException | DaoException e) {
 			connection.rollback();
-			CoursesSystemLogger.getInstance().logError(getClass(), TransactionStatus.TRANSACTION_FAILED);
+			logger.logError(getClass(), TransactionStatus.TRANSACTION_FAILED);
 			throw new ServiceException(e.getMessage());
 		}
 		return isNew;
