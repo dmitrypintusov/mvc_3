@@ -13,7 +13,7 @@ public class DBConfig {
 
 	//properties for HikariCP
 	public static final String HIKARI = "hikari";
-	public static final String HIKARI_DRIVER = "dataSourceClassName";
+	public static final String HIKARI_DRIVER = "dataSource.driver";
 	public static final String HIKARI_USER = "dataSource.user";
 	public static final String HIKARI_PASSWORD = "dataSource.password";
 	public static final String HIKARI_URL = "dataSource.jdbcUrl";

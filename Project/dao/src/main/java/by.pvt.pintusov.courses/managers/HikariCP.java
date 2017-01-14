@@ -21,6 +21,12 @@ public class HikariCP {
 
 	private HikariCP () {
 		ResourceBundle bundle = ResourceBundle.getBundle(DBConfig.HIKARI);
+		try {
+			Class.forName(bundle.getString(DBConfig.HIKARI_DRIVER));
+		}catch(ClassNotFoundException ex) {
+			String message = "Error: unable to load driver class!";
+			CoursesSystemLogger.getInstance().logError(getClass(), message);
+		}
 		dataSource = new HikariDataSource();
 		dataSource.setJdbcUrl(bundle.getString(DBConfig.HIKARI_URL));
 		dataSource.setUsername(bundle.getString(DBConfig.HIKARI_USER));
