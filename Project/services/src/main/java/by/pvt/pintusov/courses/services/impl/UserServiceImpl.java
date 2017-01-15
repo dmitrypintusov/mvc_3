@@ -2,18 +2,12 @@ package by.pvt.pintusov.courses.services.impl;
 
 import by.pvt.pintusov.courses.constants.TransactionStatus;
 import by.pvt.pintusov.courses.constants.UserType;
-import by.pvt.pintusov.courses.dao.Impl.CourseDaoImpl;
 import by.pvt.pintusov.courses.dao.Impl.UserDaoImpl;
-import by.pvt.pintusov.courses.entities.Course;
-import by.pvt.pintusov.courses.entities.User;
+import by.pvt.pintusov.courses.pojos.User;
 import by.pvt.pintusov.courses.exceptions.DaoException;
 import by.pvt.pintusov.courses.exceptions.ServiceException;
-import by.pvt.pintusov.courses.managers.HikariCP;
-import by.pvt.pintusov.courses.managers.PoolManager;
 import by.pvt.pintusov.courses.services.AbstractService;
-import by.pvt.pintusov.courses.utils.CoursesSystemLogger;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -89,7 +83,7 @@ public class UserServiceImpl extends AbstractService <User> {
 	/**
 	 * Calls Dao getById() method
 	 * @param id - id of entity
-	 * @return object of derived class Entity
+	 * @return object of derived class AbstractEntity
 	 * @throws SQLException
 	 * @throws UnsupportedOperationException
 	 */
@@ -100,7 +94,7 @@ public class UserServiceImpl extends AbstractService <User> {
 
 	/**
 	 * Calls Dao update() method
-	 * @param entity - object of derived class Entity
+	 * @param entity - object of derived class AbstractEntity
 	 * @throws SQLException
 	 * @throws UnsupportedOperationException
 	 */

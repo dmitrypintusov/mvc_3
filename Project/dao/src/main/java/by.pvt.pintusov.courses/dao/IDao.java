@@ -1,48 +1,24 @@
 package by.pvt.pintusov.courses.dao;
 
-import by.pvt.pintusov.courses.entities.Entity;
+import by.pvt.pintusov.courses.pojos.AbstractEntity;
 import by.pvt.pintusov.courses.exceptions.DaoException;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Dao interface
  * @author pintusov
- * @version 1.0
+ * @version 1.1
  */
 
-public interface IDao <T extends Entity> {
-	/**
-	 * adds entity to database
-	 * @param entity - new entity
-	 * @exception DaoException throws Dao exception
-	 */
-	void add (T entity) throws DaoException;
+public interface IDao <T extends AbstractEntity> {
 
-	/**
-	 * updates entity in database
-	 * @param entity - entity
-	 * @exception DaoException throws Dao exception
-	 */
-	void update(T entity) throws DaoException;
+	void saveOrUpdate(T t) throws DaoException;
 
-	/**
-	 * Delete Entity
-	 * @exception DaoException throws Dao exception
-	 */
-	void delete () throws DaoException;
+	T get(Serializable id) throws DaoException;
 
-	/**
-	 * Create a list of all elements in database
-	 * @return List of all elements
-	 * @exception DaoException throws Dao exception
-	 */
-	List<T> getAll () throws DaoException;
+	T load(Serializable id) throws DaoException;
 
-	/**
-	 * Getting Entity by id
-	 * @return entity max id
-	 * @exception DaoException throws Dao exception
-	 */
-	int getMaxId () throws DaoException;
+	void delete(T t) throws DaoException;
 }

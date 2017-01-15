@@ -3,7 +3,7 @@ package by.pvt.pintusov.courses.dao.Impl;
 import by.pvt.pintusov.courses.constants.ColumnName;
 import by.pvt.pintusov.courses.constants.SqlRequest;
 import by.pvt.pintusov.courses.dao.AbstractDao;
-import by.pvt.pintusov.courses.entities.Operation;
+import by.pvt.pintusov.courses.pojos.Operation;
 import by.pvt.pintusov.courses.exceptions.DaoException;
 import by.pvt.pintusov.courses.managers.PoolManager;
 import by.pvt.pintusov.courses.utils.ClosingUtil;

@@ -1,19 +1,23 @@
 package by.pvt.pintusov.courses.utils;
 
-import by.pvt.pintusov.courses.entities.*;
+import by.pvt.pintusov.courses.pojos.Archive;
+import by.pvt.pintusov.courses.pojos.Course;
+import by.pvt.pintusov.courses.pojos.Operation;
+import by.pvt.pintusov.courses.pojos.User;
 
 import java.util.HashMap;
 
 /**
  * Utility class for building entities
  * @author pintusov
- * @version 1.0
+ * @version 1.1
  */
 public class EntityBuilder {
 	private EntityBuilder() {}
 
 	/**
 	 * Creates user
+	 * @param id -user`s id
 	 * @param firstName - user's first name
 	 * @param lastName user's last name
 	 * @param login - user's login
@@ -21,13 +25,13 @@ public class EntityBuilder {
 	 * @param accessType - user's access type (0 - student, 1 - teacher)
 	 * @return entity of <strong>User</strong>
 	 */
-	public static User buildUser (String firstName, String lastName, String login, String password, int accessType) {
+	public static User buildUser (Integer id, String firstName, String lastName, String login, String password) {
 		User user = new User ();
+		user.setId(id);
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
 		user.setLogin(login);
 		user.setPassword(password);
-		user.setAccessType(accessType);
 		return user;
 	}
 
@@ -39,8 +43,9 @@ public class EntityBuilder {
 	 * @param status - course's status
 	 * @return entity of <strong>Course</strong>
 	 */
-	public static Course buildCourse (String courseName, int hours, int status) {
+	public static Course buildCourse (Integer id, String courseName, Integer hours, Integer status) {
 		Course course = new Course ();
+		course.setId(id);
 		course.setCourseName(courseName);
 		course.setHours(hours);
 		course.setStatus(status);

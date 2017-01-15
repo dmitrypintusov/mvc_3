@@ -1,6 +1,6 @@
 package by.pvt.pintusov.courses.services;
 
-import by.pvt.pintusov.courses.entities.Entity;
+import by.pvt.pintusov.courses.pojos.AbstractEntity;
 import by.pvt.pintusov.courses.exceptions.ServiceException;
 
 import java.sql.SQLException;
@@ -12,11 +12,11 @@ import java.util.List;
  * @version 1.0
  */
 
-public interface IService <T extends Entity> {
+public interface IService <T extends AbstractEntity> {
 
 	/**
 	 * Calls Dao add() method
-	 * @param entity - object of derived class Entity
+	 * @param entity - object of derived class AbstractEntity
 	 * @throws SQLException
 	 * @throws ServiceException
 	 */
@@ -24,7 +24,7 @@ public interface IService <T extends Entity> {
 
 	/**
 	 *  Calls Dao getAll() method
-	 * @return list of objects of derived class Entity
+	 * @return list of objects of derived class AbstractEntity
 	 * @throws SQLException
 	 * @throws ServiceException
 	 */
@@ -33,7 +33,7 @@ public interface IService <T extends Entity> {
 	/**
 	 * Calls Dao getById() method
 	 * @param id - id of entity
-	 * @return object of derived class Entity
+	 * @return object of derived class AbstractEntity
 	 * @throws SQLException
 	 * @throws ServiceException
 	 */
@@ -41,7 +41,7 @@ public interface IService <T extends Entity> {
 
 	/**
 	 * Calls Dao update() method
-	 * @param entity - object of derived class Entity
+	 * @param entity - object of derived class AbstractEntity
 	 * @throws SQLException
 	 * @throws ServiceException
 	 */

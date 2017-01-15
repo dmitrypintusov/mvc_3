@@ -1,4 +1,4 @@
-package by.pvt.pintusov.courses.entities;
+package by.pvt.pintusov.courses.pojos;
 
 import java.util.HashMap;
 
@@ -7,7 +7,7 @@ import java.util.HashMap;
  * @author pintusov
  * @version 1.0
  */
-public class Archive extends Entity {
+public class Archive extends AbstractEntity {
 	private static final long serialVersionUID = 1L;
 	private HashMap <User, Integer> marks;
 	private int courseId;

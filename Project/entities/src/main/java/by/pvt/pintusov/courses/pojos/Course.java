@@ -1,55 +1,44 @@
-package by.pvt.pintusov.courses.entities;
+package by.pvt.pintusov.courses.pojos;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * Describes the entity <strong>Course</strong>
  * @author pintusov
- * @version 1.0
+ * @version 1.1
  */
-public class Course extends Entity {
-	private static final long serialVersionUID = 1L;
-	private String courseName;
-	private int hours;
-	private int status;
 
-	/**
-	 * @return the courseName
-	 */
+@Entity
+@Table
+public class Course extends AbstractEntity {
+	private static final long serialVersionUID = 2L;
+
+	@Column
+	private String courseName;
 	public String getCourseName() {
 		return courseName;
 	}
-
-	/**
-	 * @param courseName setting courseName
-	 */
 	public void setCourseName(String courseName) {
 		this.courseName = courseName;
 	}
 
-	/**
-	 * @return the hours
-	 */
-	public int getHours() {
+	@Column
+	private Integer hours;
+	public Integer getHours() {
 		return hours;
 	}
-
-	/**
-	 * @param hours setting courseName
-	 */
-	public void setHours(int hours) {
+	public void setHours(Integer hours) {
 		this.hours = hours;
 	}
 
-	/**
-	 * @return the status
-	 */
-	public int getStatus() {
+	@Column
+	private Integer status;
+	public Integer getStatus() {
 		return status;
 	}
-
-	/**
-	 * @param status setting status
-	 */
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 

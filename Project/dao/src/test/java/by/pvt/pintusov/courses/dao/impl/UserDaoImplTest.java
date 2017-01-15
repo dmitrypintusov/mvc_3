@@ -1,7 +1,7 @@
 package by.pvt.pintusov.courses.dao.impl;
 
 import by.pvt.pintusov.courses.dao.Impl.UserDaoImpl;
-import by.pvt.pintusov.courses.entities.User;
+import by.pvt.pintusov.courses.pojos.User;
 import by.pvt.pintusov.courses.utils.EntityBuilder;
 import org.junit.*;
 

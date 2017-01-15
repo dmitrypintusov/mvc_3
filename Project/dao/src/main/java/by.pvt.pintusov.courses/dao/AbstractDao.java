@@ -1,9 +1,14 @@
 package by.pvt.pintusov.courses.dao;
 
-import by.pvt.pintusov.courses.entities.Entity;
+import by.pvt.pintusov.courses.exceptions.DaoException;
+import by.pvt.pintusov.courses.pojos.AbstractEntity;
 import by.pvt.pintusov.courses.managers.HikariCP;
 import by.pvt.pintusov.courses.utils.CoursesSystemLogger;
+import org.apache.log4j.Logger;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,14 +16,40 @@ import java.sql.ResultSet;
 /**
  * Abstract Dao class implements Dao interface
  * @author pintusov
- * @version 1.0
+ * @version 1.1
  */
 
-public abstract class AbstractDao <T extends Entity> implements IDao <T> {
-	protected Connection connection;
-	protected PreparedStatement statement;
-	protected ResultSet result;
-	protected HikariCP manager = HikariCP.getInstance();
-	protected CoursesSystemLogger logger = CoursesSystemLogger.getInstance();
-	protected String message;
+public abstract class AbstractDao <T extends AbstractEntity> implements IDao <T> {
+	private static Logger logger = Logger.getLogger(AbstractDao.class);
+	private Class abstactClass;
+	private SessionFactory sessionFactory;
+
+	protected AbstractDao (Class abstractClass, SessionFactory sessionFactory) {
+		this.abstactClass = abstractClass;
+		this.sessionFactory = sessionFactory;
+	}
+
+	protected Session getCurrentSession () {
+		return sessionFactory.getCurrentSession();
+	}
+
+	@Override
+	public void saveOrUpdate(T entity) throws DaoException {
+
+	}
+
+	@Override
+	public T get(Serializable id) throws DaoException {
+		return null;
+	}
+
+	@Override
+	public T load(Serializable id) throws DaoException {
+		return null;
+	}
+
+	@Override
+	public void delete(T entity) throws DaoException {
+
+	}
 }

@@ -3,15 +3,10 @@ package by.pvt.pintusov.courses.dao.Impl;
 import by.pvt.pintusov.courses.constants.ColumnName;
 import by.pvt.pintusov.courses.constants.SqlRequest;
 import by.pvt.pintusov.courses.dao.AbstractDao;
-import by.pvt.pintusov.courses.entities.User;
+import by.pvt.pintusov.courses.pojos.User;
 import by.pvt.pintusov.courses.exceptions.DaoException;
-import by.pvt.pintusov.courses.managers.HikariCP;
-import by.pvt.pintusov.courses.managers.PoolManager;
-import by.pvt.pintusov.courses.utils.ClosingUtil;
-import by.pvt.pintusov.courses.utils.CoursesSystemLogger;
 import by.pvt.pintusov.courses.utils.EntityBuilder;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package by.pvt.pintusov.courses.entities;
+package by.pvt.pintusov.courses.pojos;
 
 /**
  * Describes the entity <strong>Operation</strong>
@@ -6,7 +6,7 @@ package by.pvt.pintusov.courses.entities;
  * @version 1.0
  */
 
-public class Operation extends Entity {
+public class Operation extends AbstractEntity {
 	private static final long serialVersionUID = 1L;
 	private int userId;
 	private int courseId;
