@@ -3,9 +3,11 @@ package by.pvt.pintusov.courses.exceptions;
 /**
  * Creates DaoException
  * @author pintusov
- * @version 1.0
+ * @version 1.1
  */
 public class DaoException extends Exception {
+	public DaoException () {super();}
+
 	public DaoException(String message) {
 		super(message);
 	}

@@ -15,6 +15,9 @@
         <mapping class="by.pvt.pintusov.courses.pojos.AbstractEntity"/>
         <mapping class="by.pvt.pintusov.courses.pojos.User"/>
         <mapping class="by.pvt.pintusov.courses.pojos.Course"/>
+        <mapping class="by.pvt.pintusov.courses.pojos.Mark"/>
+        <mapping class="by.pvt.pintusov.courses.pojos.Archive"/>
+        <mapping class="by.pvt.pintusov.courses.pojos.AccessLevel"/>
     </session-factory>
 </hibernate-configuration>
 

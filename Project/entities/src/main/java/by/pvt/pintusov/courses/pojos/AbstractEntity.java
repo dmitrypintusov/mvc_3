@@ -1,5 +1,6 @@
 package by.pvt.pintusov.courses.pojos;
 import javax.persistence.*;
+import javax.persistence.AccessType;
 import java.io.Serializable;
 
 /**
@@ -26,19 +27,16 @@ public abstract class AbstractEntity implements Serializable {
 	}
 
 	@Override
-	public int hashCode () {
-		final int alfa = 17;
-		int result = 1;
-		result = alfa * result + id;
-		return result;
-	}
-
-	@Override
 	public boolean equals (Object o) {
 		if (this == o) {return true;}
 		if (o == null || !(o instanceof AbstractEntity)) {return false;}
-		AbstractEntity other = (AbstractEntity) o;
-		return id == other.id;
+		AbstractEntity abstractEntity = (AbstractEntity) o;
+		return id == abstractEntity.id;
+	}
+
+	@Override
+	public int hashCode() {
+		return id != null ? id.hashCode() : 0;
 	}
 
 	@Override

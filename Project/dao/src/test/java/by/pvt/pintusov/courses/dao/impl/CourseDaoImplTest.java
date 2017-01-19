@@ -1,6 +1,5 @@
 package by.pvt.pintusov.courses.dao.impl;
 
-import by.pvt.pintusov.courses.dao.Impl.CourseDaoImpl;
 import by.pvt.pintusov.courses.pojos.Course;
 import by.pvt.pintusov.courses.utils.EntityBuilder;
 import org.junit.*;

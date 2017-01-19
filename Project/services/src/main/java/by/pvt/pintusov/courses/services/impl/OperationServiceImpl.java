@@ -1,7 +1,6 @@
 package by.pvt.pintusov.courses.services.impl;
 
 import by.pvt.pintusov.courses.constants.TransactionStatus;
-import by.pvt.pintusov.courses.dao.Impl.OperationDaoImpl;
 import by.pvt.pintusov.courses.pojos.Operation;
 import by.pvt.pintusov.courses.exceptions.DaoException;
 import by.pvt.pintusov.courses.exceptions.ServiceException;

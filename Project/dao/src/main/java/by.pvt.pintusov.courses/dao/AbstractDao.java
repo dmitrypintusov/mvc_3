@@ -2,16 +2,13 @@ package by.pvt.pintusov.courses.dao;
 
 import by.pvt.pintusov.courses.exceptions.DaoException;
 import by.pvt.pintusov.courses.pojos.AbstractEntity;
-import by.pvt.pintusov.courses.managers.HikariCP;
-import by.pvt.pintusov.courses.utils.CoursesSystemLogger;
+import by.pvt.pintusov.courses.utils.HibernateUtil;
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 /**
  * Abstract Dao class implements Dao interface
@@ -22,6 +19,7 @@ import java.sql.ResultSet;
 public abstract class AbstractDao <T extends AbstractEntity> implements IDao <T> {
 	private static Logger logger = Logger.getLogger(AbstractDao.class);
 	private Class abstactClass;
+	protected HibernateUtil util = HibernateUtil.getInstance();
 	private SessionFactory sessionFactory;
 
 	protected AbstractDao (Class abstractClass, SessionFactory sessionFactory) {
@@ -35,7 +33,14 @@ public abstract class AbstractDao <T extends AbstractEntity> implements IDao <T>
 
 	@Override
 	public void saveOrUpdate(T entity) throws DaoException {
-
+		try {
+			Session session = util.getSession();
+			session.saveOrUpdate(entity);
+		}
+		catch (HibernateException e) {
+			logger.error("Error was thrown in DAO: " + e);
+			throw new DaoException();
+		}
 	}
 
 	@Override

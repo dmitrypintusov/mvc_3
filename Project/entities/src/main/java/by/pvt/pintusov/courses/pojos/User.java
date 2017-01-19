@@ -1,8 +1,8 @@
 package by.pvt.pintusov.courses.pojos;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Describes the entity <strong>User</strong>
@@ -13,7 +13,9 @@ import javax.persistence.Table;
 @Entity
 @Table
 public class User extends AbstractEntity {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
+
+	public User() { super (); }
 
 	@Column
 	private String firstName;
@@ -34,6 +36,51 @@ public class User extends AbstractEntity {
 	private String password;
 	public String getPassword () { return password; }
 	public void setPassword (String password) { this.password = password; }
+
+	@ManyToMany
+	private Set <Course> courses;
+	public Set<Course> getCourses() {
+		return courses;
+	}
+	public void setCourses(Set<Course> courses) {
+		this.courses = courses;
+	}
+	public void addCourse(Course course){
+		if(courses == null){
+			courses = new HashSet<>();
+		}
+		courses.add(course);
+	}
+
+	@OneToMany
+	private Set<Mark> marks;
+	public Set<Mark> getMarks() {
+		return marks;
+	}
+	public void setMarks(Set<Mark> marks) {
+		this.marks = marks;
+	}
+	public void addMark(Mark mark){
+		if(marks == null){
+			marks = new HashSet<>();
+		}
+		marks.add(mark);
+	}
+
+	@ManyToMany
+	private Set<AccessLevel> accessLevels;
+	public Set<AccessLevel> getAccessLevels() {
+		return accessLevels;
+	}
+	public void setAccessLevels(Set<AccessLevel> accessLevels) {
+		this.accessLevels = accessLevels;
+	}
+	public void addAccessLevel(AccessLevel accessLevel){
+		if(accessLevels == null){
+			accessLevels = new HashSet<>();
+		}
+		accessLevels.add(accessLevel);
+	}
 
 	@Override
 	public boolean equals(Object o) {

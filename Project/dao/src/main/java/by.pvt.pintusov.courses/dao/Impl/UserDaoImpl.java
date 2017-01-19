@@ -1,6 +1,5 @@
 package by.pvt.pintusov.courses.dao.Impl;
 
-import by.pvt.pintusov.courses.constants.ColumnName;
 import by.pvt.pintusov.courses.constants.SqlRequest;
 import by.pvt.pintusov.courses.dao.AbstractDao;
 import by.pvt.pintusov.courses.pojos.User;

@@ -1,8 +1,11 @@
 package by.pvt.pintusov.courses.pojos;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import by.pvt.pintusov.courses.enums.CourseStatusType;
+
+import javax.persistence.*;
+import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Describes the entity <strong>Course</strong>
@@ -13,7 +16,11 @@ import javax.persistence.Table;
 @Entity
 @Table
 public class Course extends AbstractEntity {
-	private static final long serialVersionUID = 2L;
+	private static final long serialVersionUID = 3L;
+
+	public Course() {
+		super();
+	}
 
 	@Column
 	private String courseName;
@@ -33,38 +40,66 @@ public class Course extends AbstractEntity {
 		this.hours = hours;
 	}
 
+	@Enumerated(EnumType.STRING)
 	@Column
-	private Integer status;
-	public Integer getStatus() {
-		return status;
+	private CourseStatusType courseStatus;
+	public CourseStatusType getCourseStatus() {
+		return courseStatus;
 	}
-	public void setStatus(Integer status) {
-		this.status = status;
+	public void setCourseStatus(CourseStatusType courseStatus) {
+		this.courseStatus = courseStatus;
+	}
+
+	@Column
+	private Calendar date;
+	public Calendar getDate() {
+		return date;
+	}
+	public void setDate(Calendar date) {
+		this.date = date;
+	}
+
+	@ManyToMany
+	private Set<User> users;
+	public Set<User> getUser() {
+		return users;
+	}
+	public void setUser(Set<User> users) {
+		this.users = users;
+	}
+	public void addUser(User user){
+		if(users == null){
+			users = new HashSet<>();
+		}
+		users.add(user);
 	}
 
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
-		if (o == null || !(o instanceof Course)) return false;
+		if (o == null || !(o instanceof User)) return false;
 		if (!super.equals(o)) return false;
-		Course other = (Course) o;
-		if (hours != other.hours) return false;
-		if (status != other.status) return false;
-		return courseName.equals(other.courseName);
+		Course course = (Course) o;
+		if (courseName != null ? !courseName.equals(course.courseName) : course.courseName != null) return false;
+		return hours != null ? hours.equals(course.hours) : course.hours == null;
+
 	}
 
 	@Override
 	public int hashCode() {
-		final int alfa = 31;
 		int result = super.hashCode();
-		result = alfa * result + courseName.hashCode();
-		result = alfa * result + hours;
-		result = alfa * result + status;
+		result = 31 * result + (courseName != null ? courseName.hashCode() : 0);
+		result = 31 * result + (hours != null ? hours.hashCode() : 0);
 		return result;
 	}
 
 	@Override
 	public String toString() {
-		return "Course {courseName=" + courseName + ", hours=" + hours + ", status=" + status + "}";
+		return "Course{" +
+				"courseName='" + courseName + '\'' +
+				", hours=" + hours +
+				", courseStatus=" + courseStatus +
+				", date=" + date +
+				'}';
 	}
 }
