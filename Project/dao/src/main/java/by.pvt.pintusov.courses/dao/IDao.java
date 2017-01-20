@@ -13,11 +13,9 @@ import java.io.Serializable;
 
 public interface IDao <T extends AbstractEntity> {
 
-	void saveOrUpdate(T entity) throws DaoException;
-
-	T get(Serializable id) throws DaoException;
-
-	T load(Serializable id) throws DaoException;
-
-	void delete(T entity) throws DaoException;
+	Serializable saveOrUpdate(T entity) throws DaoException;
+	T getById(Integer id) throws DaoException;
+	T load(Integer id) throws DaoException;
+	void delete(Integer id) throws DaoException;
 }
+

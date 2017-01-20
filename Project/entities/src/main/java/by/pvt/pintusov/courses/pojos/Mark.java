@@ -20,40 +20,40 @@ public class Mark extends AbstractEntity {
 	public Mark() { super(); }
 
 	@Column
-	private Integer mark;
 	public Integer getMark() {
 		return mark;
 	}
 	public void setMark(Integer mark) {
 		this.mark = mark;
 	}
+	private Integer mark;
 
 	@ManyToOne
-	private User user;
 	public User getUser() {
 		return user;
 	}
 	public void setUser(User user) {
 		this.user = user;
 	}
+	private User user;
 
 	@ManyToOne
-	private Course course;
 	public Course getCourse() {
 		return course;
 	}
 	public void setCourse(Course course) {
 		this.course = course;
 	}
+	private Course course;
 
 	@Column
-	private Calendar date;
 	public Calendar getDate() {
 		return date;
 	}
 	public void setDate(Calendar date) {
 		this.date = date;
 	}
+	private Calendar date;
 
 	@Override
 	public boolean equals(Object o) {

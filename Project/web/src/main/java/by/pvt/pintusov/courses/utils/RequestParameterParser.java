@@ -2,7 +2,6 @@ package by.pvt.pintusov.courses.utils;
 
 import by.pvt.pintusov.courses.commands.factory.CommandType;
 import by.pvt.pintusov.courses.constants.Parameters;
-import by.pvt.pintusov.courses.constants.UserType;
 import by.pvt.pintusov.courses.pojos.Course;
 import by.pvt.pintusov.courses.pojos.User;
 

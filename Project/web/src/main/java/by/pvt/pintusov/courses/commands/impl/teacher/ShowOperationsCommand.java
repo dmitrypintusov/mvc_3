@@ -4,8 +4,6 @@ import by.pvt.pintusov.courses.commands.AbstractCommand;
 import by.pvt.pintusov.courses.constants.MessageConstants;
 import by.pvt.pintusov.courses.constants.PagePath;
 import by.pvt.pintusov.courses.constants.Parameters;
-import by.pvt.pintusov.courses.constants.UserType;
-import by.pvt.pintusov.courses.pojos.Operation;
 import by.pvt.pintusov.courses.exceptions.ServiceException;
 import by.pvt.pintusov.courses.managers.ConfigurationManager;
 import by.pvt.pintusov.courses.managers.MessageManager;

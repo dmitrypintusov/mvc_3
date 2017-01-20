@@ -2,13 +2,11 @@ package by.pvt.pintusov.courses.services.impl;
 
 import by.pvt.pintusov.courses.constants.TransactionStatus;
 import by.pvt.pintusov.courses.pojos.Course;
-import by.pvt.pintusov.courses.pojos.Operation;
 import by.pvt.pintusov.courses.pojos.User;
 import by.pvt.pintusov.courses.exceptions.DaoException;
 import by.pvt.pintusov.courses.exceptions.ServiceException;
 import by.pvt.pintusov.courses.managers.PoolManager;
 import by.pvt.pintusov.courses.services.AbstractService;
-import by.pvt.pintusov.courses.utils.CoursesSystemLogger;
 
 import java.sql.SQLException;
 import java.util.List;

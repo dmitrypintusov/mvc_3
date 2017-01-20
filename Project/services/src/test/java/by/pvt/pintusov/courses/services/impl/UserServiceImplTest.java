@@ -1,6 +1,5 @@
 package by.pvt.pintusov.courses.services.impl;
 
-import by.pvt.pintusov.courses.constants.UserType;
 import by.pvt.pintusov.courses.pojos.User;
 import by.pvt.pintusov.courses.utils.EntityBuilder;
 import org.junit.*;

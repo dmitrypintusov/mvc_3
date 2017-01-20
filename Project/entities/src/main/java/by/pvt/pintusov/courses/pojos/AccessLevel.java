@@ -12,22 +12,22 @@ import java.util.Set;
  * @version 1.1
  */
 @Entity
+@Table
 public class AccessLevel extends AbstractEntity {
 	private static final long serialVersionUID = 5L;
 
 	public AccessLevel() {super();}
 
 	@Enumerated (EnumType.STRING)
-	private AccessLevelType accessLevel;
 	public AccessLevelType getAccessLevel() {
 		return accessLevel;
 	}
 	public void setAccessLevel(AccessLevelType accessLevel) {
 		this.accessLevel = accessLevel;
 	}
+	private AccessLevelType accessLevel;
 
 	@ManyToMany
-	private Set <User> users;
 	public Set<User> getUsers() {
 		return users;
 	}
@@ -40,6 +40,7 @@ public class AccessLevel extends AbstractEntity {
 		}
 		users.add(user);
 	}
+	private Set <User> users;
 
 	@Override
 	public boolean equals(Object o) {

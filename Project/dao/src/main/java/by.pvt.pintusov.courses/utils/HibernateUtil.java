@@ -6,7 +6,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 
 /**
  * Project name: courses
@@ -17,15 +16,14 @@ import org.hibernate.service.ServiceRegistry;
 public class HibernateUtil {
 	private static HibernateUtil util = null;
 	private static Logger logger = Logger.getLogger(HibernateUtil.class);
-	private SessionFactory sessionFactory = null;
+	private SessionFactory sessionFactory;
 	private static ThreadLocal <Session> sessions = new ThreadLocal <> ();
 
 	private HibernateUtil () {
 		try {
 			Configuration configuration = new Configuration().configure();
 			StandardServiceRegistryBuilder serviceRegistryBuilder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-			ServiceRegistry serviceRegistry = serviceRegistryBuilder.build();
-			sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+			sessionFactory = configuration.buildSessionFactory(serviceRegistryBuilder.build());
 		} catch (Throwable e) {
 			logger.error("Initial SessionFactory creation failed." + e);
 			System.exit(0);

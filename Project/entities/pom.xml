@@ -31,4 +31,5 @@
 				<artifactId>hibernate-entitymanager</artifactId>
 				</dependency>
 		</dependencies>
+
 </project>

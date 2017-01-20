@@ -2,7 +2,6 @@ package by.pvt.pintusov.courses.services;
 
 import by.pvt.pintusov.courses.pojos.AbstractEntity;
 import by.pvt.pintusov.courses.managers.HikariCP;
-import by.pvt.pintusov.courses.utils.CoursesSystemLogger;
 
 import java.sql.Connection;
 

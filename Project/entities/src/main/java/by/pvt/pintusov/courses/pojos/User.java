@@ -18,27 +18,26 @@ public class User extends AbstractEntity {
 	public User() { super (); }
 
 	@Column
-	private String firstName;
 	public String getFirstName () { return firstName; }
 	public void setFirstName (String firstName) { this.firstName = firstName; }
+	private String firstName;
 
 	@Column
-	private String lastName;
 	public String getLastName () { return lastName; }
 	public void setLastName (String lastName) { this.lastName = lastName; }
+	private String lastName;
 
 	@Column
-	private String login;
 	public String getLogin () { return login; }
 	public void setLogin (String login) { this.login = login; }
+	private String login;
 
 	@Column
-	private String password;
 	public String getPassword () { return password; }
 	public void setPassword (String password) { this.password = password; }
+	private String password;
 
 	@ManyToMany
-	private Set <Course> courses;
 	public Set<Course> getCourses() {
 		return courses;
 	}
@@ -51,9 +50,9 @@ public class User extends AbstractEntity {
 		}
 		courses.add(course);
 	}
+	private Set <Course> courses;
 
 	@OneToMany
-	private Set<Mark> marks;
 	public Set<Mark> getMarks() {
 		return marks;
 	}
@@ -66,9 +65,9 @@ public class User extends AbstractEntity {
 		}
 		marks.add(mark);
 	}
+	private Set<Mark> marks;
 
 	@ManyToMany
-	private Set<AccessLevel> accessLevels;
 	public Set<AccessLevel> getAccessLevels() {
 		return accessLevels;
 	}
@@ -81,6 +80,7 @@ public class User extends AbstractEntity {
 		}
 		accessLevels.add(accessLevel);
 	}
+	private Set<AccessLevel> accessLevels;
 
 	@Override
 	public boolean equals(Object o) {

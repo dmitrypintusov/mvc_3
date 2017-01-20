@@ -23,44 +23,43 @@ public class Course extends AbstractEntity {
 	}
 
 	@Column
-	private String courseName;
 	public String getCourseName() {
 		return courseName;
 	}
 	public void setCourseName(String courseName) {
 		this.courseName = courseName;
 	}
+	private String courseName;
 
 	@Column
-	private Integer hours;
 	public Integer getHours() {
 		return hours;
 	}
 	public void setHours(Integer hours) {
 		this.hours = hours;
 	}
+	private Integer hours;
 
 	@Enumerated(EnumType.STRING)
 	@Column
-	private CourseStatusType courseStatus;
 	public CourseStatusType getCourseStatus() {
 		return courseStatus;
 	}
 	public void setCourseStatus(CourseStatusType courseStatus) {
 		this.courseStatus = courseStatus;
 	}
+	private CourseStatusType courseStatus;
 
 	@Column
-	private Calendar date;
 	public Calendar getDate() {
 		return date;
 	}
 	public void setDate(Calendar date) {
 		this.date = date;
 	}
+	private Calendar date;
 
 	@ManyToMany
-	private Set<User> users;
 	public Set<User> getUser() {
 		return users;
 	}
@@ -73,6 +72,7 @@ public class Course extends AbstractEntity {
 		}
 		users.add(user);
 	}
+	private Set<User> users;
 
 	@Override
 	public boolean equals(Object o) {

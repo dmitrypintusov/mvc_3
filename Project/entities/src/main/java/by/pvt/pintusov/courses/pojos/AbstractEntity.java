@@ -1,6 +1,8 @@
 package by.pvt.pintusov.courses.pojos;
+
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
-import javax.persistence.AccessType;
 import java.io.Serializable;
 
 /**
@@ -17,14 +19,15 @@ public abstract class AbstractEntity implements Serializable {
 	public AbstractEntity() {}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	protected Integer id;
+	@GeneratedValue(generator = "increment")
+	@GenericGenerator(name = "increment", strategy = "increment")
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	protected Integer id;
 
 	@Override
 	public boolean equals (Object o) {

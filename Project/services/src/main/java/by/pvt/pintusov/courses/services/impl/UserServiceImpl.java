@@ -1,7 +1,6 @@
 package by.pvt.pintusov.courses.services.impl;
 
 import by.pvt.pintusov.courses.constants.TransactionStatus;
-import by.pvt.pintusov.courses.constants.UserType;
 import by.pvt.pintusov.courses.dao.Impl.UserDaoImpl;
 import by.pvt.pintusov.courses.pojos.User;
 import by.pvt.pintusov.courses.exceptions.DaoException;
