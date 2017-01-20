@@ -2,7 +2,6 @@ package by.pvt.pintusov.courses.filters;
 
 import by.pvt.pintusov.courses.commands.factory.CommandType;
 import by.pvt.pintusov.courses.constants.PagePath;
-import by.pvt.pintusov.courses.constants.UserType;
 import by.pvt.pintusov.courses.managers.ConfigurationManager;
 import by.pvt.pintusov.courses.utils.RequestParameterParser;
 
