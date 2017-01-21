@@ -4,7 +4,7 @@
     <title>Error</title>
 </head>
     <body>
-        Возникла ошибка: <br>
+        Извините, но в данный момент сервис не доступен: <br>
         ${errorDatabase} <br>
         <a href="controller?command=logout">Назад</a>
     </body>

@@ -110,7 +110,22 @@ public class UserServiceImpl extends AbstractService <User> implements IUserServ
 
 	@Override
 	public boolean checkUserAuthorization(String login, String password) throws ServiceException {
-		return false;
+		boolean isAuthorized = false;
+		Session session = util.getSession();
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+			isAuthorized = userDao.isAuthorized(login, password);
+			transaction.commit();
+			logger.info(TRANSACTION_SUCCEEDED);
+			logger.info("User " + login + " is authorized");
+		}
+		catch (DaoException e) {
+			TransactionUtil.rollback(transaction, e);
+			logger.error(TRANSACTION_FAILED, e);
+			throw new ServiceException(TRANSACTION_FAILED + e);
+		}
+		return isAuthorized;
 	}
 
 	@Override

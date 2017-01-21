@@ -34,7 +34,7 @@ public class RegistrationCommand extends AbstractCommand {
 					request.setAttribute(Parameters.OPERATION_MESSAGE, MessageManager.getInstance().getProperty(MessageConstants.SUCCESS_OPERATION));
 				} else {
 					page = ConfigurationManager.getInstance().getProperty(PagePath.REGISTRATION_PAGE_PATH);
-					request.setAttribute(Parameters.ERROR_USER_EXISTS, MessageManager.getInstance().getProperty(MessageConstants.USER_EXISTS));
+					request.setAttribute(Parameters.ERROR_USER_EXISTS, MessageManager.getInstance().getProperty(MessageConstants.USEREXISTS));
 				}
 			} else {
 				request.setAttribute(Parameters.OPERATION_MESSAGE, MessageManager.getInstance().getProperty(MessageConstants.EMPTY_FIELDS));

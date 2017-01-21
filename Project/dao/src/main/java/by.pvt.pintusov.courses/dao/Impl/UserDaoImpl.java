@@ -22,6 +22,8 @@ public class UserDaoImpl extends AbstractDao <User> implements IUserDao {
 	private static Logger logger = Logger.getLogger(UserDaoImpl.class);
 	private HibernateUtil util = HibernateUtil.getInstance();
 	private static UserDaoImpl instance;
+	static String message;
+	private final String CHECK_AUTHORIZATION = "from User where login = :login and password = :password";
 
 	public static synchronized UserDaoImpl getInstance(){
 		if(instance == null){
@@ -50,5 +52,25 @@ public class UserDaoImpl extends AbstractDao <User> implements IUserDao {
 			throw new DaoException(DaoConstants.ERROR_USER_BY_LOGIN, e);
 		}
 		return user;
+	}
+
+	@Override
+	public boolean isAuthorized(String login, String password) throws DaoException {
+		boolean isLogIn = false;
+		try {
+			Session session = util.getSession();
+			Query query = session.createQuery(CHECK_AUTHORIZATION);
+			query.setParameter("login", login);
+			query.setParameter("password", password);
+			if(query.uniqueResult() != null){
+				isLogIn = true;
+			}
+		}
+		catch(HibernateException e){
+			message = "Unable to check authorization. Error was thrown in DAO: ";
+			logger.error(message + e);
+			throw new DaoException(message, e);
+		}
+		return isLogIn;
 	}
 }

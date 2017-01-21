@@ -19,7 +19,7 @@
             Пароль:<br>
             <input type="password" name="password" value="" size="20" required /><br>
             ${operationMessage}
-            ${errorUserExists} <br>
+            ${UserExists} <br>
             <input type="submit" value="Зарегистрировать" />
             <a href="controller?command=back">Вернуться обратно</a>
         </form>

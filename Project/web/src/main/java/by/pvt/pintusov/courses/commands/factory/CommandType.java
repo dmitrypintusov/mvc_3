@@ -2,8 +2,6 @@ package by.pvt.pintusov.courses.commands.factory;
 
 import by.pvt.pintusov.courses.commands.ICommand;
 import by.pvt.pintusov.courses.commands.impl.teacher.GoBackTeacherCommand;
-import by.pvt.pintusov.courses.commands.impl.teacher.ShowOperationsCommand;
-import by.pvt.pintusov.courses.commands.impl.teacher.ShowStudentsCommand;
 import by.pvt.pintusov.courses.commands.impl.user.*;
 
 /**
@@ -42,10 +40,6 @@ public enum CommandType {
 			case BACK:
 				return new GoBackCommand();
 			//teacher`s commands
-			case STUDENTS_LIST:
-				return new ShowStudentsCommand();
-			case OPERATIONS:
-				return new ShowOperationsCommand();
 			case BACK_TEACHER:
 				return new GoBackTeacherCommand();
 			//students commands

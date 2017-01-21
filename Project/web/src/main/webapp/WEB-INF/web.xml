@@ -4,32 +4,41 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          id="WebApp_ID" version="3.1">
 
-  <display-name>CoursesSystem</display-name>
+    <display-name>CoursesSystem</display-name>
 
-  <servlet>
-      <servlet-name>Controller</servlet-name>
-      <servlet-class>by.pvt.pintusov.courses.controllers.Controller</servlet-class>
-  </servlet>
-  <servlet-mapping>
-      <servlet-name>Controller</servlet-name>
-      <url-pattern>/controller</url-pattern>
-  </servlet-mapping>
+    <servlet>
+        <servlet-name>Controller</servlet-name>
+        <servlet-class>by.pvt.pintusov.courses.controllers.Controller</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Controller</servlet-name>
+        <url-pattern>/controller</url-pattern>
+    </servlet-mapping>
 
-  <session-config>
-      <session-timeout>1</session-timeout>
-  </session-config>
+    <session-config>
+        <session-timeout>10</session-timeout>
+    </session-config>
 
-  <filter>
-      <filter-name>SecurityFilter</filter-name>
-      <filter-class>by.pvt.pintusov.courses.filters.SecurityFilter</filter-class>
-  </filter>
-  <filter-mapping>
-      <filter-name>SecurityFilter</filter-name>
-      <servlet-name>Controller</servlet-name>
-  </filter-mapping>
+    <filter>
+        <filter-name>SecurityFilter</filter-name>
+        <filter-class>by.pvt.pintusov.courses.filters.SecurityFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SecurityFilter</filter-name>
+        <servlet-name>Controller</servlet-name>
+    </filter-mapping>
 
-  <welcome-file-list>
-      <welcome-file>index.jsp</welcome-file>
-  </welcome-file-list>
+    <filter>
+         <filter-name>SessionClosing</filter-name>
+        <filter-class>by.pvt.pintusov.courses.filters.SessionClosingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SessionClosing</filter-name>
+        <servlet-name>Controller</servlet-name>
+    </filter-mapping>
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
 
 </web-app>
