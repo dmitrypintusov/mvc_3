@@ -65,6 +65,22 @@ public class UserDaoImplTest {
 		delete();
 	}
 
+	@Test
+	public void testGetByIdFalse() throws Exception {
+		createEntities();
+		actualUser = userDao.getById(15);
+		Assert.assertEquals("getById() method failed: ", expectedUser, actualUser);
+		delete();
+	}
+
+	@Test
+	public void testLoadFalse () throws Exception {
+		createEntities();
+		actualUser = userDao.load(15);
+		Assert.assertEquals("load() method failed: ", expectedUser, actualUser);
+		delete();
+	}
+
 	@Ignore
 	@Test
 	public void testGetByLogin () throws Exception {

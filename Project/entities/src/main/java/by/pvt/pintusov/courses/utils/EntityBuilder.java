@@ -97,4 +97,13 @@ public class EntityBuilder {
 		accessLevel.setUsers(users);
 		return accessLevel;
 	}
+
+	public static TestClass buildTestClass (String beginDate, String endDate, Integer tax) {
+		TestClass testClass = new TestClass();
+		testClass.setBeginDate(beginDate);
+		testClass.setEndDate(endDate);
+		testClass.setTax(tax);
+		return testClass;
+
+	}
 }

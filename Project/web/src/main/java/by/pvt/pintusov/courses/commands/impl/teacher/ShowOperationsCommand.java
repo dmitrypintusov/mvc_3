@@ -7,7 +7,6 @@ import by.pvt.pintusov.courses.constants.Parameters;
 import by.pvt.pintusov.courses.exceptions.ServiceException;
 import by.pvt.pintusov.courses.managers.ConfigurationManager;
 import by.pvt.pintusov.courses.managers.MessageManager;
-import by.pvt.pintusov.courses.services.impl.OperationServiceImpl;
 import by.pvt.pintusov.courses.utils.RequestParameterParser;
 
 import javax.servlet.http.HttpServletRequest;
