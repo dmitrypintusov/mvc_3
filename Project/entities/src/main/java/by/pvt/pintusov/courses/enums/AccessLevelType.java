@@ -7,5 +7,5 @@ package by.pvt.pintusov.courses.enums;
  */
 
 public enum AccessLevelType {
-	TEACHER, USER
+	TEACHER, STUDENT, ADMIN
 }

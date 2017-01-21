@@ -2,6 +2,7 @@ package by.pvt.pintusov.courses.filters;
 
 import by.pvt.pintusov.courses.commands.factory.CommandType;
 import by.pvt.pintusov.courses.constants.PagePath;
+import by.pvt.pintusov.courses.enums.AccessLevelType;
 import by.pvt.pintusov.courses.managers.ConfigurationManager;
 import by.pvt.pintusov.courses.utils.RequestParameterParser;
 
@@ -34,7 +35,7 @@ public class SecurityFilter implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		HttpSession session = httpRequest.getSession();
-		UserType type = RequestParameterParser.getUserType(httpRequest);
+		AccessLevelType type = RequestParameterParser.getAccessLevelType(httpRequest);
 		try {
 			CommandType commandType = RequestParameterParser.getCommandType(httpRequest);
 			if (type == null) {

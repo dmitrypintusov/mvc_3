@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Go to index page command
  * @author pintusov
- * @version 1.0
+ * @version 1.1
  */
 
 public class GoBackCommand extends AbstractCommand {

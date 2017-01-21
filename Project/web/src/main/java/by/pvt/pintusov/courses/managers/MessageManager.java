@@ -15,6 +15,7 @@ public class MessageManager {
 	private static MessageManager instance;
 
 	private MessageManager () {}
+
 	/**
 	 * Singleton for message manager
 	 * @return instance of Message manager

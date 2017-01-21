@@ -13,4 +13,7 @@ abstract public class AbstractService <T extends AbstractEntity> implements ISer
 	protected HibernateUtil util = HibernateUtil.getInstance();
 	protected final String TRANSACTION_SUCCEEDED = "Transaction succeeded";
 	protected final String TRANSACTION_FAILED = "Error was thrown in service: ";
+
+
 }
+

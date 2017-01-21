@@ -52,7 +52,7 @@ public class EntityBuilder {
 		course.setCourseName(courseName);
 		course.setHours(hours);
 		course.setCourseStatus(courseStatus);
-		course.setDate(date);
+		course.setStartDate(date);
 		course.setUser(users);
 		return course;
 	}
@@ -96,14 +96,5 @@ public class EntityBuilder {
 		accessLevel.setAccessLevel(accessLevelType);
 		accessLevel.setUsers(users);
 		return accessLevel;
-	}
-
-	public static TestClass buildTestClass (String beginDate, String endDate, Integer tax) {
-		TestClass testClass = new TestClass();
-		testClass.setBeginDate(beginDate);
-		testClass.setEndDate(endDate);
-		testClass.setTax(tax);
-		return testClass;
-
 	}
 }

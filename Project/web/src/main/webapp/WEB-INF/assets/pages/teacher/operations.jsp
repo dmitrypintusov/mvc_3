@@ -17,7 +17,7 @@
             </tr>
             <c:forEach var="operation" items="${operationsList}">
                 <tr>
-                    <td><c:out value="${operation.date}" /></td>
+                    <td><c:out value="${operation.startDate}" /></td>
                     <td><c:out value="${operation.discription}" /></td>
                     <td><c:out value="${operation.userId}" /></td>
                     <td><c:out value="${operation.courseId}" /></td>

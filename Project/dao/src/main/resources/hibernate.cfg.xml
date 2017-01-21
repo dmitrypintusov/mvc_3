@@ -17,7 +17,6 @@
         <mapping class="by.pvt.pintusov.courses.pojos.Mark"/>
         <mapping class="by.pvt.pintusov.courses.pojos.Archive"/>
         <mapping class="by.pvt.pintusov.courses.pojos.AccessLevel"/>
-        <mapping class="by.pvt.pintusov.courses.pojos.TestClass"/>
     </session-factory>
 </hibernate-configuration>
 

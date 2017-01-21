@@ -19,14 +19,23 @@ public class HibernateUtil {
 	private SessionFactory sessionFactory;
 	private static ThreadLocal <Session> sessions = new ThreadLocal <> ();
 
+	public static synchronized HibernateUtil getInstance () {
+		if (util == null) {
+			util = new HibernateUtil();
+		}
+		return util;
+	}
+
 	private HibernateUtil () {
 		try {
 			Configuration configuration = new Configuration().configure();
+			//TODO: решить проблему
+			//configuration.setNamingStrategy(new CustomNamingStrategyUtil());
 			StandardServiceRegistryBuilder serviceRegistryBuilder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
 			sessionFactory = configuration.buildSessionFactory(serviceRegistryBuilder.build());
 		} catch (Throwable e) {
 			logger.error("Initial SessionFactory creation failed." + e);
-			System.exit(0);
+			throw new ExceptionInInitializerError(e);
 		}
 	}
 
@@ -47,12 +56,5 @@ public class HibernateUtil {
 				logger.error(e);
 			}
 		}
-	}
-
-	public static synchronized HibernateUtil getInstance () {
-		if (util == null) {
-			util = new HibernateUtil();
-		}
-		return util;
 	}
 }

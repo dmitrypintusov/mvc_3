@@ -9,7 +9,7 @@ import by.pvt.pintusov.courses.commands.impl.user.*;
 /**
  * Command factory
  * @author pintusov
- * @version 1.0
+ * @version 1.1
  */
 
 public enum CommandType {

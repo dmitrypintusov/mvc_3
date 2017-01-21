@@ -45,6 +45,21 @@
                 <groupId>log4j</groupId>
                 <artifactId>log4j</artifactId>
                 <version>1.2.17</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.sun.jdmk</groupId>
+                        <artifactId>jmxtools</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>com.sun.jmx</groupId>
+                        <artifactId>jmxri</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-nop</artifactId>
+                <version>1.7.22</version>
             </dependency>
 
             <!-- Servlet-API -->
@@ -62,16 +77,11 @@
                 <version>2.1.1</version>
             </dependency>
 
-            <!--HikariPC-->
+            <!--HikariCP-->
             <dependency>
                 <groupId>com.zaxxer</groupId>
                 <artifactId>HikariCP</artifactId>
                 <version>2.4.6</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-nop</artifactId>
-                <version>1.7.22</version>
             </dependency>
 
             <!-- JUnit -->
@@ -82,7 +92,7 @@
                 <scope>test</scope>
             </dependency>
 
-            <!--Hibernate-->
+            <!-- Hibernate -->
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-core</artifactId>
@@ -93,8 +103,13 @@
                 <artifactId>hibernate-entitymanager</artifactId>
                 <version>${hibernate.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-ehcache</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
 
-            <!--Lomboc (used for auto generating constructors, getters, setters etc.-->
+            <!-- LomboK -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
@@ -151,6 +166,14 @@
                     <path>/${project.build.finalName}</path>
                     <warFile>target/${project.build.finalName}.war</warFile>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>redeploy</goal>
+                        </goals>
+                        <phase>install</phase>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

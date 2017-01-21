@@ -1,9 +1,6 @@
 package by.pvt.pintusov.courses.pojos;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Calendar;
 
 /**
@@ -47,6 +44,7 @@ public class Mark extends AbstractEntity {
 	private Course course;
 
 	@Column
+	@Temporal(value = TemporalType.TIMESTAMP)
 	public Calendar getDate() {
 		return date;
 	}

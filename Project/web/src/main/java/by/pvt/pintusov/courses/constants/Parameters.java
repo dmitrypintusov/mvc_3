@@ -14,7 +14,7 @@ public class Parameters {
 	public static final String USER_LAST_NAME = "lastname";
 	public static final String USER_LOGIN = "login";
 	public static final String USER_PASSWORD = "password";
-	public static final String USER_ACCESS_TYPE = "accesstype";
+	public static final String USER_ACCESS_LEVEL = "accessLevel";
 	public static final String USER_TYPE = "usertype";
 	public static final String USERS_LIST = "userslist";
 	//course parameters

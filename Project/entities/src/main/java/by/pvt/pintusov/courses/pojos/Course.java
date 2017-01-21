@@ -22,7 +22,7 @@ public class Course extends AbstractEntity {
 		super();
 	}
 
-	@Column
+	@Column (nullable = false)
 	public String getCourseName() {
 		return courseName;
 	}
@@ -31,7 +31,7 @@ public class Course extends AbstractEntity {
 	}
 	private String courseName;
 
-	@Column
+	@Column (nullable = false)
 	public Integer getHours() {
 		return hours;
 	}
@@ -41,7 +41,7 @@ public class Course extends AbstractEntity {
 	private Integer hours;
 
 	@Enumerated(EnumType.STRING)
-	@Column
+	@Column (columnDefinition = "enum('OPEN', 'CLOSED', 'ARCHIVE')")
 	public CourseStatusType getCourseStatus() {
 		return courseStatus;
 	}
@@ -50,16 +50,27 @@ public class Course extends AbstractEntity {
 	}
 	private CourseStatusType courseStatus;
 
-	@Column
-	public Calendar getDate() {
-		return date;
+	@Column (updatable = false)
+	@Temporal(value = TemporalType.TIMESTAMP)
+	public Calendar getStartDate() {
+		return startDate;
 	}
-	public void setDate(Calendar date) {
-		this.date = date;
+	public void setStartDate(Calendar startDate) {
+		this.startDate = startDate;
 	}
-	private Calendar date;
+	private Calendar startDate;
 
-	@ManyToMany
+	@Column (updatable = true)
+	@Temporal(value = TemporalType.TIMESTAMP)
+	public Calendar getEndDate() {
+		return  endDate;
+	}
+	public void setEndDate(Calendar endDate) {
+		this.endDate = endDate;
+	}
+	private Calendar endDate;
+
+	@ManyToMany (cascade = CascadeType.ALL)
 	public Set<User> getUser() {
 		return users;
 	}
@@ -99,7 +110,7 @@ public class Course extends AbstractEntity {
 				"courseName='" + courseName + '\'' +
 				", hours=" + hours +
 				", courseStatus=" + courseStatus +
-				", date=" + date +
+				", startDate=" + startDate +
 				'}';
 	}
 }

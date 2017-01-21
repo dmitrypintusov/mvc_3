@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * Request Handler
  * @author pintusov
- * @version 1.0
+ * @version 1.1
  */
 
 public class RequestHandler {
@@ -28,13 +28,14 @@ public class RequestHandler {
 	 * @throws IOException
 	 */
 	public static void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ICommand command = CommandFactory.getInstance ().defineCommand(request);
-		String page = command.execute(request);
+		CommandFactory commandFactory = CommandFactory.getInstance();
+		ICommand сommand = commandFactory.defineCommand(request);
+		String page = сommand.execute(request);
 		if (page != null) {
 			RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher(page);
 			dispatcher.forward(request, response);
 		} else {
-			page = ConfigurationManager.getInstance().getProperty (PagePath.INDEX_PAGE_PATH);
+			page = ConfigurationManager.getInstance().getProperty(PagePath.INDEX_PAGE_PATH);
 			response.sendRedirect(request.getContextPath() + page);
 		}
 	}

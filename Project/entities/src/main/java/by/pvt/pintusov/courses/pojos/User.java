@@ -17,27 +17,27 @@ public class User extends AbstractEntity {
 
 	public User() { super (); }
 
-	@Column
+	@Column (nullable = false)
 	public String getFirstName () { return firstName; }
 	public void setFirstName (String firstName) { this.firstName = firstName; }
 	private String firstName;
 
-	@Column
+	@Column (nullable = false)
 	public String getLastName () { return lastName; }
 	public void setLastName (String lastName) { this.lastName = lastName; }
 	private String lastName;
 
-	@Column
+	@Column (nullable = false)
 	public String getLogin () { return login; }
 	public void setLogin (String login) { this.login = login; }
 	private String login;
 
-	@Column
+	@Column (nullable = false)
 	public String getPassword () { return password; }
 	public void setPassword (String password) { this.password = password; }
 	private String password;
 
-	@ManyToMany
+	@ManyToMany (cascade = CascadeType.ALL)
 	public Set<Course> getCourses() {
 		return courses;
 	}
@@ -52,7 +52,7 @@ public class User extends AbstractEntity {
 	}
 	private Set <Course> courses;
 
-	@OneToMany
+	@OneToMany (cascade = CascadeType.ALL)
 	public Set<Mark> getMarks() {
 		return marks;
 	}
@@ -67,7 +67,7 @@ public class User extends AbstractEntity {
 	}
 	private Set<Mark> marks;
 
-	@ManyToMany
+	@ManyToMany (cascade = CascadeType.ALL)
 	public Set<AccessLevel> getAccessLevels() {
 		return accessLevels;
 	}
