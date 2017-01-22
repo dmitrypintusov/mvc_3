@@ -30,6 +30,7 @@ public class UserServiceImplTest {
 		expectedUser.setId((Integer) userId);
 	}
 
+	@Ignore
 	@Test
 	public void testSaveOrUpdate() throws Exception {
 		createEntities();
@@ -52,6 +53,15 @@ public class UserServiceImplTest {
 		delete();
 		actualUser = userService.getById((Integer) userId);
 		Assert.assertNull("delete() method failed: ", actualUser);
+	}
+
+	@Ignore
+	@Test
+	public void testIsAuthorized () throws Exception {
+		createEntities();
+		boolean authorized = userService.checkUserAuthorization(expectedUser.getLogin(), expectedUser.getPassword());
+		Assert.assertTrue("UserAuthorization() method failed: ", authorized);
+		delete();
 	}
 
 	@After

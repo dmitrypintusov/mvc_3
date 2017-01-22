@@ -93,7 +93,7 @@ public class EntityBuilder {
 	 */
 	public static AccessLevel buildAccessLevel (AccessLevelType accessLevelType, Set<User> users) {
 		AccessLevel accessLevel = new AccessLevel();
-		accessLevel.setAccessLevel(accessLevelType);
+		accessLevel.setAccessLevelType(accessLevelType);
 		accessLevel.setUsers(users);
 		return accessLevel;
 	}

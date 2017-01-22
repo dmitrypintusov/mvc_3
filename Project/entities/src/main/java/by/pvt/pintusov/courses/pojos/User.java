@@ -2,7 +2,6 @@ package by.pvt.pintusov.courses.pojos;
 
 import lombok.Data;
 import org.hibernate.annotations.Formula;
-import org.hibernate.annotations.Immutable;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -15,46 +14,33 @@ import java.util.Set;
  */
 
 //@Data
-//@Immutable
 @Entity
-@Table
 public class User extends AbstractEntity {
 	private static final long serialVersionUID = 2L;
 
 	public User() { super (); }
 
-	@Column (nullable = false)
+	@Column (nullable = false, length = 15)
 	public String getFirstName () { return firstName; }
 	public void setFirstName (String firstName) { this.firstName = firstName; }
 	private String firstName;
 
-	@Column (nullable = false)
+	@Column (nullable = false, length = 30)
 	public String getLastName () { return lastName; }
 	public void setLastName (String lastName) { this.lastName = lastName; }
 	private String lastName;
 
-	@Access (AccessType.FIELD)
-	//TODO: проверить синтаксис. слетают тесты в service
-	//@Formula(value = "AS CONCAT (COALESCE(name, ''), COALESCE(' ' + surname, ''))")
-	private String fullName;
-	public String getFullName() {
-		return fullName;
-	}
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
-
-	@Column (nullable = false)
+	@Column (unique = true, nullable = false, length = 25)
 	public String getLogin () { return login; }
 	public void setLogin (String login) { this.login = login; }
 	private String login;
 
-	@Column (nullable = false)
+	@Column (nullable = false, length = 30)
 	public String getPassword () { return password; }
 	public void setPassword (String password) { this.password = password; }
 	private String password;
 
-	@ManyToMany (cascade = CascadeType.ALL)
+	@ManyToMany (mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	public Set<Course> getCourses() {
 		return courses;
 	}
@@ -69,7 +55,7 @@ public class User extends AbstractEntity {
 	}
 	private Set <Course> courses;
 
-	@OneToMany (cascade = CascadeType.ALL)
+	@OneToMany (mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	public Set<Mark> getMarks() {
 		return marks;
 	}
@@ -84,7 +70,8 @@ public class User extends AbstractEntity {
 	}
 	private Set<Mark> marks;
 
-	@ManyToMany (cascade = CascadeType.ALL)
+	@ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name = "T_USER_ACCESS_LEVEL", joinColumns = @JoinColumn(name = "F_USER_ID"), inverseJoinColumns = @JoinColumn(name = "F_ACCESS_LEVEL_ID"))
 	public Set<AccessLevel> getAccessLevels() {
 		return accessLevels;
 	}

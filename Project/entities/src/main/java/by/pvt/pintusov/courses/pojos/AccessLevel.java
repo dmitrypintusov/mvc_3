@@ -12,7 +12,6 @@ import java.util.Set;
  * @version 1.1
  */
 @Entity
-@Table
 public class AccessLevel extends AbstractEntity {
 	private static final long serialVersionUID = 5L;
 
@@ -20,15 +19,15 @@ public class AccessLevel extends AbstractEntity {
 
 	@Enumerated (EnumType.STRING)
 	@Column(columnDefinition = "enum('TEACHER', 'USER', 'ADMIN')")
-	public AccessLevelType getAccessLevel() {
-		return accessLevel;
+	public AccessLevelType getAccessLevelType() {
+		return accessLevelType;
 	}
-	public void setAccessLevel(AccessLevelType accessLevel) {
-		this.accessLevel = accessLevel;
+	public void setAccessLevelType(AccessLevelType accessLevelType) {
+		this.accessLevelType = accessLevelType;
 	}
-	private AccessLevelType accessLevel;
+	private AccessLevelType accessLevelType;
 
-	@ManyToMany
+	@ManyToMany (mappedBy = "accessLevels")
 	public Set<User> getUsers() {
 		return users;
 	}
@@ -49,21 +48,21 @@ public class AccessLevel extends AbstractEntity {
 		if (o == null || !(o instanceof AccessLevel)) return false;
 		if (!super.equals(o)) return false;
 		AccessLevel that = (AccessLevel) o;
-		return accessLevel == that.accessLevel;
+		return accessLevelType == that.accessLevelType;
 
 	}
 
 	@Override
 	public int hashCode() {
 		int result = super.hashCode();
-		result = 31 * result + (accessLevel != null ? accessLevel.hashCode() : 0);
+		result = 31 * result + (accessLevelType != null ? accessLevelType.hashCode() : 0);
 		return result;
 	}
 
 	@Override
 	public String toString() {
 		return "AccessLevel{" +
-				"accessLevel=" + accessLevel +
+				"accessLevelType=" + accessLevelType +
 				'}';
 	}
 }

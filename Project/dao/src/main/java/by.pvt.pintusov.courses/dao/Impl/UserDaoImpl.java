@@ -20,8 +20,8 @@ import org.hibernate.SessionFactory;
 
 public class UserDaoImpl extends AbstractDao <User> implements IUserDao {
 	private static Logger logger = Logger.getLogger(UserDaoImpl.class);
-	private HibernateUtil util = HibernateUtil.getInstance();
 	private static UserDaoImpl instance;
+
 
 	public static synchronized UserDaoImpl getInstance(){
 		if(instance == null){
@@ -65,8 +65,8 @@ public class UserDaoImpl extends AbstractDao <User> implements IUserDao {
 			}
 		}
 		catch(HibernateException e){
-			logger.error(DaoConstants.ERROR_AUTHORIZATION + e);
-			throw new DaoException(DaoConstants.ERROR_AUTHORIZATION, e);
+			logger.error(DaoConstants.ERROR_USER_AUTHORIZATION + e);
+			throw new DaoException(DaoConstants.ERROR_USER_AUTHORIZATION, e);
 		}
 		return isLogIn;
 	}

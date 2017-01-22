@@ -6,5 +6,5 @@ package by.pvt.pintusov.courses.enums;
  * Date: 17.01.17.
  */
 public enum CourseStatusType {
-	OPEN, CLOSED, ARCHIVE
+	OPEN, ENDED, ARCHIVE
 }

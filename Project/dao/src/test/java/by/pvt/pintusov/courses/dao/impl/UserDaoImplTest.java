@@ -68,20 +68,8 @@ public class UserDaoImplTest {
 	@Test
 	public void testGetByLogin () throws Exception {
 		createEntities();
-		String login = expectedUser.getLogin();
-		actualUser = userDao.getUserByLogin(login);
+		actualUser = userDao.getUserByLogin(expectedUser.getLogin());
 		Assert.assertEquals("getByLogin() method failed: ", expectedUser, actualUser);
-		delete();
-	}
-
-	@Ignore
-	@Test
-	public void testIsAuthorized () throws Exception {
-		createEntities();
-		String login = expectedUser.getLogin();
-		String password = expectedUser.getPassword();
-		boolean authorized = userDao.isAuthorized(login, password);
-		Assert.assertTrue(authorized);
 		delete();
 	}
 

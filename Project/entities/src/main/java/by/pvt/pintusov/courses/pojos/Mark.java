@@ -10,13 +10,12 @@ import java.util.Calendar;
  */
 
 @Entity
-@Table
 public class Mark extends AbstractEntity {
 	private static final long serialVersionUID = 4L;
 
 	public Mark() { super(); }
 
-	@Column
+	@Column (nullable = false, updatable = false)
 	public Integer getMark() {
 		return mark;
 	}
@@ -26,6 +25,7 @@ public class Mark extends AbstractEntity {
 	private Integer mark;
 
 	@ManyToOne
+	@JoinColumn(name = "F_USER_ID", updatable = false)
 	public User getUser() {
 		return user;
 	}
@@ -35,6 +35,7 @@ public class Mark extends AbstractEntity {
 	private User user;
 
 	@ManyToOne
+	@JoinColumn(name = "F_COURSE_ID", updatable = false)
 	public Course getCourse() {
 		return course;
 	}

@@ -44,7 +44,7 @@ public class RequestParameterParser {
 		if (request.getParameter(Parameters.USER_ACCESS_LEVEL) != null) {
 			accessLevel = AccessLevelType.valueOf(request.getParameter(Parameters.USER_ACCESS_LEVEL).toUpperCase());
 			AccessLevel access = new AccessLevel();
-			access.setAccessLevel(accessLevel);
+			access.setAccessLevelType(accessLevel);
 			accessLevels.add(access);
 		}
 		String firstName = request.getParameter(Parameters.USER_FIRST_NAME);

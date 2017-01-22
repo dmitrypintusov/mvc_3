@@ -14,7 +14,6 @@ import java.util.Set;
  */
 
 @Entity
-@Table
 public class Course extends AbstractEntity {
 	private static final long serialVersionUID = 3L;
 
@@ -62,15 +61,15 @@ public class Course extends AbstractEntity {
 
 	@Column (insertable = false, updatable = true)
 	@Temporal(value = TemporalType.TIMESTAMP)
-	public Calendar getEndDate() {
-		return  endDate;
+	public Calendar getUpdateDate() {
+		return updateDate;
 	}
-	public void setEndDate(Calendar endDate) {
-		this.endDate = endDate;
+	public void setUpdateDate(Calendar updateDate) {
+		this.updateDate = updateDate;
 	}
-	private Calendar endDate;
+	private Calendar updateDate;
 
-	@ManyToMany (cascade = CascadeType.ALL)
+	@ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	public Set<User> getUser() {
 		return users;
 	}
@@ -88,11 +87,16 @@ public class Course extends AbstractEntity {
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
-		if (o == null || !(o instanceof User)) return false;
+		if (o == null || getClass() != o.getClass()) return false;
 		if (!super.equals(o)) return false;
+
 		Course course = (Course) o;
+
 		if (courseName != null ? !courseName.equals(course.courseName) : course.courseName != null) return false;
-		return hours != null ? hours.equals(course.hours) : course.hours == null;
+		if (hours != null ? !hours.equals(course.hours) : course.hours != null) return false;
+		if (courseStatus != course.courseStatus) return false;
+		if (startDate != null ? !startDate.equals(course.startDate) : course.startDate != null) return false;
+		return updateDate != null ? updateDate.equals(course.updateDate) : course.updateDate == null;
 
 	}
 
@@ -101,6 +105,9 @@ public class Course extends AbstractEntity {
 		int result = super.hashCode();
 		result = 31 * result + (courseName != null ? courseName.hashCode() : 0);
 		result = 31 * result + (hours != null ? hours.hashCode() : 0);
+		result = 31 * result + (courseStatus != null ? courseStatus.hashCode() : 0);
+		result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
+		result = 31 * result + (updateDate != null ? updateDate.hashCode() : 0);
 		return result;
 	}
 
@@ -111,6 +118,7 @@ public class Course extends AbstractEntity {
 				", hours=" + hours +
 				", courseStatus=" + courseStatus +
 				", startDate=" + startDate +
+				", updateDate=" + updateDate +
 				'}';
 	}
 }

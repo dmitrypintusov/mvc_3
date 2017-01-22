@@ -1,8 +1,6 @@
 package by.pvt.pintusov.courses.pojos;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,13 +11,12 @@ import java.util.Set;
  */
 
 @Entity
-@Table
 public class Archive extends AbstractEntity {
 	private static final long serialVersionUID = 6L;
 
 	public Archive() {super(); }
 
-	@OneToMany
+	@OneToMany (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	public Set<Course> getCourses() {
 		return archive;
 	}
