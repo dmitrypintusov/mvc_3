@@ -2,6 +2,7 @@ package by.pvt.pintusov.courses.pojos;
 
 import lombok.Data;
 import org.hibernate.annotations.Formula;
+import org.hibernate.annotations.Immutable;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -14,6 +15,7 @@ import java.util.Set;
  */
 
 //@Data
+//@Immutable
 @Entity
 @Table
 public class User extends AbstractEntity {
