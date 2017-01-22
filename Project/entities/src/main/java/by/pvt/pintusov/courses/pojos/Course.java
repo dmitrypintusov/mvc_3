@@ -50,7 +50,7 @@ public class Course extends AbstractEntity {
 	}
 	private CourseStatusType courseStatus;
 
-	@Column (updatable = false)
+	@Column (insertable = true, updatable = false)
 	@Temporal(value = TemporalType.TIMESTAMP)
 	public Calendar getStartDate() {
 		return startDate;
@@ -60,7 +60,7 @@ public class Course extends AbstractEntity {
 	}
 	private Calendar startDate;
 
-	@Column (updatable = true)
+	@Column (insertable = false, updatable = true)
 	@Temporal(value = TemporalType.TIMESTAMP)
 	public Calendar getEndDate() {
 		return  endDate;

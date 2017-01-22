@@ -7,7 +7,7 @@ import org.hibernate.cfg.DefaultNamingStrategy;
  * Created by: USER
  * Date: 21.01.17.
  */
-public class CustomNamingStrategyUtil extends DefaultNamingStrategy {
+public class CustomNamingStrategy extends DefaultNamingStrategy {
 	@Override
 	public String classToTableName(String className) {
 		return "T_" + super.classToTableName(className).toUpperCase();

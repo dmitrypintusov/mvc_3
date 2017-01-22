@@ -1,5 +1,8 @@
 package by.pvt.pintusov.courses.pojos;
 
+import lombok.Data;
+import org.hibernate.annotations.Formula;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,6 +13,7 @@ import java.util.Set;
  * @version 1.1
  */
 
+//@Data
 @Entity
 @Table
 public class User extends AbstractEntity {
@@ -26,6 +30,17 @@ public class User extends AbstractEntity {
 	public String getLastName () { return lastName; }
 	public void setLastName (String lastName) { this.lastName = lastName; }
 	private String lastName;
+
+	@Access (AccessType.FIELD)
+	//TODO: проверить синтаксис. слетают тесты в service
+	//@Formula(value = "AS CONCAT (COALESCE(name, ''), COALESCE(' ' + surname, ''))")
+	private String fullName;
+	public String getFullName() {
+		return fullName;
+	}
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
 
 	@Column (nullable = false)
 	public String getLogin () { return login; }
