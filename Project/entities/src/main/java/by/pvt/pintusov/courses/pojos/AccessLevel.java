@@ -18,7 +18,7 @@ public class AccessLevel extends AbstractEntity {
 	public AccessLevel() {super();}
 
 	@Enumerated (EnumType.STRING)
-	@Column(columnDefinition = "enum('TEACHER', 'USER', 'ADMIN')")
+	@Column(columnDefinition = "enum('TEACHER', 'STUDENT', 'ADMIN')")
 	public AccessLevelType getAccessLevelType() {
 		return accessLevelType;
 	}

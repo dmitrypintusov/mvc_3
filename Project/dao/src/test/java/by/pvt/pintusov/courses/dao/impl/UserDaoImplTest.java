@@ -1,13 +1,25 @@
 package by.pvt.pintusov.courses.dao.impl;
 
+import by.pvt.pintusov.courses.dao.Impl.AccessLevelDaoImpl;
+import by.pvt.pintusov.courses.dao.Impl.CourseDaoImpl;
+import by.pvt.pintusov.courses.dao.Impl.MarkDaoImpl;
 import by.pvt.pintusov.courses.dao.Impl.UserDaoImpl;
+import by.pvt.pintusov.courses.enums.AccessLevelType;
+import by.pvt.pintusov.courses.enums.CourseStatusType;
+import by.pvt.pintusov.courses.pojos.AccessLevel;
+import by.pvt.pintusov.courses.pojos.Course;
+import by.pvt.pintusov.courses.pojos.Mark;
 import by.pvt.pintusov.courses.pojos.User;
 import by.pvt.pintusov.courses.utils.EntityBuilder;
 import by.pvt.pintusov.courses.utils.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.junit.*;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Test User Dao
@@ -18,26 +30,61 @@ import java.io.Serializable;
 public class UserDaoImplTest {
 	private User expectedUser;
 	private User actualUser;
+	private Course course;
+	private Mark mark;
+	private AccessLevel accessLevel;
 	private Serializable userId;
+	private Serializable courseId;
+	private Serializable markId;
+	private Serializable accessLevelId;
+
+	private Set<User> users;
+	private Set<Course> courses;
+	private Set<AccessLevel> accessLevels;
+	private Set<Mark> marks;
+	private Transaction transaction;
+
 	private static HibernateUtil util;
 	private static Session session;
+
 	private static UserDaoImpl userDao;
+	private static CourseDaoImpl courseDao;
+	private static MarkDaoImpl markDao;
+	private static AccessLevelDaoImpl accessLevelDao;
 
 	@BeforeClass
 	public static void initTest () throws Exception {
 		userDao = UserDaoImpl.getInstance();
+		courseDao = CourseDaoImpl.getInstance();
+		markDao = MarkDaoImpl.getInstance();
+		accessLevelDao = AccessLevelDaoImpl.getInstance();
 		util = HibernateUtil.getInstance();
 		session = util.getSession();
 	}
 
 	@Before
 	public void setUp() throws Exception {
-		expectedUser = EntityBuilder.buildUser("TEST", "TEST", "TEST", "TEST", null, null, null);
-	}
 
-	private void createEntities() throws Exception {
-		userId = userDao.saveOrUpdate(expectedUser);
-		expectedUser.setId((Integer) userId);
+		courses = new HashSet<>();
+		accessLevels = new HashSet<>();
+		marks = new HashSet<>();
+		users = new HashSet<>();
+
+		expectedUser = EntityBuilder.buildUser("TEST", "TEST", "TEST", "TEST", null, null, null);
+		users.add(expectedUser);
+
+		course = EntityBuilder.buildCourse("COURSE", 100, CourseStatusType.OPEN, Calendar.getInstance(), Calendar.getInstance(), users);
+		courses.add(course);
+		expectedUser.setCourses(courses);
+
+		mark = EntityBuilder.buildMark(10, expectedUser, course, Calendar.getInstance());
+		marks.add(mark);
+		expectedUser.setMarks(marks);
+
+		accessLevel = EntityBuilder.buildAccessLevel(AccessLevelType.STUDENT, users);
+		accessLevels.add(accessLevel);
+		expectedUser.setAccessLevels(accessLevels);
+		transaction = session.beginTransaction();
 	}
 
 	@Test
@@ -83,19 +130,41 @@ public class UserDaoImplTest {
 
 	@After
 	public void tearDown () throws Exception {
+		transaction.commit();
 		expectedUser = null;
 		actualUser = null;
+		course = null;
+		mark = null;
+		accessLevel = null;
 		userId = null;
+		courseId = null;
+		markId = null;
+		accessLevelId = null;
+		transaction = null;
 	}
 
 	@AfterClass
 	public static void closeTest() throws Exception{
-		session.close();
-		util = null;
 		userDao = null;
+		courseDao = null;
+		markDao = null;
+		accessLevelDao = null;
+		util = null;
+		session.close();
+	}
+
+	private void createEntities() throws Exception {
+		accessLevelId = accessLevelDao.saveOrUpdate(accessLevel);
+		markId = markDao.saveOrUpdate(mark);
+		userId = userDao.saveOrUpdate(expectedUser);
+		courseId = courseDao.saveOrUpdate(course);
+		expectedUser.setId((Integer) userId);
 	}
 
 	private void delete() throws Exception {
+		accessLevelDao.delete((Integer) accessLevelId);
+		markDao.delete((Integer) markId);
 		userDao.delete((Integer) userId);
+		//courseDao.delete((Integer) courseId); TODO: разобраться почему не может удалить
 	}
 }

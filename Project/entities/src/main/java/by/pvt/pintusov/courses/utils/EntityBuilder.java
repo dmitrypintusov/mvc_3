@@ -43,16 +43,18 @@ public class EntityBuilder {
 	 * @param courseName - course's name
 	 * @param hours - hours of study
 	 * @param courseStatus - course's status
-	 * @param date - course's start date
+	 * @param startDate - course's start date
+	 * @param updateDate - course's update date
 	 * @param users - set of course's users
 	 * @return entity of <strong>Course</strong>
 	 */
-	public static Course buildCourse (String courseName, Integer hours, CourseStatusType courseStatus, Calendar date, Set<User> users) {
+	public static Course buildCourse (String courseName, Integer hours, CourseStatusType courseStatus, Calendar startDate, Calendar updateDate, Set<User> users) {
 		Course course = new Course ();
 		course.setCourseName(courseName);
 		course.setHours(hours);
 		course.setCourseStatus(courseStatus);
-		course.setStartDate(date);
+		course.setStartDate(startDate);
+		course.setUpdateDate(updateDate);
 		course.setUser(users);
 		return course;
 	}
