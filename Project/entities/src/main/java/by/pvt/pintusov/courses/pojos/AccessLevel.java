@@ -11,6 +11,7 @@ import java.util.Set;
  * @author pintusov
  * @version 1.1
  */
+
 @Entity
 public class AccessLevel extends AbstractEntity {
 	private static final long serialVersionUID = 5L;

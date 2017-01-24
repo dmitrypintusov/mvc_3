@@ -64,7 +64,6 @@ public class UserDaoImplTest {
 
 	@Before
 	public void setUp() throws Exception {
-
 		courses = new HashSet<>();
 		accessLevels = new HashSet<>();
 		marks = new HashSet<>();
@@ -120,6 +119,16 @@ public class UserDaoImplTest {
 		delete();
 	}
 
+	@Ignore
+	@Test
+	public void testIsAuthorized () throws Exception {
+		createEntities();
+		boolean isAuthorized;
+		isAuthorized = userDao.isAuthorized(expectedUser.getLogin(), expectedUser.getPassword());
+		Assert.assertTrue("isAuthorized() method failed: ", isAuthorized);
+		delete();
+	}
+
 	@Test
 	public void testDelete () throws Exception {
 		createEntities();
@@ -165,6 +174,5 @@ public class UserDaoImplTest {
 		accessLevelDao.delete((Integer) accessLevelId);
 		markDao.delete((Integer) markId);
 		userDao.delete((Integer) userId);
-		//courseDao.delete((Integer) courseId); TODO: разобраться почему не может удалить
 	}
 }

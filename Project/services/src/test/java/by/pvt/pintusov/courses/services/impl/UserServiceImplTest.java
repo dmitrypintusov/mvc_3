@@ -30,7 +30,6 @@ public class UserServiceImplTest {
 		expectedUser.setId((Integer) userId);
 	}
 
-	@Ignore
 	@Test
 	public void testSaveOrUpdate() throws Exception {
 		createEntities();
@@ -48,6 +47,14 @@ public class UserServiceImplTest {
 	}
 
 	@Test
+	public void testLoad() throws Exception {
+		createEntities();
+		actualUser = userService.load((Integer) userId);
+		Assert.assertEquals("getById() method failed: ", expectedUser, actualUser);
+		delete();
+	}
+
+	@Test
 	public void testDelete () throws Exception {
 		createEntities();
 		delete();
@@ -55,7 +62,7 @@ public class UserServiceImplTest {
 		Assert.assertNull("delete() method failed: ", actualUser);
 	}
 
-	@Ignore
+	//@Ignore
 	@Test
 	public void testIsAuthorized () throws Exception {
 		createEntities();

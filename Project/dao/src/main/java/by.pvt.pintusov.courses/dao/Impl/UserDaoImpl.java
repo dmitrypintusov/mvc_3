@@ -5,7 +5,6 @@ import by.pvt.pintusov.courses.dao.AbstractDao;
 import by.pvt.pintusov.courses.dao.IUserDao;
 import by.pvt.pintusov.courses.exceptions.DaoException;
 import by.pvt.pintusov.courses.pojos.User;
-import by.pvt.pintusov.courses.utils.HibernateUtil;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
