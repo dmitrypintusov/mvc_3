@@ -62,7 +62,7 @@ public class RequestParameterParser {
 	 * @return course instance
 	 */
 	public static AccessLevelType getAccessLevelType (HttpServletRequest request) {
-		return (AccessLevelType) request.getSession().getAttribute(Parameters.USER_TYPE);
+		return (AccessLevelType) request.getSession().getAttribute(Parameters.USER_ACCESS_LEVEL);
 	}
 
 	/**

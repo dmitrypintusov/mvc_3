@@ -32,17 +32,15 @@ public class LoginUserCommand extends AbstractCommand {
 			user = RequestParameterParser.getUser(request);
 			if (UserServiceImpl.getInstance ().checkUserAuthorization(user.getLogin(), user.getPassword())) {
 				user = UserServiceImpl.getInstance().getUserByLogin(user.getLogin());
-				AccessLevelType userType = UserServiceImpl.getInstance().checkAccessLevel(user);
+				AccessLevelType accessLevel = UserServiceImpl.getInstance().checkAccessLevel(user);
 				session.setAttribute(Parameters.USER, user);
-				session.setAttribute(Parameters.USER_TYPE, userType);
-				if (AccessLevelType.ADMIN.equals(userType)) {
-					page = ConfigurationManager.getInstance().getProperty(PagePath.ADMIN_PAGE_PATH);
-				} else if (AccessLevelType.STUDENT.equals(userType)) {
+				session.setAttribute(Parameters.USER_ACCESS_LEVEL, accessLevel);
+				if(AccessLevelType.STUDENT.equals(accessLevel)){
 					page = ConfigurationManager.getInstance().getProperty(PagePath.STUDENT_PAGE_PATH);
-				} else {
+				} else{
 					page = ConfigurationManager.getInstance().getProperty(PagePath.TEACHER_PAGE_PATH);
 				}
-			} else  {
+			} else {
 				page = ConfigurationManager.getInstance().getProperty(PagePath.INDEX_PAGE_PATH);
 				request.setAttribute(Parameters.ERROR_LOGIN_OR_PASSWORD, MessageManager.getInstance().getProperty(MessageConstants.WRONG_LOGIN_OR_PASSWORD));
 			}

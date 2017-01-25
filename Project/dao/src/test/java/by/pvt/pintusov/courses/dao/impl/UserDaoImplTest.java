@@ -159,7 +159,7 @@ public class UserDaoImplTest {
 		markDao = null;
 		accessLevelDao = null;
 		util = null;
-		session.close();
+		//session.close();
 	}
 
 	private void createEntities() throws Exception {
