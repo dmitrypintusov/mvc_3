@@ -29,7 +29,6 @@ public class HibernateUtil {
 	private HibernateUtil () {
 		try {
 			Configuration configuration = new Configuration().configure();
-			//TODO: решить проблему Same physical table name [courses] references several logical table names: [Archive_Course], [User_Course]
 			configuration.setNamingStrategy(new CustomNamingStrategy());
 			StandardServiceRegistryBuilder serviceRegistryBuilder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
 			sessionFactory = configuration.buildSessionFactory(serviceRegistryBuilder.build());

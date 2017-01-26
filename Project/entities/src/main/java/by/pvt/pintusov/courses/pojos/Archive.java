@@ -18,18 +18,18 @@ public class Archive extends AbstractEntity {
 
 	@OneToMany (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	public Set<Course> getCourses() {
-		return archive;
+		return coursesInArchive;
 	}
-	public void setCourses(Set<Course> courses) {
-		this.archive = courses;
+	public void setCourses(Set<Course> coursesInArchive) {
+		this.coursesInArchive = coursesInArchive;
 	}
 	public void addCourseToArchive(Course course){
-		if(archive == null){
-			archive = new HashSet<>();
+		if(coursesInArchive == null){
+			coursesInArchive = new HashSet<>();
 		}
-		archive.add(course);
+		coursesInArchive.add(course);
 	}
-	private Set<Course> archive;
+	private Set<Course> coursesInArchive;
 
 	//TODO: нужно ли equals, HashCode, toString, если одна коллекция
 }

@@ -8,7 +8,7 @@ import javax.validation.constraints.*;
  * Date: 22.01.2017.
  */
 public class UserDTO {
-	@Size(min = 2, max = 20, message = "First name should be between 2 and 20 characters long") // TODO локализация
+	@Size(min = 2, max = 20, message = "First name should be between 2 and 20 characters long")
 	@Pattern(regexp = "^[a-zA-Zа-яА-Я0-9]+$", message = "First name should be alphanumeric with no spaces")
 	@NotNull(message = "First name cannot be empty")
 	private String firstName;
@@ -35,7 +35,7 @@ public class UserDTO {
 	@NotNull(message = "Course name cannot be empty")
 	private String courseName;
 
-	@Pattern(regexp = "TEACHER|STUDENT")
+	@Pattern(regexp = "TEACHER|STUDENT|ADMIN")
 	@Size(min = 7, max = 7, message = "Incorrect value of access role")
 	@NotNull(message = "Access role cannot be empty")
 	private String accessRole;

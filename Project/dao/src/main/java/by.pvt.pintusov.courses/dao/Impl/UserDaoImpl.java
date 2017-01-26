@@ -11,6 +11,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import java.util.List;
+
 /**
  * User Dao implementation
  * @author pintusov
@@ -38,7 +40,7 @@ public class UserDaoImpl extends AbstractDao <User> implements IUserDao {
 
 	@Override
 	public User getUserByLogin(String login) throws DaoException {
-		User user;
+		User user = null;
 		try {
 			Session session = util.getSession();
 			Query query = session.createQuery(DaoConstants.HQL_GET_BY_LOGIN);
@@ -68,5 +70,22 @@ public class UserDaoImpl extends AbstractDao <User> implements IUserDao {
 			throw new DaoException(DaoConstants.ERROR_USER_AUTHORIZATION, e);
 		}
 		return isLogIn;
+	}
+
+	public List<User> getAll() throws DaoException {
+		List<User> results;
+		try {
+			Session session = util.getSession();
+			Query query = session.createQuery(DaoConstants.HQL_GET_ALL_USERS);
+			query.setFirstResult(0);
+			query.setMaxResults(2);
+			results = query.list();
+			logger.info(results);
+		}
+		catch(HibernateException e){
+			logger.error(DaoConstants.ERROR_USERS_LIST + e);
+			throw new DaoException(DaoConstants.ERROR_USERS_LIST, e);
+		}
+		return results;
 	}
 }

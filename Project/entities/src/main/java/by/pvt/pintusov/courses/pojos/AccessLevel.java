@@ -28,7 +28,7 @@ public class AccessLevel extends AbstractEntity {
 	}
 	private AccessLevelType accessLevelType;
 
-	@ManyToMany (mappedBy = "accessLevels")
+	@ManyToMany
 	public Set<User> getUsers() {
 		return users;
 	}

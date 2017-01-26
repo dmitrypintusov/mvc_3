@@ -19,8 +19,8 @@ public abstract class AbstractEntity implements Serializable {
 	public AbstractEntity() {}
 
 	@Id
-	@GeneratedValue(generator = "increment")
-	@GenericGenerator(name = "increment", strategy = "increment")
+	@GeneratedValue(generator = "identity")
+	@GenericGenerator(name = "identity", strategy = "identity")
 	public Integer getId() {
 		return id;
 	}

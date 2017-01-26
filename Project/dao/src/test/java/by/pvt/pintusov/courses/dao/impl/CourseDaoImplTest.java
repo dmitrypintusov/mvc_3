@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.*;
 
+import javax.validation.constraints.AssertFalse;
 import java.io.Serializable;
 import java.util.Calendar;
 
@@ -70,6 +71,14 @@ public class CourseDaoImplTest {
 		delete();
 		actualCourse = courseDao.getById((Integer) courseId);
 		Assert.assertNull("delete() method failed: ", actualCourse);
+	}
+
+	@Test
+	public void testIsCourseStatusEnded () throws Exception {
+		createEntities();
+		boolean isCourseStatusEnded;
+		isCourseStatusEnded = courseDao.isCourseStatusEnded(expectedCourse.getId());
+		Assert.assertFalse("isCourseStatusEnded() method failed: ", isCourseStatusEnded);
 	}
 
 	@After

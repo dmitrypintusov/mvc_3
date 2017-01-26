@@ -35,7 +35,7 @@ public class CourseDaoImpl extends AbstractDao <Course> implements ICourseDao {
 	}
 
 	@Override
-	public boolean isCourseStatusEnded(Long id) throws DaoException {
+	public boolean isCourseStatusEnded(Integer id) throws DaoException {
 		boolean isEnded = false;
 		try {
 			Session session = util.getSession();

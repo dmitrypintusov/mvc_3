@@ -110,7 +110,7 @@ public class UserDaoImplTest {
 		delete();
 	}
 
-	@Ignore
+	//@Ignore
 	@Test
 	public void testGetByLogin () throws Exception {
 		createEntities();
@@ -119,7 +119,7 @@ public class UserDaoImplTest {
 		delete();
 	}
 
-	@Ignore
+	//@Ignore
 	@Test
 	public void testIsAuthorized () throws Exception {
 		createEntities();
