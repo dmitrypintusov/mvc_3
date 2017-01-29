@@ -2,6 +2,9 @@ package by.pvt.pintusov.courses.services.impl;
 
 import by.pvt.pintusov.courses.pojos.User;
 import by.pvt.pintusov.courses.utils.EntityBuilder;
+import by.pvt.pintusov.courses.utils.HibernateUtil;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.junit.*;
 
 import java.io.Serializable;
@@ -15,9 +18,18 @@ public class UserServiceImplTest {
 	private Serializable userId;
 	private static UserServiceImpl userService;
 
+	private static HibernateUtil util;
+	private static Session session;
+	private static Session currentSession;
+	private static SessionFactory sessionFactory;
+
 	@BeforeClass
 	public static void initTest () throws Exception {
-		userService = UserServiceImpl.getInstance();
+		util = HibernateUtil.getInstance();
+		session = util.getSession();
+		sessionFactory = util.getSessionFactory();
+		currentSession = sessionFactory.getCurrentSession();
+		userService = UserServiceImpl.getInstance(sessionFactory);
 	}
 
 	@Before

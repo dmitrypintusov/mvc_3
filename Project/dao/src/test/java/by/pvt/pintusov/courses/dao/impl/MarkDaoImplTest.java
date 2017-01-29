@@ -5,6 +5,7 @@ import by.pvt.pintusov.courses.pojos.Mark;
 import by.pvt.pintusov.courses.utils.EntityBuilder;
 import by.pvt.pintusov.courses.utils.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.junit.*;
 
@@ -24,19 +25,21 @@ public class MarkDaoImplTest {
 
 	private static HibernateUtil util;
 	private static Session session;
+	private static SessionFactory sessionFactory;
 	private static MarkDaoImpl markDao;
 
 	@BeforeClass
 	public static void initTest () throws Exception {
-		markDao = MarkDaoImpl.getInstance();
 		util = HibernateUtil.getInstance();
 		session = util.getSession();
+		sessionFactory = util.getSessionFactory();
+		markDao = MarkDaoImpl.getInstance(sessionFactory);
 	}
 
 	@Before
 	public void setUp() throws Exception {
 		expectedMark = EntityBuilder.buildMark(100, null, null, Calendar.getInstance());
-		transaction = session.beginTransaction();
+		transaction = sessionFactory.getCurrentSession().beginTransaction();
 	}
 
 	@Test
@@ -73,7 +76,7 @@ public class MarkDaoImplTest {
 
 	@After
 	public void tearDown () throws Exception {
-		transaction.commit();
+		sessionFactory.getCurrentSession().getTransaction().commit();
 		expectedMark = null;
 		actualMark = null;
 		markId = null;
@@ -84,7 +87,6 @@ public class MarkDaoImplTest {
 	public static void closeTest() throws Exception{
 		markDao = null;
 		util = null;
-		//session.close();
 	}
 
 	private void createEntities() throws Exception {

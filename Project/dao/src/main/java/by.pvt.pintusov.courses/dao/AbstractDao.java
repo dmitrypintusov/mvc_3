@@ -20,25 +20,24 @@ import java.io.Serializable;
 
 public abstract class AbstractDao <T extends AbstractEntity> implements IDao <T> {
 	private static Logger logger = Logger.getLogger(AbstractDao.class);
-	protected HibernateUtil util = HibernateUtil.getInstance();
 	private Class persistentClass;
-
-	protected AbstractDao (Class persistentClass) { this.persistentClass = persistentClass; }
-
 	private SessionFactory sessionFactory;
+
+	protected AbstractDao (Class persistentClass, SessionFactory sessionFactory) {
+		this.persistentClass = persistentClass;
+		this.sessionFactory = sessionFactory;
+	}
+
 	protected Session getCurrentSession () {
 		return sessionFactory.getCurrentSession();
 	}
-	protected AbstractDao (Class persistentClassClass, SessionFactory sessionFactory) {
-		this.persistentClass = persistentClassClass;
-		this.sessionFactory = sessionFactory;
-	}
+
 
 	@Override
 	public Serializable saveOrUpdate(T entity) throws DaoException {
 		Serializable id;
 		try {
-			Session session = util.getSession();
+			Session session = getCurrentSession();
 			session.saveOrUpdate(entity);
 			id = session.getIdentifier(entity);
 		}
@@ -53,7 +52,7 @@ public abstract class AbstractDao <T extends AbstractEntity> implements IDao <T>
 	public T getById(Integer id) throws DaoException {
 		T entity;
 		try {
-			Session session = util.getSession();
+			Session session = getCurrentSession();
 			entity = (T) session.get(persistentClass, id);
 		} catch (HibernateException e) {
 			logger.error(DaoConstants.ERROR_DAO + e);
@@ -66,7 +65,7 @@ public abstract class AbstractDao <T extends AbstractEntity> implements IDao <T>
 	public T load(Integer id) throws DaoException {
 		T entity;
 		try {
-			Session session = util.getSession();
+			Session session = getCurrentSession();
 			entity = (T) session.load(persistentClass, id);
 		} catch (HibernateException e) {
 			logger.error(DaoConstants.ERROR_DAO + e);
@@ -78,7 +77,7 @@ public abstract class AbstractDao <T extends AbstractEntity> implements IDao <T>
 	@Override
 	public void delete(Integer id) throws DaoException {
 		try {
-			Session session = util.getSession();
+			Session session = getCurrentSession();
 			T entity = (T) session.get(persistentClass, id);
 			session.delete(entity);
 		}catch (HibernateException e) {

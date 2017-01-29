@@ -2,6 +2,7 @@ package by.pvt.pintusov.courses.services.impl;
 
 import by.pvt.pintusov.courses.pojos.Archive;
 import by.pvt.pintusov.courses.utils.EntityBuilder;
+import org.hibernate.SessionFactory;
 import org.junit.*;
 
 import java.io.Serializable;
@@ -16,10 +17,11 @@ public class ArchiveServiceImplTest {
 	private Archive actualAccessLevel;
 	private Serializable archiveId;
 	private static ArchiveServiceImpl archiveService;
+	private static SessionFactory sessionFactory;
 
 	@BeforeClass
 	public static void initTest () throws Exception {
-		archiveService = ArchiveServiceImpl.getInstance();
+		archiveService = ArchiveServiceImpl.getInstance(sessionFactory);
 	}
 
 	@Before

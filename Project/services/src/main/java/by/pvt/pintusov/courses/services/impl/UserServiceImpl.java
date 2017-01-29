@@ -12,6 +12,7 @@ import by.pvt.pintusov.courses.services.IUserService;
 import by.pvt.pintusov.courses.utils.TransactionUtil;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 
 /**
@@ -32,24 +33,21 @@ public class UserServiceImpl extends AbstractService <User> implements IUserServ
 		return instance;
 	}
 
-	private UserServiceImpl () {
+	private UserServiceImpl (Session session) {
 		super (User.class, UserDaoImpl.getInstance());
 	}
 
 	@Override
 	public boolean checkUserAuthorization(String login, String password) throws ServiceException {
 		boolean isAuthorized = false;
-		Session session = util.getSession();
 		try {
-			transaction = session.beginTransaction();
+			TransactionUtil.beginTransaction();
 			isAuthorized = userDao.isAuthorized(login, password);
-			transaction.commit();
-			logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
+			TransactionUtil.commitTransaction();
 			logger.info("User " + login + " is authorized");
 		}
 		catch (DaoException e) {
-			TransactionUtil.rollback(transaction, e);
-			logger.error(ServiceConstants.TRANSACTION_FAILED, e);
+			TransactionUtil.rollbackTransaction();
 			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED + e);
 		}
 		return isAuthorized;
@@ -58,17 +56,14 @@ public class UserServiceImpl extends AbstractService <User> implements IUserServ
 	@Override
 	public User getUserByLogin(String login) throws ServiceException {
 		User user;
-		Session session = util.getSession();
 		try {
-			transaction = session.beginTransaction();
+			TransactionUtil.beginTransaction();
 			user = userDao.getUserByLogin(login);
-			transaction.commit();
-			logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
+			TransactionUtil.commitTransaction();
 			logger.info("User by login: " + user);
 		}
 		catch (DaoException e) {
-			TransactionUtil.rollback(transaction, e);
-			logger.error(ServiceConstants.TRANSACTION_FAILED, e);
+			TransactionUtil.rollbackTransaction();
 			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED + e);
 		}
 		return user;

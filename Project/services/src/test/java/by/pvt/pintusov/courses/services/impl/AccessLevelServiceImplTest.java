@@ -3,6 +3,7 @@ package by.pvt.pintusov.courses.services.impl;
 import by.pvt.pintusov.courses.enums.AccessLevelType;
 import by.pvt.pintusov.courses.pojos.AccessLevel;
 import by.pvt.pintusov.courses.utils.EntityBuilder;
+import org.hibernate.SessionFactory;
 import org.junit.*;
 
 import java.io.Serializable;
@@ -17,10 +18,11 @@ public class AccessLevelServiceImplTest {
 	private AccessLevel actualAccessLevel;
 	private Serializable accessLevelId;
 	private static AccessLevelServiceImpl accessLevelService;
+	private static SessionFactory sessionFactory;
 
 	@BeforeClass
 	public static void initTest () throws Exception {
-		accessLevelService = AccessLevelServiceImpl.getInstance();
+		accessLevelService = AccessLevelServiceImpl.getInstance(sessionFactory);
 	}
 
 	@Before

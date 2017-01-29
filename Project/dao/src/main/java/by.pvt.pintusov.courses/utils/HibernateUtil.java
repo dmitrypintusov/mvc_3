@@ -56,4 +56,8 @@ public class HibernateUtil {
 			}
 		}
 	}
+
+	public SessionFactory getSessionFactory () {
+		return sessionFactory;
+	}
 }

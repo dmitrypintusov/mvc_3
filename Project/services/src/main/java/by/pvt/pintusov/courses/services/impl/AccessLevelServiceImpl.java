@@ -5,6 +5,7 @@ import by.pvt.pintusov.courses.pojos.AccessLevel;
 import by.pvt.pintusov.courses.services.AbstractService;
 import by.pvt.pintusov.courses.services.IAccessLevelService;
 import org.apache.log4j.Logger;
+import org.hibernate.SessionFactory;
 
 /**
  * Project: courses
@@ -14,16 +15,17 @@ import org.apache.log4j.Logger;
 public class AccessLevelServiceImpl extends AbstractService<AccessLevel> implements IAccessLevelService {
 	private static Logger logger = Logger.getLogger(AccessLevelServiceImpl.class);
 	private static AccessLevelServiceImpl instance;
-	private AccessLevelDaoImpl accessLevelDao = AccessLevelDaoImpl.getInstance();
+	private SessionFactory sessionFactory = util.getSessionFactory();
+	private AccessLevelDaoImpl accessLevelDao = AccessLevelDaoImpl.getInstance(sessionFactory);
 
-	public static synchronized AccessLevelServiceImpl getInstance () {
+	public static synchronized AccessLevelServiceImpl getInstance (SessionFactory sessionFactory) {
 		if (instance == null) {
-			instance = new AccessLevelServiceImpl();
+			instance = new AccessLevelServiceImpl(sessionFactory);
 		}
 		return instance;
 	}
 
-	private AccessLevelServiceImpl () {
-		super (AccessLevel.class, AccessLevelDaoImpl.getInstance());
+	private AccessLevelServiceImpl (SessionFactory sessionFactory) {
+		super (AccessLevel.class, AccessLevelDaoImpl.getInstance(sessionFactory), sessionFactory);
 	}
 }

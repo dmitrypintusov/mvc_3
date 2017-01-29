@@ -2,6 +2,7 @@ package by.pvt.pintusov.courses.services.impl;
 
 import by.pvt.pintusov.courses.pojos.Mark;
 import by.pvt.pintusov.courses.utils.EntityBuilder;
+import org.hibernate.SessionFactory;
 import org.junit.*;
 
 import java.io.Serializable;
@@ -17,10 +18,11 @@ public class MarkServiceImplTest {
 	private Mark actualMark;
 	private Serializable markId;
 	private static MarkServiceImpl markService;
+	private static SessionFactory sessionFactory;
 
 	@BeforeClass
 	public static void initTest () throws Exception {
-		markService = MarkServiceImpl.getInstance();
+		markService = MarkServiceImpl.getInstance(sessionFactory);
 	}
 
 	@Before

@@ -9,6 +9,7 @@ import by.pvt.pintusov.courses.utils.HibernateUtil;
 import by.pvt.pintusov.courses.utils.TransactionUtil;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import java.io.Serializable;
@@ -21,7 +22,7 @@ import java.io.Serializable;
 
 abstract public class AbstractService <T extends AbstractEntity> implements IService <T> {
 	private static Logger logger = Logger.getLogger(AbstractService.class);
-	protected HibernateUtil util = HibernateUtil.getInstance();
+	protected static HibernateUtil util = HibernateUtil.getInstance();
 	protected Transaction transaction;
 	private AbstractDao abstractDao;
 	private Class persistentClass;
@@ -95,6 +96,7 @@ abstract public class AbstractService <T extends AbstractEntity> implements ISer
 			abstractDao.delete(id);
 			transaction.commit();
 			logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
+			logger.info(ServiceConstants.DELETE_MESSAGE + id);
 		}
 		catch (DaoException e) {
 			TransactionUtil.rollback(transaction, e);

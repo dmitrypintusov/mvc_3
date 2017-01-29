@@ -6,6 +6,7 @@ import by.pvt.pintusov.courses.pojos.AccessLevel;
 import by.pvt.pintusov.courses.utils.EntityBuilder;
 import by.pvt.pintusov.courses.utils.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.junit.*;
 
@@ -24,19 +25,21 @@ public class AccessLevelDaoImplTest {
 
 	private static HibernateUtil util;
 	private static Session session;
+	private static SessionFactory sessionFactory;
 	private static AccessLevelDaoImpl accessLevelDao;
 
 	@BeforeClass
 	public static void initTest () throws Exception {
-		accessLevelDao = AccessLevelDaoImpl.getInstance();
 		util = HibernateUtil.getInstance();
 		session = util.getSession();
+		sessionFactory = util.getSessionFactory();
+		accessLevelDao = AccessLevelDaoImpl.getInstance(sessionFactory);
 	}
 
 	@Before
 	public void setUp() throws Exception {
 		expectedAccessLevel = EntityBuilder.buildAccessLevel(AccessLevelType.ADMIN, null);
-		transaction = session.beginTransaction();
+		transaction = sessionFactory.getCurrentSession().beginTransaction();
 	}
 
 	@Test
@@ -73,7 +76,7 @@ public class AccessLevelDaoImplTest {
 
 	@After
 	public void tearDown () throws Exception {
-		transaction.commit();
+		sessionFactory.getCurrentSession().getTransaction().commit();
 		expectedAccessLevel = null;
 		actualAccessLevel = null;
 		accessLevelId = null;
@@ -84,7 +87,6 @@ public class AccessLevelDaoImplTest {
 	public static void closeTest() throws Exception{
 		accessLevelDao = null;
 		util = null;
-		//session.close();
 	}
 
 	private void createEntities() throws Exception {

@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 /**
  * Project name: courses
@@ -20,22 +21,22 @@ public class AccessLevelDaoImpl  extends AbstractDao<AccessLevel> implements IAc
 	private static Logger logger = Logger.getLogger(AccessLevelDaoImpl.class);
 	private static AccessLevelDaoImpl instance;
 
-	public static synchronized AccessLevelDaoImpl getInstance(){
+	public static synchronized AccessLevelDaoImpl getInstance(SessionFactory sessionFactory){
 		if(instance == null){
-			instance = new AccessLevelDaoImpl();
+			instance = new AccessLevelDaoImpl(sessionFactory);
 		}
 		return instance;
 	}
 
-	private AccessLevelDaoImpl(){
-		super(AccessLevel.class);
+	private AccessLevelDaoImpl(SessionFactory sessionFactory){
+		super(AccessLevel.class, sessionFactory);
 	}
 
 	@Override
 	public AccessLevel getByAccessLevelType(AccessLevelType accessLevelType) throws DaoException {
 		AccessLevel accessLevel;
 		try {
-			Session session = util.getSession();
+			Session session = getCurrentSession();
 			Query query = session.createQuery(DaoConstants.HQL_GET_BY_ACCESS_LEVEL);
 			query.setParameter(DaoConstants.PARAMETER_ACCESS_LEVEL_TYPE, accessLevelType);
 			accessLevel = (AccessLevel) query.uniqueResult();

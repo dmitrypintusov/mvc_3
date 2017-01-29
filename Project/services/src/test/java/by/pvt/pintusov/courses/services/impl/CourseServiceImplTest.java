@@ -3,6 +3,7 @@ package by.pvt.pintusov.courses.services.impl;
 import by.pvt.pintusov.courses.enums.CourseStatusType;
 import by.pvt.pintusov.courses.pojos.Course;
 import by.pvt.pintusov.courses.utils.EntityBuilder;
+import org.hibernate.SessionFactory;
 import org.junit.*;
 
 import java.io.Serializable;
@@ -18,10 +19,11 @@ public class CourseServiceImplTest {
 	private Course actualCourse;
 	private Serializable courseId;
 	private static CourseServiceImpl courseService;
+	private static SessionFactory sessionFactory;
 
 	@BeforeClass
 	public static void initTest () throws Exception {
-		courseService = CourseServiceImpl.getInstance();
+		courseService = CourseServiceImpl.getInstance(sessionFactory);
 	}
 
 	@Before

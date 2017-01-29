@@ -6,6 +6,7 @@ import by.pvt.pintusov.courses.pojos.Course;
 import by.pvt.pintusov.courses.utils.EntityBuilder;
 import by.pvt.pintusov.courses.utils.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.junit.*;
 
@@ -26,19 +27,21 @@ public class CourseDaoImplTest {
 
 	private static HibernateUtil util;
 	private static Session session;
+	private static SessionFactory sessionFactory;
 	private static CourseDaoImpl courseDao;
 
 	@BeforeClass
 	public static void initTest () throws Exception {
-		courseDao = CourseDaoImpl.getInstance();
 		util = HibernateUtil.getInstance();
 		session = util.getSession();
+		sessionFactory = util.getSessionFactory();
+		courseDao = CourseDaoImpl.getInstance(sessionFactory);
 	}
 
 	@Before
 	public void setUp() throws Exception {
 		expectedCourse = EntityBuilder.buildCourse("TEST", 100, CourseStatusType.OPEN, Calendar.getInstance(), Calendar.getInstance(), null);
-		transaction = session.beginTransaction();
+		transaction = sessionFactory.getCurrentSession().beginTransaction();
 	}
 
 	@Test
@@ -83,7 +86,7 @@ public class CourseDaoImplTest {
 
 	@After
 	public void tearDown () throws Exception {
-		transaction.commit();
+		sessionFactory.getCurrentSession().getTransaction().commit();
 		expectedCourse = null;
 		actualCourse = null;
 		courseId = null;
@@ -94,7 +97,6 @@ public class CourseDaoImplTest {
 	public static void closeTest() throws Exception{
 		courseDao = null;
 		util = null;
-		//session.close();
 	}
 
 	private void createEntities() throws Exception {

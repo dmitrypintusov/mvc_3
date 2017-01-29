@@ -13,6 +13,7 @@ import by.pvt.pintusov.courses.pojos.User;
 import by.pvt.pintusov.courses.utils.EntityBuilder;
 import by.pvt.pintusov.courses.utils.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.junit.*;
 
@@ -42,10 +43,11 @@ public class UserDaoImplTest {
 	private Set<Course> courses;
 	private Set<AccessLevel> accessLevels;
 	private Set<Mark> marks;
-	private Transaction transaction;
 
 	private static HibernateUtil util;
 	private static Session session;
+	private static SessionFactory sessionFactory;
+	private Transaction transaction;
 
 	private static UserDaoImpl userDao;
 	private static CourseDaoImpl courseDao;
@@ -54,12 +56,14 @@ public class UserDaoImplTest {
 
 	@BeforeClass
 	public static void initTest () throws Exception {
-		userDao = UserDaoImpl.getInstance();
-		courseDao = CourseDaoImpl.getInstance();
-		markDao = MarkDaoImpl.getInstance();
-		accessLevelDao = AccessLevelDaoImpl.getInstance();
 		util = HibernateUtil.getInstance();
 		session = util.getSession();
+		sessionFactory = util.getSessionFactory();
+
+		userDao = UserDaoImpl.getInstance(sessionFactory);
+		courseDao = CourseDaoImpl.getInstance(sessionFactory);
+		markDao = MarkDaoImpl.getInstance(sessionFactory);
+		accessLevelDao = AccessLevelDaoImpl.getInstance(sessionFactory);
 	}
 
 	@Before
@@ -83,7 +87,7 @@ public class UserDaoImplTest {
 		accessLevel = EntityBuilder.buildAccessLevel(AccessLevelType.STUDENT, users);
 		accessLevels.add(accessLevel);
 		expectedUser.setAccessLevels(accessLevels);
-		transaction = session.beginTransaction();
+		transaction = sessionFactory.getCurrentSession().beginTransaction();
 	}
 
 	@Test
@@ -110,7 +114,6 @@ public class UserDaoImplTest {
 		delete();
 	}
 
-	//@Ignore
 	@Test
 	public void testGetByLogin () throws Exception {
 		createEntities();
@@ -119,7 +122,6 @@ public class UserDaoImplTest {
 		delete();
 	}
 
-	//@Ignore
 	@Test
 	public void testIsAuthorized () throws Exception {
 		createEntities();
@@ -139,7 +141,7 @@ public class UserDaoImplTest {
 
 	@After
 	public void tearDown () throws Exception {
-		transaction.commit();
+		sessionFactory.getCurrentSession().getTransaction().commit();
 		expectedUser = null;
 		actualUser = null;
 		course = null;
@@ -159,7 +161,7 @@ public class UserDaoImplTest {
 		markDao = null;
 		accessLevelDao = null;
 		util = null;
-		//session.close();
+		session.close();
 	}
 
 	private void createEntities() throws Exception {

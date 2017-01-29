@@ -1,5 +1,7 @@
 package by.pvt.pintusov.courses.pojos;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,7 +12,7 @@ import java.util.Set;
  * @version 1.1
  */
 
-//@Data
+@Data
 @Entity
 public class User extends AbstractEntity {
 	private static final long serialVersionUID = 2L;
@@ -18,23 +20,15 @@ public class User extends AbstractEntity {
 	public User() { super (); }
 
 	@Column (nullable = false, length = 15)
-	public String getFirstName () { return firstName; }
-	public void setFirstName (String firstName) { this.firstName = firstName; }
 	private String firstName;
 
 	@Column (nullable = false, length = 30)
-	public String getLastName () { return lastName; }
-	public void setLastName (String lastName) { this.lastName = lastName; }
 	private String lastName;
 
 	@Column (unique = true, nullable = false, length = 25)
-	public String getLogin () { return login; }
-	public void setLogin (String login) { this.login = login; }
 	private String login;
 
 	@Column (nullable = false, length = 30)
-	public String getPassword () { return password; }
-	public void setPassword (String password) { this.password = password; }
 	private String password;
 
 	@ManyToMany (mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

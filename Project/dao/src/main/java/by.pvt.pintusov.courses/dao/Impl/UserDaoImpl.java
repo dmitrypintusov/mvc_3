@@ -23,26 +23,22 @@ public class UserDaoImpl extends AbstractDao <User> implements IUserDao {
 	private static Logger logger = Logger.getLogger(UserDaoImpl.class);
 	private static UserDaoImpl instance;
 
-
-	public static synchronized UserDaoImpl getInstance(){
-		if(instance == null){
-			instance = new UserDaoImpl();
-		}
-		return instance;
-	}
-
-	private UserDaoImpl(){
-		super(User.class);
-	}
 	private UserDaoImpl(SessionFactory sessionFactory){
 		super(User.class, sessionFactory);
+	}
+
+	public static synchronized UserDaoImpl getInstance(SessionFactory sessionFactory){
+		if(instance == null){
+			instance = new UserDaoImpl(sessionFactory);
+		}
+		return instance;
 	}
 
 	@Override
 	public User getUserByLogin(String login) throws DaoException {
 		User user = null;
 		try {
-			Session session = util.getSession();
+			Session session = getCurrentSession();
 			Query query = session.createQuery(DaoConstants.HQL_GET_BY_LOGIN);
 			query.setParameter(DaoConstants.PARAMETER_USER_LOGIN, login);
 			user = (User) query.uniqueResult();
@@ -57,7 +53,7 @@ public class UserDaoImpl extends AbstractDao <User> implements IUserDao {
 	public boolean isAuthorized(String login, String password) throws DaoException {
 		boolean isLogIn = false;
 		try {
-			Session session = util.getSession();
+			Session session = getCurrentSession();
 			Query query = session.createQuery(DaoConstants.HQL_CHECK_AUTHORIZATION);
 			query.setParameter(DaoConstants.PARAMETER_USER_LOGIN, login);
 			query.setParameter(DaoConstants.PARAMETER_USER_PASSWORD, password);
@@ -75,7 +71,7 @@ public class UserDaoImpl extends AbstractDao <User> implements IUserDao {
 	public List<User> getAll() throws DaoException {
 		List<User> results;
 		try {
-			Session session = util.getSession();
+			Session session = getCurrentSession();
 			Query query = session.createQuery(DaoConstants.HQL_GET_ALL_USERS);
 			query.setFirstResult(0);
 			query.setMaxResults(2);

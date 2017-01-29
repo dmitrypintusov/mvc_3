@@ -9,6 +9,7 @@ import by.pvt.pintusov.courses.pojos.User;
 import by.pvt.pintusov.courses.services.AbstractService;
 import by.pvt.pintusov.courses.services.ICourseService;
 import org.apache.log4j.Logger;
+import org.hibernate.SessionFactory;
 
 import java.util.Set;
 
@@ -20,17 +21,18 @@ import java.util.Set;
 public class CourseServiceImpl extends AbstractService<Course> implements ICourseService {
 	private static Logger logger = Logger.getLogger(CourseServiceImpl.class);
 	private static CourseServiceImpl instance;
-	private CourseDaoImpl courseDao = CourseDaoImpl.getInstance();
+	private SessionFactory sessionFactory = util.getSessionFactory();
+	private CourseDaoImpl courseDao = CourseDaoImpl.getInstance(sessionFactory);
 
-	public static synchronized CourseServiceImpl getInstance () {
+	public static synchronized CourseServiceImpl getInstance (SessionFactory sessionFactory) {
 		if (instance == null) {
-			instance = new CourseServiceImpl();
+			instance = new CourseServiceImpl(sessionFactory);
 		}
 		return instance;
 	}
 
-	private CourseServiceImpl () {
-		super (Course.class, CourseDaoImpl.getInstance());
+	private CourseServiceImpl (SessionFactory sessionFactory) {
+		super (Course.class, CourseDaoImpl.getInstance(sessionFactory), sessionFactory);
 	}
 
 	@Override

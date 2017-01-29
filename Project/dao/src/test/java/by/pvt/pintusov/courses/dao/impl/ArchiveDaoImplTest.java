@@ -5,6 +5,7 @@ import by.pvt.pintusov.courses.pojos.Archive;
 import by.pvt.pintusov.courses.utils.EntityBuilder;
 import by.pvt.pintusov.courses.utils.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.junit.*;
 
@@ -23,19 +24,21 @@ public class ArchiveDaoImplTest {
 
 	private static HibernateUtil util;
 	private static Session session;
+	private static SessionFactory sessionFactory;
 	private static ArchiveDaoImpl archiveDao;
 
 	@BeforeClass
 	public static void initTest () throws Exception {
-		archiveDao = ArchiveDaoImpl.getInstance();
 		util = HibernateUtil.getInstance();
 		session = util.getSession();
+		sessionFactory = util.getSessionFactory();
+		archiveDao = ArchiveDaoImpl.getInstance(sessionFactory);
 	}
 
 	@Before
 	public void setUp() throws Exception {
 		expectedArchive = EntityBuilder.buildArchive(null);
-		transaction = session.beginTransaction();
+		transaction = sessionFactory.getCurrentSession().beginTransaction();
 	}
 
 	@Test
@@ -72,7 +75,7 @@ public class ArchiveDaoImplTest {
 
 	@After
 	public void tearDown () throws Exception {
-		transaction.commit();
+		sessionFactory.getCurrentSession().getTransaction().commit();
 		expectedArchive = null;
 		actualArchive = null;
 		archiveId = null;
@@ -83,7 +86,6 @@ public class ArchiveDaoImplTest {
 	public static void closeTest() throws Exception{
 		archiveDao = null;
 		util = null;
-		//session.close();
 	}
 
 	private void createEntities() throws Exception {

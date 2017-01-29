@@ -23,4 +23,6 @@ public class DaoConstants {
 	public static final String HQL_CHECK_AUTHORIZATION = "FROM User U WHERE U.login = :login AND U.password = :password";
 	public static final String HQL_GET_BY_ACCESS_LEVEL = "FROM AccessLevel A WHERE A.accessLevelType = :accessLevelType";
 	public static final String HQL_GET_ALL_USERS = " from User";
+
+	private DaoConstants () {}
 }
