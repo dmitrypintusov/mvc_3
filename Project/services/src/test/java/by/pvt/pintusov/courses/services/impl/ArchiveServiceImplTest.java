@@ -2,6 +2,8 @@ package by.pvt.pintusov.courses.services.impl;
 
 import by.pvt.pintusov.courses.pojos.Archive;
 import by.pvt.pintusov.courses.utils.EntityBuilder;
+import by.pvt.pintusov.courses.utils.HibernateUtil;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.*;
 
@@ -17,10 +19,16 @@ public class ArchiveServiceImplTest {
 	private Archive actualAccessLevel;
 	private Serializable archiveId;
 	private static ArchiveServiceImpl archiveService;
+
+	private static HibernateUtil util;
+	private static Session session;
 	private static SessionFactory sessionFactory;
 
 	@BeforeClass
 	public static void initTest () throws Exception {
+		util = HibernateUtil.getInstance();
+		session = util.getSession();
+		sessionFactory = util.getSessionFactory();
 		archiveService = ArchiveServiceImpl.getInstance(sessionFactory);
 	}
 
@@ -50,6 +58,7 @@ public class ArchiveServiceImplTest {
 		delete();
 	}
 
+	@Ignore
 	@Test
 	public void testLoad() throws Exception {
 		createEntities();
@@ -76,6 +85,8 @@ public class ArchiveServiceImplTest {
 	@AfterClass
 	public static void closeTest() throws Exception{
 		archiveService = null;
+		util = null;
+		//session.close();
 	}
 
 	private void delete() throws Exception {

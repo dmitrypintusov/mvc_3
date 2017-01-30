@@ -15,7 +15,6 @@ import org.hibernate.SessionFactory;
 public class AccessLevelServiceImpl extends AbstractService<AccessLevel> implements IAccessLevelService {
 	private static Logger logger = Logger.getLogger(AccessLevelServiceImpl.class);
 	private static AccessLevelServiceImpl instance;
-	private SessionFactory sessionFactory = util.getSessionFactory();
 	private AccessLevelDaoImpl accessLevelDao = AccessLevelDaoImpl.getInstance(sessionFactory);
 
 	public static synchronized AccessLevelServiceImpl getInstance (SessionFactory sessionFactory) {

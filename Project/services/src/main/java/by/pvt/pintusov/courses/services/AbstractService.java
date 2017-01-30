@@ -5,7 +5,6 @@ import by.pvt.pintusov.courses.enums.ServiceConstants;
 import by.pvt.pintusov.courses.exceptions.DaoException;
 import by.pvt.pintusov.courses.exceptions.ServiceException;
 import by.pvt.pintusov.courses.pojos.AbstractEntity;
-import by.pvt.pintusov.courses.utils.HibernateUtil;
 import by.pvt.pintusov.courses.utils.TransactionUtil;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
@@ -22,29 +21,32 @@ import java.io.Serializable;
 
 abstract public class AbstractService <T extends AbstractEntity> implements IService <T> {
 	private static Logger logger = Logger.getLogger(AbstractService.class);
-	protected static HibernateUtil util = HibernateUtil.getInstance();
 	protected Transaction transaction;
+	protected SessionFactory sessionFactory;
 	private AbstractDao abstractDao;
 	private Class persistentClass;
 
-	protected AbstractService (Class persistentClass, AbstractDao abstractDao) {
+	protected AbstractService (Class persistentClass, AbstractDao abstractDao, SessionFactory sessionFactory) {
 		this.persistentClass = persistentClass;
 		this.abstractDao = abstractDao;
+		this.sessionFactory = sessionFactory;
+	}
+
+	protected Session getCurrentSession () {
+		return sessionFactory.getCurrentSession();
 	}
 
 	@Override
 	public Serializable saveOrUpdate(T entity) throws ServiceException {
 		Serializable id;
-		Session session = util.getSession();
+		Session session = getCurrentSession();
 		try {
-			transaction = session.beginTransaction();
+			TransactionUtil.beginTransaction(session);
 			id = abstractDao.saveOrUpdate(entity);
-			transaction.commit();
-			logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
+			TransactionUtil.commitTransaction(session);
 			logger.info(entity);
 		} catch (DaoException e) {
-			TransactionUtil.rollback(transaction, e);
-			logger.error(ServiceConstants.TRANSACTION_FAILED, e);
+			TransactionUtil.rollbackTransaction(session);
 			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED + e);
 		}
 		return id;
@@ -53,17 +55,15 @@ abstract public class AbstractService <T extends AbstractEntity> implements ISer
 	@Override
 	public T getById(Integer id) throws ServiceException {
 		T entity;
-		Session session = util.getSession();
+		Session session = getCurrentSession();
 		try {
-			transaction = session.beginTransaction();
+			TransactionUtil.beginTransaction(session);
 			entity = (T) abstractDao.getById(id);
-			transaction.commit();
-			logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
+			TransactionUtil.commitTransaction(session);
 			logger.info(entity);
 		}
 		catch (DaoException e) {
-			TransactionUtil.rollback(transaction, e);
-			logger.error(ServiceConstants.TRANSACTION_FAILED, e);
+			TransactionUtil.rollbackTransaction(session);
 			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED + e);
 		}
 		return entity;
@@ -72,17 +72,15 @@ abstract public class AbstractService <T extends AbstractEntity> implements ISer
 	@Override
 	public T load(Integer id) throws ServiceException {
 		T entity;
-		Session session = util.getSession();
+		Session session = getCurrentSession();
 		try {
-			transaction = session.beginTransaction();
+			TransactionUtil.beginTransaction(session);
 			entity = (T) abstractDao.load(id);
-			transaction.commit();
-			logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
+			TransactionUtil.commitTransaction(session);
 			logger.info(entity);
 		}
 		catch (DaoException e) {
-			TransactionUtil.rollback(transaction, e);
-			logger.error(ServiceConstants.TRANSACTION_FAILED, e);
+			TransactionUtil.rollbackTransaction(session);
 			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED + e);
 		}
 		return entity;
@@ -90,17 +88,15 @@ abstract public class AbstractService <T extends AbstractEntity> implements ISer
 
 	@Override
 	public void delete(Integer id) throws ServiceException {
-		Session session = util.getSession();
+		Session session = getCurrentSession();
 		try {
-			transaction = session.beginTransaction();
+			TransactionUtil.beginTransaction(session);
 			abstractDao.delete(id);
-			transaction.commit();
-			logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
+			TransactionUtil.commitTransaction(session);
 			logger.info(ServiceConstants.DELETE_MESSAGE + id);
 		}
 		catch (DaoException e) {
-			TransactionUtil.rollback(transaction, e);
-			logger.error(ServiceConstants.TRANSACTION_FAILED, e);
+			TransactionUtil.rollbackTransaction(session);
 			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED + e);
 		}
 	}

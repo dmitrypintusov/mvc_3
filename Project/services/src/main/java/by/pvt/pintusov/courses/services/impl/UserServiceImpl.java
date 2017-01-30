@@ -24,30 +24,31 @@ import org.hibernate.SessionFactory;
 public class UserServiceImpl extends AbstractService <User> implements IUserService {
 	private static Logger logger = Logger.getLogger(UserServiceImpl.class);
 	private static UserServiceImpl instance;
-	private UserDaoImpl userDao = UserDaoImpl.getInstance();
+	private UserDaoImpl userDao = UserDaoImpl.getInstance(sessionFactory);
 
-	public static synchronized UserServiceImpl getInstance () {
+	public static synchronized UserServiceImpl getInstance (SessionFactory sessionFactory) {
 		if (instance == null) {
-			instance = new UserServiceImpl();
+			instance = new UserServiceImpl(sessionFactory);
 		}
 		return instance;
 	}
 
-	private UserServiceImpl (Session session) {
-		super (User.class, UserDaoImpl.getInstance());
+	private UserServiceImpl (SessionFactory sessionFactory) {
+		super (User.class, UserDaoImpl.getInstance(sessionFactory), sessionFactory);
 	}
 
 	@Override
 	public boolean checkUserAuthorization(String login, String password) throws ServiceException {
 		boolean isAuthorized = false;
+		Session session = getCurrentSession();
 		try {
-			TransactionUtil.beginTransaction();
+			TransactionUtil.beginTransaction(session);
 			isAuthorized = userDao.isAuthorized(login, password);
-			TransactionUtil.commitTransaction();
+			TransactionUtil.commitTransaction(session);
 			logger.info("User " + login + " is authorized");
 		}
 		catch (DaoException e) {
-			TransactionUtil.rollbackTransaction();
+			TransactionUtil.rollbackTransaction(session);
 			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED + e);
 		}
 		return isAuthorized;
@@ -56,14 +57,15 @@ public class UserServiceImpl extends AbstractService <User> implements IUserServ
 	@Override
 	public User getUserByLogin(String login) throws ServiceException {
 		User user;
+		Session session = getCurrentSession();
 		try {
-			TransactionUtil.beginTransaction();
+			TransactionUtil.beginTransaction(session);
 			user = userDao.getUserByLogin(login);
-			TransactionUtil.commitTransaction();
+			TransactionUtil.commitTransaction(session);
 			logger.info("User by login: " + user);
 		}
 		catch (DaoException e) {
-			TransactionUtil.rollbackTransaction();
+			TransactionUtil.rollbackTransaction(session);
 			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED + e);
 		}
 		return user;

@@ -21,7 +21,6 @@ import java.util.Set;
 public class CourseServiceImpl extends AbstractService<Course> implements ICourseService {
 	private static Logger logger = Logger.getLogger(CourseServiceImpl.class);
 	private static CourseServiceImpl instance;
-	private SessionFactory sessionFactory = util.getSessionFactory();
 	private CourseDaoImpl courseDao = CourseDaoImpl.getInstance(sessionFactory);
 
 	public static synchronized CourseServiceImpl getInstance (SessionFactory sessionFactory) {

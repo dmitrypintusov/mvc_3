@@ -3,6 +3,8 @@ package by.pvt.pintusov.courses.services.impl;
 import by.pvt.pintusov.courses.enums.AccessLevelType;
 import by.pvt.pintusov.courses.pojos.AccessLevel;
 import by.pvt.pintusov.courses.utils.EntityBuilder;
+import by.pvt.pintusov.courses.utils.HibernateUtil;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.*;
 
@@ -18,10 +20,16 @@ public class AccessLevelServiceImplTest {
 	private AccessLevel actualAccessLevel;
 	private Serializable accessLevelId;
 	private static AccessLevelServiceImpl accessLevelService;
+
+	private static HibernateUtil util;
+	private static Session session;
 	private static SessionFactory sessionFactory;
 
 	@BeforeClass
 	public static void initTest () throws Exception {
+		util = HibernateUtil.getInstance();
+		session = util.getSession();
+		sessionFactory = util.getSessionFactory();
 		accessLevelService = AccessLevelServiceImpl.getInstance(sessionFactory);
 	}
 
@@ -51,6 +59,7 @@ public class AccessLevelServiceImplTest {
 		delete();
 	}
 
+	@Ignore
 	@Test
 	public void testLoad() throws Exception {
 		createEntities();
@@ -77,6 +86,8 @@ public class AccessLevelServiceImplTest {
 	@AfterClass
 	public static void closeTest() throws Exception{
 		accessLevelService = null;
+		util = null;
+		//session.close();
 	}
 
 	private void delete() throws Exception {

@@ -20,7 +20,6 @@ public class UserServiceImplTest {
 
 	private static HibernateUtil util;
 	private static Session session;
-	private static Session currentSession;
 	private static SessionFactory sessionFactory;
 
 	@BeforeClass
@@ -28,7 +27,6 @@ public class UserServiceImplTest {
 		util = HibernateUtil.getInstance();
 		session = util.getSession();
 		sessionFactory = util.getSessionFactory();
-		currentSession = sessionFactory.getCurrentSession();
 		userService = UserServiceImpl.getInstance(sessionFactory);
 	}
 
@@ -58,6 +56,7 @@ public class UserServiceImplTest {
 		delete();
 	}
 
+	@Ignore
 	@Test
 	public void testLoad() throws Exception {
 		createEntities();
@@ -74,7 +73,6 @@ public class UserServiceImplTest {
 		Assert.assertNull("delete() method failed: ", actualUser);
 	}
 
-	//@Ignore
 	@Test
 	public void testIsAuthorized () throws Exception {
 		createEntities();
@@ -93,6 +91,8 @@ public class UserServiceImplTest {
 	@AfterClass
 	public static void closeTest() throws Exception{
 		userService = null;
+		util = null;
+		//session.close();
 	}
 
 	private void delete() throws Exception {

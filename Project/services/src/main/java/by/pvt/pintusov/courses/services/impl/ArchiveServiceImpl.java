@@ -15,7 +15,6 @@ import org.hibernate.SessionFactory;
 public class ArchiveServiceImpl extends AbstractService<Archive> implements IArchiveService {
 	private static Logger logger = Logger.getLogger(ArchiveServiceImpl.class);
 	private static ArchiveServiceImpl instance;
-	private SessionFactory sessionFactory = util.getSessionFactory();
 	private ArchiveDaoImpl markDao = ArchiveDaoImpl.getInstance(sessionFactory);
 
 	public static synchronized ArchiveServiceImpl getInstance (SessionFactory sessionFactory) {

@@ -8,8 +8,6 @@ import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
-import java.io.Serializable;
-
 /**
  * Project name: courses
  * Created by Дмитрий
@@ -28,9 +26,7 @@ public class AbstractInheritanceDao <T extends Person> implements IInheritanceDa
 		try {
 			Session session = util.getSession();
 			session.saveOrUpdate(entity);
-			logger.info("saved " + entity);
 			id = (Integer) session.getIdentifier(entity);
-			logger.info("entity " + entity + " id=" + id);
 		}
 		catch (HibernateException e) {
 			logger.error(DaoConstants.ERROR_DAO + e);

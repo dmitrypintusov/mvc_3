@@ -13,5 +13,5 @@ public class ServiceConstants {
 	public static final String TRANSACTION_COMMIT_FAILED = "Error while commit transaction: ";
 	public static final String TRANSACTION_ROLLBACK_FAILED = "Error while rollback transaction: ";
 
-	public static final String DELETE_MESSAGE = "Deleted entity with id # "
+	public static final String DELETE_MESSAGE = "Deleted entity with id # ";
 }

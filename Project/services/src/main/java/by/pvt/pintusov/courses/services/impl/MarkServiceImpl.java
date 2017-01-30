@@ -15,7 +15,6 @@ import org.hibernate.SessionFactory;
 public class MarkServiceImpl extends AbstractService<Mark> implements IMarkService {
 	private static Logger logger = Logger.getLogger(MarkServiceImpl.class);
 	private static MarkServiceImpl instance;
-	private SessionFactory sessionFactory = util.getSessionFactory();
 	private MarkDaoImpl markDao = MarkDaoImpl.getInstance(sessionFactory);
 
 	public static synchronized MarkServiceImpl getInstance (SessionFactory sessionFactory) {

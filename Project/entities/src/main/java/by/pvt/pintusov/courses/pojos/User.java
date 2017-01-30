@@ -62,7 +62,6 @@ public class User extends AbstractEntity {
 	private Set<Mark> marks;
 
 	@ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinTable(name = "T_USER_ACCESS_LEVEL", joinColumns = @JoinColumn(name = "F_USER_ID"), inverseJoinColumns = @JoinColumn(name = "F_ACCESS_LEVEL_ID"))
 	public Set<AccessLevel> getAccessLevels() {
 		return accessLevels;
 	}
