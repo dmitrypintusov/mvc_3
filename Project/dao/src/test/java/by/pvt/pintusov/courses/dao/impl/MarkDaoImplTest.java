@@ -25,21 +25,19 @@ public class MarkDaoImplTest {
 
 	private static HibernateUtil util;
 	private static Session session;
-	private static SessionFactory sessionFactory;
 	private static MarkDaoImpl markDao;
 
 	@BeforeClass
 	public static void initTest () throws Exception {
 		util = HibernateUtil.getInstance();
 		session = util.getSession();
-		sessionFactory = util.getSessionFactory();
-		markDao = MarkDaoImpl.getInstance(sessionFactory);
+		markDao = MarkDaoImpl.getInstance();
 	}
 
 	@Before
 	public void setUp() throws Exception {
 		expectedMark = EntityBuilder.buildMark(100, null, null, Calendar.getInstance());
-		transaction = sessionFactory.getCurrentSession().beginTransaction();
+		transaction = session.beginTransaction();
 	}
 
 	@Test
@@ -76,7 +74,7 @@ public class MarkDaoImplTest {
 
 	@After
 	public void tearDown () throws Exception {
-		sessionFactory.getCurrentSession().getTransaction().commit();
+		session.getTransaction().commit();
 		expectedMark = null;
 		actualMark = null;
 		markId = null;

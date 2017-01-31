@@ -24,23 +24,23 @@ import org.hibernate.SessionFactory;
 public class UserServiceImpl extends AbstractService <User> implements IUserService {
 	private static Logger logger = Logger.getLogger(UserServiceImpl.class);
 	private static UserServiceImpl instance;
-	private UserDaoImpl userDao = UserDaoImpl.getInstance(sessionFactory);
+	private UserDaoImpl userDao = UserDaoImpl.getInstance();
 
-	public static synchronized UserServiceImpl getInstance (SessionFactory sessionFactory) {
+	public static synchronized UserServiceImpl getInstance () {
 		if (instance == null) {
-			instance = new UserServiceImpl(sessionFactory);
+			instance = new UserServiceImpl();
 		}
 		return instance;
 	}
 
-	private UserServiceImpl (SessionFactory sessionFactory) {
-		super (User.class, UserDaoImpl.getInstance(sessionFactory), sessionFactory);
+	private UserServiceImpl () {
+		super (User.class, UserDaoImpl.getInstance());
 	}
 
 	@Override
 	public boolean checkUserAuthorization(String login, String password) throws ServiceException {
 		boolean isAuthorized = false;
-		Session session = getCurrentSession();
+		Session session = util.getSession();
 		try {
 			TransactionUtil.beginTransaction(session);
 			isAuthorized = userDao.isAuthorized(login, password);
@@ -57,7 +57,7 @@ public class UserServiceImpl extends AbstractService <User> implements IUserServ
 	@Override
 	public User getUserByLogin(String login) throws ServiceException {
 		User user;
-		Session session = getCurrentSession();
+		Session session = util.getSession();
 		try {
 			TransactionUtil.beginTransaction(session);
 			user = userDao.getUserByLogin(login);

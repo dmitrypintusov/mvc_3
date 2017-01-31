@@ -15,13 +15,13 @@ public class MarkDaoImpl extends AbstractDao<Mark> implements IMarkDao {
 	private static Logger logger = Logger.getLogger(MarkDaoImpl.class);
 	private static MarkDaoImpl instance;
 
-	private MarkDaoImpl(SessionFactory sessionFactory){
-		super(Mark.class, sessionFactory);
+	private MarkDaoImpl(){
+		super(Mark.class);
 	}
 
-	public static synchronized MarkDaoImpl getInstance(SessionFactory sessionFactory){
+	public static synchronized MarkDaoImpl getInstance(){
 		if(instance == null){
-			instance = new MarkDaoImpl(sessionFactory);
+			instance = new MarkDaoImpl();
 		}
 		return instance;
 	}

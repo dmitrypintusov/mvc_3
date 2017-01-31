@@ -15,13 +15,13 @@ public class ArchiveDaoImpl extends AbstractDao<Archive> implements IArchiveDao 
 	private static Logger logger = Logger.getLogger(ArchiveDaoImpl.class);
 	private static ArchiveDaoImpl instance;
 
-	private ArchiveDaoImpl(SessionFactory sessionFactory){
-		super(Archive.class, sessionFactory);
+	private ArchiveDaoImpl(){
+		super(Archive.class);
 	}
 
-	public static synchronized ArchiveDaoImpl getInstance(SessionFactory sessionFactory){
+	public static synchronized ArchiveDaoImpl getInstance(){
 		if(instance == null){
-			instance = new ArchiveDaoImpl(sessionFactory);
+			instance = new ArchiveDaoImpl();
 		}
 		return instance;
 	}

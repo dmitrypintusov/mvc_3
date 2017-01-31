@@ -21,17 +21,17 @@ import java.util.Set;
 public class CourseServiceImpl extends AbstractService<Course> implements ICourseService {
 	private static Logger logger = Logger.getLogger(CourseServiceImpl.class);
 	private static CourseServiceImpl instance;
-	private CourseDaoImpl courseDao = CourseDaoImpl.getInstance(sessionFactory);
+	private CourseDaoImpl courseDao = CourseDaoImpl.getInstance();
 
-	public static synchronized CourseServiceImpl getInstance (SessionFactory sessionFactory) {
+	public static synchronized CourseServiceImpl getInstance () {
 		if (instance == null) {
-			instance = new CourseServiceImpl(sessionFactory);
+			instance = new CourseServiceImpl();
 		}
 		return instance;
 	}
 
-	private CourseServiceImpl (SessionFactory sessionFactory) {
-		super (Course.class, CourseDaoImpl.getInstance(sessionFactory), sessionFactory);
+	private CourseServiceImpl () {
+		super (Course.class, CourseDaoImpl.getInstance());
 	}
 
 	@Override

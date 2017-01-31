@@ -46,7 +46,6 @@ public class UserDaoImplTest {
 
 	private static HibernateUtil util;
 	private static Session session;
-	private static SessionFactory sessionFactory;
 	private Transaction transaction;
 
 	private static UserDaoImpl userDao;
@@ -58,12 +57,11 @@ public class UserDaoImplTest {
 	public static void initTest () throws Exception {
 		util = HibernateUtil.getInstance();
 		session = util.getSession();
-		sessionFactory = util.getSessionFactory();
 
-		userDao = UserDaoImpl.getInstance(sessionFactory);
-		courseDao = CourseDaoImpl.getInstance(sessionFactory);
-		markDao = MarkDaoImpl.getInstance(sessionFactory);
-		accessLevelDao = AccessLevelDaoImpl.getInstance(sessionFactory);
+		userDao = UserDaoImpl.getInstance();
+		courseDao = CourseDaoImpl.getInstance();
+		markDao = MarkDaoImpl.getInstance();
+		accessLevelDao = AccessLevelDaoImpl.getInstance();
 	}
 
 	@Before
@@ -87,7 +85,7 @@ public class UserDaoImplTest {
 		accessLevel = EntityBuilder.buildAccessLevel(AccessLevelType.STUDENT, users);
 		accessLevels.add(accessLevel);
 		expectedUser.setAccessLevels(accessLevels);
-		transaction = sessionFactory.getCurrentSession().beginTransaction();
+		transaction = session.beginTransaction();
 	}
 
 	@Test
@@ -141,7 +139,7 @@ public class UserDaoImplTest {
 
 	@After
 	public void tearDown () throws Exception {
-		sessionFactory.getCurrentSession().getTransaction().commit();
+		session.getTransaction().commit();
 		expectedUser = null;
 		actualUser = null;
 		course = null;
@@ -161,7 +159,6 @@ public class UserDaoImplTest {
 		markDao = null;
 		accessLevelDao = null;
 		util = null;
-		session.close();
 	}
 
 	private void createEntities() throws Exception {

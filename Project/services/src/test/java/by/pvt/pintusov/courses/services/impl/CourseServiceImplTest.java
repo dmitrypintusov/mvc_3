@@ -23,14 +23,12 @@ public class CourseServiceImplTest {
 
 	private static HibernateUtil util;
 	private static Session session;
-	private static SessionFactory sessionFactory;
 
 	@BeforeClass
 	public static void initTest () throws Exception {
 		util = HibernateUtil.getInstance();
 		session = util.getSession();
-		sessionFactory = util.getSessionFactory();
-		courseService = CourseServiceImpl.getInstance(sessionFactory);
+		courseService = CourseServiceImpl.getInstance();
 	}
 
 	@Before
@@ -59,7 +57,6 @@ public class CourseServiceImplTest {
 		delete();
 	}
 
-	@Ignore
 	@Test
 	public void testLoad() throws Exception {
 		createEntities();
@@ -87,7 +84,6 @@ public class CourseServiceImplTest {
 	public static void closeTest() throws Exception{
 		courseService = null;
 		util = null;
-		//session.close();
 	}
 
 	private void delete() throws Exception {

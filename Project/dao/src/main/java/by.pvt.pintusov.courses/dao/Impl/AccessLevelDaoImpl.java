@@ -21,22 +21,22 @@ public class AccessLevelDaoImpl  extends AbstractDao<AccessLevel> implements IAc
 	private static Logger logger = Logger.getLogger(AccessLevelDaoImpl.class);
 	private static AccessLevelDaoImpl instance;
 
-	public static synchronized AccessLevelDaoImpl getInstance(SessionFactory sessionFactory){
+	public static synchronized AccessLevelDaoImpl getInstance(){
 		if(instance == null){
-			instance = new AccessLevelDaoImpl(sessionFactory);
+			instance = new AccessLevelDaoImpl();
 		}
 		return instance;
 	}
 
-	private AccessLevelDaoImpl(SessionFactory sessionFactory){
-		super(AccessLevel.class, sessionFactory);
+	private AccessLevelDaoImpl(){
+		super(AccessLevel.class);
 	}
 
 	@Override
 	public AccessLevel getByAccessLevelType(AccessLevelType accessLevelType) throws DaoException {
 		AccessLevel accessLevel;
 		try {
-			Session session = getCurrentSession();
+			Session session = util.getSession();
 			Query query = session.createQuery(DaoConstants.HQL_GET_BY_ACCESS_LEVEL);
 			query.setParameter(DaoConstants.PARAMETER_ACCESS_LEVEL_TYPE, accessLevelType);
 			accessLevel = (AccessLevel) query.uniqueResult();

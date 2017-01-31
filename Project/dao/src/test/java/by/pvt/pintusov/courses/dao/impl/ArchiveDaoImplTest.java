@@ -24,21 +24,19 @@ public class ArchiveDaoImplTest {
 
 	private static HibernateUtil util;
 	private static Session session;
-	private static SessionFactory sessionFactory;
 	private static ArchiveDaoImpl archiveDao;
 
 	@BeforeClass
 	public static void initTest () throws Exception {
 		util = HibernateUtil.getInstance();
 		session = util.getSession();
-		sessionFactory = util.getSessionFactory();
-		archiveDao = ArchiveDaoImpl.getInstance(sessionFactory);
+		archiveDao = ArchiveDaoImpl.getInstance();
 	}
 
 	@Before
 	public void setUp() throws Exception {
 		expectedArchive = EntityBuilder.buildArchive(null);
-		transaction = sessionFactory.getCurrentSession().beginTransaction();
+		transaction = session.beginTransaction();
 	}
 
 	@Test
@@ -75,7 +73,7 @@ public class ArchiveDaoImplTest {
 
 	@After
 	public void tearDown () throws Exception {
-		sessionFactory.getCurrentSession().getTransaction().commit();
+		session.getTransaction().commit();
 		expectedArchive = null;
 		actualArchive = null;
 		archiveId = null;

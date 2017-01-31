@@ -1,8 +1,11 @@
 package by.pvt.pintusov.courses.pojos;
-
 import lombok.Data;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,6 +16,7 @@ import java.util.Set;
  */
 
 @Data
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Entity
 public class User extends AbstractEntity {
 	private static final long serialVersionUID = 2L;

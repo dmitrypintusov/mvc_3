@@ -27,21 +27,19 @@ public class CourseDaoImplTest {
 
 	private static HibernateUtil util;
 	private static Session session;
-	private static SessionFactory sessionFactory;
 	private static CourseDaoImpl courseDao;
 
 	@BeforeClass
 	public static void initTest () throws Exception {
 		util = HibernateUtil.getInstance();
 		session = util.getSession();
-		sessionFactory = util.getSessionFactory();
-		courseDao = CourseDaoImpl.getInstance(sessionFactory);
+		courseDao = CourseDaoImpl.getInstance();
 	}
 
 	@Before
 	public void setUp() throws Exception {
 		expectedCourse = EntityBuilder.buildCourse("TEST", 100, CourseStatusType.OPEN, Calendar.getInstance(), Calendar.getInstance(), null);
-		transaction = sessionFactory.getCurrentSession().beginTransaction();
+		transaction = session.beginTransaction();
 	}
 
 	@Test
@@ -86,7 +84,7 @@ public class CourseDaoImplTest {
 
 	@After
 	public void tearDown () throws Exception {
-		sessionFactory.getCurrentSession().getTransaction().commit();
+		session.getTransaction().commit();
 		expectedCourse = null;
 		actualCourse = null;
 		courseId = null;

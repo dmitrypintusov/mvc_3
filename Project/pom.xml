@@ -109,6 +109,11 @@
                 <artifactId>hibernate-ehcache</artifactId>
                 <version>${hibernate.version}</version>
             </dependency>
+            <dependency>
+                <groupId>net.sf.ehcache</groupId>
+                <artifactId>encache-core</artifactId>
+                <version>2.6.11</version>
+            </dependency>
 
             <!-- Validation -->
             <dependency>

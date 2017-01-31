@@ -15,16 +15,16 @@ import org.hibernate.SessionFactory;
 public class AccessLevelServiceImpl extends AbstractService<AccessLevel> implements IAccessLevelService {
 	private static Logger logger = Logger.getLogger(AccessLevelServiceImpl.class);
 	private static AccessLevelServiceImpl instance;
-	private AccessLevelDaoImpl accessLevelDao = AccessLevelDaoImpl.getInstance(sessionFactory);
+	private AccessLevelDaoImpl accessLevelDao = AccessLevelDaoImpl.getInstance();
 
-	public static synchronized AccessLevelServiceImpl getInstance (SessionFactory sessionFactory) {
+	public static synchronized AccessLevelServiceImpl getInstance () {
 		if (instance == null) {
-			instance = new AccessLevelServiceImpl(sessionFactory);
+			instance = new AccessLevelServiceImpl();
 		}
 		return instance;
 	}
 
-	private AccessLevelServiceImpl (SessionFactory sessionFactory) {
-		super (AccessLevel.class, AccessLevelDaoImpl.getInstance(sessionFactory), sessionFactory);
+	private AccessLevelServiceImpl () {
+		super (AccessLevel.class, AccessLevelDaoImpl.getInstance());
 	}
 }

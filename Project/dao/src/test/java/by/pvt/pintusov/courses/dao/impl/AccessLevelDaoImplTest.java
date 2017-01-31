@@ -25,21 +25,19 @@ public class AccessLevelDaoImplTest {
 
 	private static HibernateUtil util;
 	private static Session session;
-	private static SessionFactory sessionFactory;
 	private static AccessLevelDaoImpl accessLevelDao;
 
 	@BeforeClass
 	public static void initTest () throws Exception {
 		util = HibernateUtil.getInstance();
 		session = util.getSession();
-		sessionFactory = util.getSessionFactory();
-		accessLevelDao = AccessLevelDaoImpl.getInstance(sessionFactory);
+		accessLevelDao = AccessLevelDaoImpl.getInstance();
 	}
 
 	@Before
 	public void setUp() throws Exception {
 		expectedAccessLevel = EntityBuilder.buildAccessLevel(AccessLevelType.ADMIN, null);
-		transaction = sessionFactory.getCurrentSession().beginTransaction();
+		transaction = session.beginTransaction();
 	}
 
 	@Test
@@ -76,7 +74,7 @@ public class AccessLevelDaoImplTest {
 
 	@After
 	public void tearDown () throws Exception {
-		sessionFactory.getCurrentSession().getTransaction().commit();
+		session.getTransaction().commit();
 		expectedAccessLevel = null;
 		actualAccessLevel = null;
 		accessLevelId = null;

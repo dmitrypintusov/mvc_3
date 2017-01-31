@@ -15,16 +15,16 @@ import org.hibernate.SessionFactory;
 public class ArchiveServiceImpl extends AbstractService<Archive> implements IArchiveService {
 	private static Logger logger = Logger.getLogger(ArchiveServiceImpl.class);
 	private static ArchiveServiceImpl instance;
-	private ArchiveDaoImpl markDao = ArchiveDaoImpl.getInstance(sessionFactory);
+	private ArchiveDaoImpl markDao = ArchiveDaoImpl.getInstance();
 
-	public static synchronized ArchiveServiceImpl getInstance (SessionFactory sessionFactory) {
+	public static synchronized ArchiveServiceImpl getInstance () {
 		if (instance == null) {
-			instance = new ArchiveServiceImpl(sessionFactory);
+			instance = new ArchiveServiceImpl();
 		}
 		return instance;
 	}
 
-	private ArchiveServiceImpl (SessionFactory sessionFactory) {
-		super (Archive.class, ArchiveDaoImpl.getInstance(sessionFactory), sessionFactory);
+	private ArchiveServiceImpl () {
+		super (Archive.class, ArchiveDaoImpl.getInstance());
 	}
 }

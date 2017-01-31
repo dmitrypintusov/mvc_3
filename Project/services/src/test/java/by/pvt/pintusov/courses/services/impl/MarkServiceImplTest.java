@@ -22,14 +22,12 @@ public class MarkServiceImplTest {
 
 	private static HibernateUtil util;
 	private static Session session;
-	private static SessionFactory sessionFactory;
 
 	@BeforeClass
 	public static void initTest () throws Exception {
 		util = HibernateUtil.getInstance();
 		session = util.getSession();
-		sessionFactory = util.getSessionFactory();
-		markService = MarkServiceImpl.getInstance(sessionFactory);
+		markService = MarkServiceImpl.getInstance();
 	}
 
 	@Before
@@ -58,7 +56,6 @@ public class MarkServiceImplTest {
 		delete();
 	}
 
-	@Ignore
 	@Test
 	public void testLoad() throws Exception {
 		createEntities();
@@ -86,7 +83,6 @@ public class MarkServiceImplTest {
 	public static void closeTest() throws Exception{
 		markService = null;
 		util = null;
-		//session.close();
 	}
 
 	private void delete() throws Exception {
