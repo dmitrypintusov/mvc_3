@@ -3,15 +3,19 @@ package by.pvt.pintusov.courses.dao.Impl;
 import by.pvt.pintusov.courses.constants.DaoConstants;
 import by.pvt.pintusov.courses.dao.AbstractDao;
 import by.pvt.pintusov.courses.dao.IUserDao;
+import by.pvt.pintusov.courses.enums.AccessLevelType;
+import by.pvt.pintusov.courses.enums.CourseStatusType;
 import by.pvt.pintusov.courses.exceptions.DaoException;
+import by.pvt.pintusov.courses.pojos.AccessLevel;
+import by.pvt.pintusov.courses.pojos.Course;
 import by.pvt.pintusov.courses.pojos.User;
 import org.apache.log4j.Logger;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
+import org.hibernate.criterion.Restrictions;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * User Dao implementation
@@ -22,6 +26,7 @@ import java.util.List;
 public class UserDaoImpl extends AbstractDao <User> implements IUserDao {
 	private static Logger logger = Logger.getLogger(UserDaoImpl.class);
 	private static UserDaoImpl instance;
+	private Class persistenceClass = User.class;
 
 	private UserDaoImpl(){
 		super(User.class);
@@ -84,5 +89,25 @@ public class UserDaoImpl extends AbstractDao <User> implements IUserDao {
 			throw new DaoException(DaoConstants.ERROR_USERS_LIST, e);
 		}
 		return results;
+	}
+
+	//TODO: переделать
+	public AccessLevelType checkUserAccessLevel (User user) throws DaoException {
+		AccessLevelType access;
+		AccessLevel accessLevel = null;
+		Set<AccessLevel> accessLevels;
+		try {
+			Session session = util.getSession();
+			Set <User> users = new HashSet<>();
+			users.add(user);
+			accessLevel.setUsers(users);
+			Query query = session.createQuery(DaoConstants.HQL_CHECK_USER_ACCESS);
+			query.setParameter(DaoConstants.PARAMETER_ACCESS_LEVEL_TYPE, users);
+			access = (AccessLevelType) query.uniqueResult();
+		} catch(HibernateException e){
+			logger.error(DaoConstants.ERROR_ACCESS_LEVEL_TYPE + e);
+			throw new DaoException(DaoConstants.ERROR_ACCESS_LEVEL_TYPE, e);
+		}
+		return access;
 	}
 }

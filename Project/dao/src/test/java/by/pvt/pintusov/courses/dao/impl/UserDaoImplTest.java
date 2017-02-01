@@ -18,9 +18,7 @@ import org.hibernate.Transaction;
 import org.junit.*;
 
 import java.io.Serializable;
-import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Test User Dao

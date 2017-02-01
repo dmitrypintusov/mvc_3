@@ -17,12 +17,14 @@ public class DaoConstants {
 	public static final String PARAMETER_USER_LOGIN = "login";
 	public static final String PARAMETER_USER_PASSWORD = "password";
 	public static final String PARAMETER_COURSE_STATUS = "courseStatus";
+	public static final String PARAMETER_ACCESS_LEVEL = "accessLevel";
 	public static final String PARAMETER_ACCESS_LEVEL_TYPE = "accessLevelType";
 
 	public static final String HQL_GET_BY_LOGIN = "FROM User U WHERE U.login =:login";
 	public static final String HQL_CHECK_AUTHORIZATION = "FROM User U WHERE U.login = :login AND U.password = :password";
 	public static final String HQL_GET_BY_ACCESS_LEVEL = "FROM AccessLevel A WHERE A.accessLevelType = :accessLevelType";
-	public static final String HQL_GET_ALL_USERS = " from User";
+	public static final String HQL_CHECK_USER_ACCESS = "SELECT A.accessLevelType FROM AccessLevel WHERE A.users = :users";
+	public static final String HQL_GET_ALL_USERS = "FROM User U";
 
 	private DaoConstants () {}
 }

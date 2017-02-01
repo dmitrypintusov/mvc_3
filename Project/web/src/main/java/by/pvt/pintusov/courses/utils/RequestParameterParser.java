@@ -39,11 +39,15 @@ public class RequestParameterParser {
 	 * @return user instance
 	 */
 	public static User getUser(HttpServletRequest request) {
+		AccessLevel access = new AccessLevel();
 		AccessLevelType accessLevel;
 		Set<AccessLevel> accessLevels = new HashSet<>();
 		if (request.getParameter(Parameters.USER_ACCESS_LEVEL) != null) {
 			accessLevel = AccessLevelType.valueOf(request.getParameter(Parameters.USER_ACCESS_LEVEL).toUpperCase());
-			AccessLevel access = new AccessLevel();
+			access.setAccessLevelType(accessLevel);
+			accessLevels.add(access);
+		} else {
+			accessLevel = AccessLevelType.STUDENT;
 			access.setAccessLevelType(accessLevel);
 			accessLevels.add(access);
 		}
