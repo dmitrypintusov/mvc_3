@@ -29,12 +29,12 @@ public class RegistrationCommand extends AbstractCommand {
 			user = RequestParameterParser.getUser(request);
 			if (areFieldsFullStocked()) {
 				if(UserServiceImpl.getInstance().checkIsNewUser(user)){
-					//UserServiceImpl.getInstance().bookUser(user, account);
+					UserServiceImpl.getInstance().bookUser(user);
 					page = ConfigurationManager.getInstance().getProperty(PagePath.REGISTRATION_PAGE_PATH);
 					request.setAttribute(Parameters.OPERATION_MESSAGE, MessageManager.getInstance().getProperty(MessageConstants.SUCCESS_OPERATION));
 				} else {
 					page = ConfigurationManager.getInstance().getProperty(PagePath.REGISTRATION_PAGE_PATH);
-					request.setAttribute(Parameters.ERROR_USER_EXISTS, MessageManager.getInstance().getProperty(MessageConstants.USEREXISTS));
+					request.setAttribute(Parameters.ERROR_USER_EXISTS, MessageManager.getInstance().getProperty(MessageConstants.USER_EXISTS));
 				}
 			} else {
 				request.setAttribute(Parameters.OPERATION_MESSAGE, MessageManager.getInstance().getProperty(MessageConstants.EMPTY_FIELDS));

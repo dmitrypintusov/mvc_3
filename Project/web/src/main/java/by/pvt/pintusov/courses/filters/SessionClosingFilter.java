@@ -9,18 +9,19 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Project: courses
- * Created by: USER
- * Date: 21.01.17.
+ * Security filter
+ * @author pintusov
+ * @version 1.1
  */
+
 public class SessionClosingFilter implements javax.servlet.Filter {
 	public void init(FilterConfig fConfig) throws ServletException {}
 
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		Session session = HibernateUtil.getInstance().getSession();
-		chain.doFilter(request, response);
+		filterChain.doFilter(request, response);
 		HibernateUtil.getInstance().releaseSession(session);
 	}
 

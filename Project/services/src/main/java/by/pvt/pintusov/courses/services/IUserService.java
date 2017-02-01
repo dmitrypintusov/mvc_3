@@ -16,5 +16,5 @@ public interface IUserService extends IService<User> {
 	User getUserByLogin(String login) throws ServiceException;
 	AccessLevelType checkAccessLevel(User user) throws ServiceException;
 	boolean checkIsNewUser(User user) throws ServiceException;
-	void bookUser(User user, Course course) throws ServiceException;
+	void bookUser(User user) throws ServiceException;
 }

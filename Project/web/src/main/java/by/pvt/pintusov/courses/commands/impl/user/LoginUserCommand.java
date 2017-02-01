@@ -26,7 +26,7 @@ public class LoginUserCommand extends AbstractCommand {
 
 	@Override
 	public String execute(HttpServletRequest request) {
-		String page = null;
+		String page;
 		HttpSession session = request.getSession();
 		try {
 			user = RequestParameterParser.getUser(request);

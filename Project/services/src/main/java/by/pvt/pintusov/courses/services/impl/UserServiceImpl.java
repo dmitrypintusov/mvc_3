@@ -1,10 +1,12 @@
 package by.pvt.pintusov.courses.services.impl;
 
+import by.pvt.pintusov.courses.dao.Impl.AccessLevelDaoImpl;
 import by.pvt.pintusov.courses.dao.Impl.UserDaoImpl;
 import by.pvt.pintusov.courses.enums.AccessLevelType;
 import by.pvt.pintusov.courses.enums.ServiceConstants;
 import by.pvt.pintusov.courses.exceptions.DaoException;
 import by.pvt.pintusov.courses.exceptions.ServiceException;
+import by.pvt.pintusov.courses.pojos.AccessLevel;
 import by.pvt.pintusov.courses.pojos.Course;
 import by.pvt.pintusov.courses.pojos.User;
 import by.pvt.pintusov.courses.services.AbstractService;
@@ -13,6 +15,7 @@ import by.pvt.pintusov.courses.utils.TransactionUtil;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 
 /**
@@ -78,10 +81,40 @@ public class UserServiceImpl extends AbstractService <User> implements IUserServ
 
 	@Override
 	public boolean checkIsNewUser(User user) throws ServiceException {
-		return false;
+		boolean isNew = false;
+		Session session = util.getSession();
+		try {
+			TransactionUtil.beginTransaction(session);
+			if(userDao.getUserByLogin(user.getLogin()) == null){
+				isNew = true;
+			}
+			TransactionUtil.commitTransaction(session);
+			logger.info("User " + user + " is new");
+		}
+		catch (DaoException e) {
+			TransactionUtil.rollbackTransaction(session);
+			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED + e);
+		}
+		return isNew;
 	}
 
 	@Override
-	public void bookUser(User user, Course course) throws ServiceException {
+	public void bookUser(User user) throws ServiceException {
+		Session session = util.getSession();
+		try {
+			TransactionUtil.beginTransaction(session);
+			AccessLevel accessLevel = new AccessLevel();
+			accessLevel.setAccessLevelType(AccessLevelType.STUDENT);
+			user.addAccessLevel(accessLevel);
+			accessLevel.addUser(user);
+			AccessLevelDaoImpl.getInstance().saveOrUpdate(accessLevel);
+			userDao.saveOrUpdate(user);
+			TransactionUtil.commitTransaction(session);
+			logger.info(user);
+			logger.info(accessLevel);
+		} catch (DaoException e) {
+			TransactionUtil.rollbackTransaction(session);
+			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED + e);
+		}
 	}
 }

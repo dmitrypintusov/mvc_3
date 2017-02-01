@@ -27,7 +27,7 @@ public class Parameters {
 	public static final String OPERATION_ID = "operationid";
 	public static final String OPERATION_DESCRIPTION ="operationdescription";
 	public static final String OPERATION_DATE = "operationdate";
-	public static final String OPERATION_MESSAGE = "operationmessage";
+	public static final String OPERATION_MESSAGE = "operationMessage";
 	public static final String OPERATIONS_LIST = "operationslist";
 	public static final String OPERATION_OPEN = "open";
 	public static final String OPERATION_CLOSE = "close";
@@ -37,7 +37,7 @@ public class Parameters {
 	public static final String ERROR_EMPTY_CHOICE = "erroremptychoice";
 	public static final String ERROR_EMPTY_LIST = "erroremptylist";
 	public static final String ERROR_LOGIN_OR_PASSWORD = "errorloginorpassword";
-	public static final String ERROR_USER_EXISTS = "erroruserexists";
+	public static final String ERROR_USER_EXISTS = "errorUserExists";
 
 	private Parameters () {}
 }
