@@ -79,17 +79,18 @@ public class UserServiceImpl extends AbstractService <User> implements IUserServ
 	@Override
 	public AccessLevelType checkAccessLevel(User user) throws ServiceException {
 		AccessLevel accessLevel = new AccessLevel();
+		AccessLevelType accessLevelType = null;
 		Set<AccessLevel> accessLevels = user.getAccessLevels();
 		for (AccessLevel access: accessLevels) {
-			if(access.equals(AccessLevelType.TEACHER)){
-				accessLevel.setAccessLevelType(AccessLevelType.TEACHER);
-			} else if (access.equals(AccessLevelType.ADMIN)) {
-				accessLevel.setAccessLevelType(AccessLevelType.ADMIN);
+			if(access.getAccessLevelType().equals(AccessLevelType.TEACHER)){
+				accessLevelType = AccessLevelType.TEACHER;
+			} else if (access.getAccessLevelType().equals(AccessLevelType.ADMIN)) {
+				accessLevelType = AccessLevelType.ADMIN;
 			} else {
-				accessLevel.setAccessLevelType(AccessLevelType.STUDENT);
+				accessLevelType = AccessLevelType.STUDENT;
 			}
 		}
-		return accessLevel.getAccessLevelType();
+		return accessLevelType;
 	}
 
 	@Override

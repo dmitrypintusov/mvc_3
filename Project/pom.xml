@@ -132,6 +132,7 @@
     </dependencyManagement>
 
     <build>
+        <finalName>Courses_System</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>

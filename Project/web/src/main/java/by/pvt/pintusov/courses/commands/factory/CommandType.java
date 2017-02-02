@@ -3,6 +3,7 @@ package by.pvt.pintusov.courses.commands.factory;
 import by.pvt.pintusov.courses.commands.ICommand;
 import by.pvt.pintusov.courses.commands.impl.student.ShowTeachersCommand;
 import by.pvt.pintusov.courses.commands.impl.teacher.GoBackTeacherCommand;
+import by.pvt.pintusov.courses.commands.impl.teacher.ShowStudentsCommand;
 import by.pvt.pintusov.courses.commands.impl.user.*;
 
 /**
@@ -19,7 +20,7 @@ public enum CommandType {
 	COURSES_LIST, ATTEND_COURSE, LEAVE_COURSE, BACK_STUDENT, SHOW_TEACHERS,
 
 	//teachers commands
-	STUDENTS_LIST, OPERATIONS, START_COURSE, CLOSE_COURSE,
+	SHOW_STUDENTS, OPERATIONS, START_COURSE, CLOSE_COURSE,
 	GO_TO_START_COURSES, GO_TO_CLOSE_COURSES, COURSES_IN_ARCHIVE, BACK_TEACHER;
 
 	//TODO доделать
@@ -40,9 +41,13 @@ public enum CommandType {
 				return new GoToRegistrationCommand();
 			case BACK:
 				return new GoBackCommand();
+
 			//teacher`s commands
 			case BACK_TEACHER:
 				return new GoBackTeacherCommand();
+			case SHOW_STUDENTS:
+				return new ShowStudentsCommand();
+
 			//students commands
 			case SHOW_TEACHERS:
 				return new ShowTeachersCommand();

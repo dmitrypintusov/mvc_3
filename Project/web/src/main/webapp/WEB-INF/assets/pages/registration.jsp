@@ -25,7 +25,8 @@
             <input type="login" name="login" value="" size="20" required /><br>
             Пароль:<br>
             <input type="password" name="password" value="" size="20" required /><br>
-
+            <input type="radio" name="accessLevel" value="STUDENT" checked />Student
+            <input type="radio" name="accessLevel" value="TEACHER" />Teacher<br>
             ${operationMessage}
             ${errorUserExists} <br>
             <input type="submit" value="Зарегистрировать" />

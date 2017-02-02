@@ -14,7 +14,6 @@ public class PagePath {
 	//Teacher pages path
 	public static final String TEACHER_PAGE_PATH = "path.page.teacher";
 	public static final String TEACHER_SHOW_STUDENTS_PAGE = "path.page.teacher.students";
-	public static final String TEACHER_SHOW_OPERATION_PAGE = "path.page.teacher.operations";
 	public static final String TEACHER_COURSE_PAGE = "path.page.teacher.course";
 	//Student pages path
 	public static final String STUDENT_PAGE_PATH = "path.page.student";

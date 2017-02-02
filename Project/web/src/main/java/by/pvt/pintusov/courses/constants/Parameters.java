@@ -9,7 +9,6 @@ package by.pvt.pintusov.courses.constants;
 public class Parameters {
 	//user parameters
 	public static final String USER = "user";
-	public static final String USER_ID = "userid";
 	public static final String USER_FIRST_NAME = "firstname";
 	public static final String USER_LAST_NAME = "lastname";
 	public static final String USER_LOGIN = "login";
