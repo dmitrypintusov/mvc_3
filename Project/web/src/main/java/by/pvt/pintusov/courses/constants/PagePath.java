@@ -14,12 +14,9 @@ public class PagePath {
 	//Teacher pages path
 	public static final String TEACHER_PAGE_PATH = "path.page.teacher";
 	public static final String TEACHER_SHOW_STUDENTS_PAGE = "path.page.teacher.students";
-	public static final String TEACHER_COURSE_PAGE = "path.page.teacher.course";
+	public static final String TEACHER_COURSES_PAGE = "path.page.teacher.courses";
 	//Student pages path
 	public static final String STUDENT_PAGE_PATH = "path.page.student";
-	public static final String STUDENT_COURSES_PAGE_PATH = "path.page.student.courses";
-	public static final String STUDENT_START_COURSE_PAGE_PATH = "path.page.student.startcourse";
-	public static final String STUDENT_END_COURSE_PAGE_PATH = "path.page.student.endcourse";
 	public static final String STUDENT_SHOW_TEACHERS_PAGE_PATH = "path.page.student.teachers";
 
 	public static final String ADMIN_PAGE_PATH = "path.page.admin";

@@ -75,36 +75,13 @@ public class CourseDaoImpl extends AbstractDao <Course> implements ICourseDao {
 		List<Course> list;
 		try {
 			Session session = util.getSession();
-			SQLQuery query = session.createSQLQuery(GET_OPERATIONS + sorting);
-			query.addScalar("operationDate", StandardBasicTypes.STRING);
-			query.addScalar("description", StandardBasicTypes.STRING);
-			query.addScalar("amount", StandardBasicTypes.DOUBLE);
-			query.addScalar("userLastName", StandardBasicTypes.STRING);
-			query.addScalar("accountNumber", StandardBasicTypes.LONG);
-			query.setResultTransformer(new ResultTransformer() {
-				@Override
-				public Object transformTuple(Object[] tuple, String[] aliases) {
-					OperationDTO operation = new OperationDTO();
-					operation.setOperationDate((String)tuple[0]);
-					operation.setDescription((String)tuple[1]);
-					operation.setAmount((Double)tuple[2]);
-					operation.setUserLastName((String)tuple[3]);
-					operation.setAccountNumber((Long)tuple[4]);
-					return operation;
-				}
-
-				@Override
-				public List transformList(List collection) {
-					return collection;
-				}
-			});
+			SQLQuery query = session.createSQLQuery(DaoConstants.HQL_GET_COURSES + sorting);
 			query.setFirstResult((pageNumber - 1) * recordsPerPage);
 			query.setMaxResults(recordsPerPage);
 			list = query.list();
 		} catch (HibernateException e) {
-			message = "Unable to get list of operations. Error was thrown in DAO: ";
-			logger.error(message + e);
-			throw new DaoException(message, e);
+			logger.error(DaoConstants.ERROR_COURSES_LIST + e);
+			throw new DaoException(DaoConstants.ERROR_COURSES_LIST, e);
 		}
 		return list;
 	}

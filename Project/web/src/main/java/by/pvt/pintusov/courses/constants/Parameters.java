@@ -16,27 +16,26 @@ public class Parameters {
 	public static final String USER_ACCESS_LEVEL = "accessLevel";
 	public static final String USERS_LIST = "userList";
 	//course parameters
-	public static final String COURSE = "course";
-	public static final String COURSE_ID = "courseid";
-	public static final String COURSE_NAME = "coursename";
-	public static final String COURSE_HOURS = "hours";
-	public static final String COURSE_STATUS = "status";
 	public static final String COURSES_LIST = "coursesList";
 	//operation parameters
-	public static final String OPERATION_ID = "operationid";
-	public static final String OPERATION_DESCRIPTION ="operationdescription";
-	public static final String OPERATION_DATE = "operationdate";
 	public static final String OPERATION_MESSAGE = "operationMessage";
-	public static final String OPERATIONS_LIST = "operationslist";
-	public static final String OPERATION_OPEN = "open";
-	public static final String OPERATION_CLOSE = "close";
+
 	//Command and errors parameters
 	public static final String COMMAND = "command";
-	public static final String ERROR_DATABASE = "errordatabase";
-	public static final String ERROR_EMPTY_CHOICE = "erroremptychoice";
-	public static final String ERROR_EMPTY_LIST = "erroremptylist";
-	public static final String ERROR_LOGIN_OR_PASSWORD = "errorloginorpassword";
+	public static final String ERROR_DATABASE = "errorDatabase";
+	public static final String ERROR_LOGIN_OR_PASSWORD = "errorLoginOrPassword";
 	public static final String ERROR_USER_EXISTS = "errorUserExists";
+
+	public static final String NUMBER_OF_PAGES = "numberOfPages";
+	public static final String CURRENT_PAGE = "currentPage";
+	public static final String RECORDS_PER_PAGE = "recordsPerPage";
+	public static final String ORDERING = "ordering";
+	public static final String ORDER_BY_ID = "ORDER BY id";
+	public static final String ORDER_BY_COURSE_NAME = "ORDER BY courseName";
+	public static final String ORDER_BY_COURSE_STATUS = "ORDER BY courseStatus";
+	public static final String ORDER_BY_HOURS = "ORDER BY hours";
+	public static final String ORDER_BY_START_DATE = "ORDER BY startDate";
+	public static final String ORDER_BY_UPDATE_DATE = "ORDER BY updateDate";
 
 	private Parameters () {}
 }

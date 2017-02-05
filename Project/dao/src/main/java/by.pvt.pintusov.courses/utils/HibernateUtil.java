@@ -9,7 +9,7 @@ import org.hibernate.cfg.Configuration;
 
 /**
  * Project name: courses
- * Created by Дмитрий
+ * Created by dpintusov
  * Date: 15.01.2017.
  */
 
@@ -19,6 +19,10 @@ public class HibernateUtil {
 	private SessionFactory sessionFactory;
 	private static ThreadLocal <Session> sessions = new ThreadLocal <> ();
 
+	/**
+	 * Singleton of HibernateUtil
+	 * @return util - HibernateUtil singleton
+	 */
 	public static synchronized HibernateUtil getInstance () {
 		if (util == null) {
 			util = new HibernateUtil();
@@ -26,6 +30,11 @@ public class HibernateUtil {
 		return util;
 	}
 
+	/**
+	 * Constructor of Hibernate util
+	 * gets configuration from hibernate.cfg.xml
+	 * build sessionFactory
+	 */
 	private HibernateUtil () {
 		try {
 			Configuration configuration = new Configuration().configure();
@@ -38,6 +47,11 @@ public class HibernateUtil {
 		}
 	}
 
+	/**
+	 * Gets a session from the  thread local
+	 * if session null, open session from the sessionFactory
+	 * @return a session from the sessionFactory
+	 */
 	public Session getSession () {
 		Session session = sessions.get();
 		if (session == null) {
@@ -47,6 +61,10 @@ public class HibernateUtil {
 		return session;
 	}
 
+	/**
+	 * Closes current session
+	 * @param session - current session
+	 */
 	public void releaseSession (Session session) {
 		if (session != null) {
 			try {
@@ -55,9 +73,5 @@ public class HibernateUtil {
 				logger.error(e);
 			}
 		}
-	}
-
-	public SessionFactory getSessionFactory () {
-		return sessionFactory;
 	}
 }

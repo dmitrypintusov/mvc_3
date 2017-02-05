@@ -6,10 +6,12 @@
 
     <groupId>by.pvt.pintusov.courses</groupId>
     <artifactId>dao</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.2</version>
 	<packaging>jar</packaging>
 
 	<name>dao</name>
+	<url>https://github.com/dmitrypintusov</url>
+	<inceptionYear>2016</inceptionYear>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,14 +20,14 @@
 	<parent>
 		<groupId>by.pvt.pintusov</groupId>
 		<artifactId>courses</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<version>1.2</version>
 	</parent>
 	
 	<dependencies>
 		<dependency>
 			<groupId>by.pvt.pintusov.courses</groupId>
 			<artifactId>entities</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>1.2</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId> 

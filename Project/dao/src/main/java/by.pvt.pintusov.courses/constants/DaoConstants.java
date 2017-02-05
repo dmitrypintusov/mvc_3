@@ -13,6 +13,7 @@ public class DaoConstants {
 	public static final String ERROR_ACCESS_LEVEL_TYPE = "Unable to return access level type. Error was thrown in DAO: ";
 	public static final String ERROR_USERS_LIST = "Unable to return list of users. Error was thrown in DAO: ";
 	public static final String ERROR_RECORD_NUMBER = "Unable to return number of rows. Error was thrown in DAO: ";
+	public static final String ERROR_COURSES_LIST = "Unable to return list of courses. Error was thrown in DAO: ";
 
 	public static final String PARAMETER_ID = "id";
 	public static final String PARAMETER_USER_LOGIN = "login";
@@ -25,6 +26,7 @@ public class DaoConstants {
 	public static final String HQL_GET_BY_ACCESS_LEVEL = "FROM AccessLevel A WHERE A.accessLevelType = :accessLevelType";
 	public static final String HQL_CHECK_USER_ACCESS = "SELECT A.accessLevelType FROM AccessLevel WHERE A.users = :users";
 	public static final String HQL_GET_ALL_USERS = "FROM User U";
+	public static final String HQL_GET_COURSES = "select Course C";
 
 	private DaoConstants () {}
 }

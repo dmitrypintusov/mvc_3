@@ -2,14 +2,14 @@
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd" updateCheck="false">
 
-    <diskStore path="java.io.tmpdir/courses" />
+    <diskStore path="java.io.tmpdir" />
 
     <defaultCache eternal="false"
                   maxElementsInMemory="1000"
                   overflowToDisk="false"
                   diskPersistent="false"
-                  timeToIdleSeconds="300"
-                  timeToLiveSeconds="300"
+                  timeToIdleSeconds="1200"
+                  timeToLiveSeconds="1200"
                   memoryStoreEvictionPolicy="LRU"
                   statistics="true"
     />
@@ -30,8 +30,8 @@
            maxElementsInMemory="2"
            overflowToDisk="false"
            diskPersistent="false"
-           timeToIdleSeconds="50"
-           timeToLiveSeconds="50"
+           timeToIdleSeconds="300"
+           timeToLiveSeconds="600"
            memoryStoreEvictionPolicy="LRU"
            statistics="true"
     />
