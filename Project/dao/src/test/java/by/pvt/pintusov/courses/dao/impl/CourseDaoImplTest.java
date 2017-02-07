@@ -1,5 +1,6 @@
 package by.pvt.pintusov.courses.dao.impl;
 
+import by.pvt.pintusov.courses.dao.ICourseDao;
 import by.pvt.pintusov.courses.dao.Impl.CourseDaoImpl;
 import by.pvt.pintusov.courses.enums.CourseStatusType;
 import by.pvt.pintusov.courses.pojos.Course;
@@ -33,7 +34,7 @@ public class CourseDaoImplTest {
 	private Serializable courseId;
 
 	@Autowired
-	private CourseDaoImpl courseDao;
+	private ICourseDao courseDao;
 
 	@Before
 	public void setUp() throws Exception {

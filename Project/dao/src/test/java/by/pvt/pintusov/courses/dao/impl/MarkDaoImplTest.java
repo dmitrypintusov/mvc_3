@@ -1,5 +1,6 @@
 package by.pvt.pintusov.courses.dao.impl;
 
+import by.pvt.pintusov.courses.dao.IMarkDao;
 import by.pvt.pintusov.courses.dao.Impl.MarkDaoImpl;
 import by.pvt.pintusov.courses.pojos.Mark;
 import by.pvt.pintusov.courses.utils.EntityBuilder;
@@ -31,7 +32,7 @@ public class MarkDaoImplTest {
 	private Serializable markId;
 
 	@Autowired
-	private static MarkDaoImpl markDao;
+	private IMarkDao markDao;
 
 	@Before
 	public void setUp() throws Exception {

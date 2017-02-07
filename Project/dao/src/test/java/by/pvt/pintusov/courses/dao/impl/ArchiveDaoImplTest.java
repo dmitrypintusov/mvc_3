@@ -1,5 +1,6 @@
 package by.pvt.pintusov.courses.dao.impl;
 
+import by.pvt.pintusov.courses.dao.IArchiveDao;
 import by.pvt.pintusov.courses.dao.Impl.ArchiveDaoImpl;
 import by.pvt.pintusov.courses.pojos.Archive;
 import by.pvt.pintusov.courses.utils.EntityBuilder;
@@ -30,7 +31,7 @@ public class ArchiveDaoImplTest {
 	private Serializable archiveId;
 
 	@Autowired
-	private static ArchiveDaoImpl archiveDao;
+	private IArchiveDao archiveDao;
 
 	@Before
 	public void setUp() throws Exception {

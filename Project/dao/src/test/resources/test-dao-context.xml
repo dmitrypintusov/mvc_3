@@ -50,18 +50,18 @@
     >
         <property name="packagesToScan">
             <list>
-                <value>courses.pojos</value>
+                <value>by.pvt.pintusov.courses.pojos</value>
             </list>
         </property>
         <property name="hibernateProperties">
             <props>
                 <prop key="connection.provider_class">com.zaxxer.hikari.hibernate.HikariConnectionProvider</prop>
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
                 <prop key="connection.isolation">2</prop>
-                <prop key="show_sql">true</prop>
-                <prop key="hbm2ddl.auto">update</prop>
-                <prop key="cache.region.factory_class">org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory</prop>
-                <prop key="cache.use_second_level_cache">true</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+                <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory</prop>
+                <prop key="hibernate.cache.use_second_level_cache">true</prop>
                 <prop key="cache.use_query_cache">true</prop>
                 <prop key="net.sf.ehcache.configurationResourceName">ehcache.xml</prop>
                 <prop key="hibernate.cglib.use_reflection_optimizer">true</prop>
@@ -78,23 +78,23 @@
 
     <tx:annotation-driven transaction-manager="testDaoTransactionManager" proxy-target-class="true"/>
 
-    <bean id="courseDao" class="by.pvt.pintusov.courses.dao.impl.CourseDaoImplTest">
+    <bean id="courseDao" class="by.pvt.pintusov.courses.dao.Impl.CourseDaoImpl">
         <constructor-arg ref="sessionFactory" />
     </bean>
 
-    <bean id="userDao" class="by.pvt.pintusov.courses.dao.impl.UserDaoImplTest">
+    <bean id="userDao" class="by.pvt.pintusov.courses.dao.Impl.UserDaoImpl">
         <constructor-arg ref="sessionFactory" />
     </bean>
 
-    <bean id="markDao" class="by.pvt.pintusov.courses.dao.impl.MarkDaoImplTest">
+    <bean id="markDao" class="by.pvt.pintusov.courses.dao.Impl.MarkDaoImpl">
         <constructor-arg ref="sessionFactory" />
     </bean>
 
-    <bean id="accessLevelDao" class="by.pvt.pintusov.courses.dao.impl.AccessLevelDaoImplTest">
+    <bean id="accessLevelDao" class="by.pvt.pintusov.courses.dao.Impl.AccessLevelDaoImpl">
         <constructor-arg ref="sessionFactory" />
     </bean>
 
-    <bean id="archiveDao" class="by.pvt.pintusov.courses.dao.impl.ArchiveDaoImplTest">
+    <bean id="archiveDao" class="by.pvt.pintusov.courses.dao.Impl.ArchiveDaoImpl">
         <constructor-arg ref="sessionFactory" />
     </bean>
 </beans>

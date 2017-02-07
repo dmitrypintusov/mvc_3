@@ -1,9 +1,9 @@
 package by.pvt.pintusov.courses.dao.impl;
 
-import by.pvt.pintusov.courses.dao.Impl.AccessLevelDaoImpl;
-import by.pvt.pintusov.courses.dao.Impl.CourseDaoImpl;
-import by.pvt.pintusov.courses.dao.Impl.MarkDaoImpl;
-import by.pvt.pintusov.courses.dao.Impl.UserDaoImpl;
+import by.pvt.pintusov.courses.dao.IAccessLevelDao;
+import by.pvt.pintusov.courses.dao.ICourseDao;
+import by.pvt.pintusov.courses.dao.IMarkDao;
+import by.pvt.pintusov.courses.dao.IUserDao;
 import by.pvt.pintusov.courses.enums.AccessLevelType;
 import by.pvt.pintusov.courses.enums.CourseStatusType;
 import by.pvt.pintusov.courses.pojos.AccessLevel;
@@ -11,10 +11,6 @@ import by.pvt.pintusov.courses.pojos.Course;
 import by.pvt.pintusov.courses.pojos.Mark;
 import by.pvt.pintusov.courses.pojos.User;
 import by.pvt.pintusov.courses.utils.EntityBuilder;
-import by.pvt.pintusov.courses.utils.HibernateUtil;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,13 +33,13 @@ import java.util.*;
 public class UserDaoImplTest {
 
 	@Autowired
-	private UserDaoImpl userDao;
+	private IUserDao userDao;
 	@Autowired
-	private CourseDaoImpl courseDao;
+	private ICourseDao courseDao;
 	@Autowired
-	private MarkDaoImpl markDao;
+	private IMarkDao markDao;
 	@Autowired
-	private AccessLevelDaoImpl accessLevelDao;
+	private IAccessLevelDao accessLevelDao;
 
 	private User expectedUser;
 	private User actualUser;
@@ -136,10 +132,6 @@ public class UserDaoImplTest {
 		courseId = null;
 		markId = null;
 		accessLevelId = null;
-		userDao = null;
-		courseDao = null;
-		markDao = null;
-		accessLevelDao = null;
 	}
 
 	private void createEntities() throws Exception {

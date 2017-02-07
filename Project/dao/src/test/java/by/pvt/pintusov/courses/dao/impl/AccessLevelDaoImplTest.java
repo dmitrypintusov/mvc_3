@@ -1,5 +1,6 @@
 package by.pvt.pintusov.courses.dao.impl;
 
+import by.pvt.pintusov.courses.dao.IAccessLevelDao;
 import by.pvt.pintusov.courses.dao.Impl.AccessLevelDaoImpl;
 import by.pvt.pintusov.courses.enums.AccessLevelType;
 import by.pvt.pintusov.courses.pojos.AccessLevel;
@@ -31,7 +32,7 @@ public class AccessLevelDaoImplTest {
 	private Serializable accessLevelId;
 
 	@Autowired
-	private static AccessLevelDaoImpl accessLevelDao;
+	private IAccessLevelDao accessLevelDao;
 
 	@Before
 	public void setUp() throws Exception {
