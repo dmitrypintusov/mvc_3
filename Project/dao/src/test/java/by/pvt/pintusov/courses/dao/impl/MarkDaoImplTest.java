@@ -8,6 +8,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.junit.*;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -17,27 +22,20 @@ import java.util.Calendar;
  * Created by: USER
  * Date: 25.01.17.
  */
+@ContextConfiguration("/test-dao-context.xml")
+@RunWith(SpringJUnit4ClassRunner.class)
+@Transactional(transactionManager = "testDaoTransactionManager")
 public class MarkDaoImplTest {
 	private Mark expectedMark;
 	private Mark actualMark;
 	private Serializable markId;
-	private Transaction transaction;
 
-	private static HibernateUtil util;
-	private static Session session;
+	@Autowired
 	private static MarkDaoImpl markDao;
-
-	@BeforeClass
-	public static void initTest () throws Exception {
-		util = HibernateUtil.getInstance();
-		session = util.getSession();
-		markDao = MarkDaoImpl.getInstance();
-	}
 
 	@Before
 	public void setUp() throws Exception {
 		expectedMark = EntityBuilder.buildMark(100, null, null, Calendar.getInstance());
-		transaction = session.beginTransaction();
 	}
 
 	@Test
@@ -74,17 +72,10 @@ public class MarkDaoImplTest {
 
 	@After
 	public void tearDown () throws Exception {
-		session.getTransaction().commit();
 		expectedMark = null;
 		actualMark = null;
 		markId = null;
-		transaction = null;
-	}
-
-	@AfterClass
-	public static void closeTest() throws Exception{
 		markDao = null;
-		util = null;
 	}
 
 	private void createEntities() throws Exception {

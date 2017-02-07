@@ -9,6 +9,6 @@ import by.pvt.pintusov.courses.pojos.Course;
  * Date: 22.01.2017.
  */
 public interface ICourseDao extends IDao<Course> {
-	boolean isCourseStatusEnded (Integer id) throws DaoException;
 
+	boolean isCourseStatusEnded (Integer id) throws DaoException;
 }

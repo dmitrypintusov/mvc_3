@@ -9,6 +9,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.junit.*;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 
@@ -17,27 +22,20 @@ import java.io.Serializable;
  * Created by: USER
  * Date: 25.01.17.
  */
+@ContextConfiguration("/test-dao-context.xml")
+@RunWith(SpringJUnit4ClassRunner.class)
+@Transactional(transactionManager = "testDaoTransactionManager")
 public class AccessLevelDaoImplTest {
 	private AccessLevel expectedAccessLevel;
 	private AccessLevel actualAccessLevel;
 	private Serializable accessLevelId;
-	private Transaction transaction;
 
-	private static HibernateUtil util;
-	private static Session session;
+	@Autowired
 	private static AccessLevelDaoImpl accessLevelDao;
-
-	@BeforeClass
-	public static void initTest () throws Exception {
-		util = HibernateUtil.getInstance();
-		session = util.getSession();
-		accessLevelDao = AccessLevelDaoImpl.getInstance();
-	}
 
 	@Before
 	public void setUp() throws Exception {
 		expectedAccessLevel = EntityBuilder.buildAccessLevel(AccessLevelType.ADMIN, null);
-		transaction = session.beginTransaction();
 	}
 
 	@Test
@@ -74,17 +72,10 @@ public class AccessLevelDaoImplTest {
 
 	@After
 	public void tearDown () throws Exception {
-		session.getTransaction().commit();
 		expectedAccessLevel = null;
 		actualAccessLevel = null;
 		accessLevelId = null;
-		transaction = null;
-	}
-
-	@AfterClass
-	public static void closeTest() throws Exception{
 		accessLevelDao = null;
-		util = null;
 	}
 
 	private void createEntities() throws Exception {

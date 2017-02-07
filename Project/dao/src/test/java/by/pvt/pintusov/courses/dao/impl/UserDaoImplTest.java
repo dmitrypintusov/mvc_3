@@ -16,6 +16,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.junit.*;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.*;
@@ -26,7 +31,20 @@ import java.util.*;
  * @version 1.1
  */
 
+@ContextConfiguration ("/test-dao-context.xml")
+@RunWith(SpringJUnit4ClassRunner.class)
+@Transactional(transactionManager = "testDaoTransactionManager")
 public class UserDaoImplTest {
+
+	@Autowired
+	private UserDaoImpl userDao;
+	@Autowired
+	private CourseDaoImpl courseDao;
+	@Autowired
+	private MarkDaoImpl markDao;
+	@Autowired
+	private AccessLevelDaoImpl accessLevelDao;
+
 	private User expectedUser;
 	private User actualUser;
 	private Course course;
@@ -41,26 +59,6 @@ public class UserDaoImplTest {
 	private Set<Course> courses;
 	private Set<AccessLevel> accessLevels;
 	private Set<Mark> marks;
-
-	private static HibernateUtil util;
-	private static Session session;
-	private Transaction transaction;
-
-	private static UserDaoImpl userDao;
-	private static CourseDaoImpl courseDao;
-	private static MarkDaoImpl markDao;
-	private static AccessLevelDaoImpl accessLevelDao;
-
-	@BeforeClass
-	public static void initTest () throws Exception {
-		util = HibernateUtil.getInstance();
-		session = util.getSession();
-
-		userDao = UserDaoImpl.getInstance();
-		courseDao = CourseDaoImpl.getInstance();
-		markDao = MarkDaoImpl.getInstance();
-		accessLevelDao = AccessLevelDaoImpl.getInstance();
-	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -83,7 +81,6 @@ public class UserDaoImplTest {
 		accessLevel = EntityBuilder.buildAccessLevel(AccessLevelType.STUDENT, users);
 		accessLevels.add(accessLevel);
 		expectedUser.setAccessLevels(accessLevels);
-		transaction = session.beginTransaction();
 	}
 
 	@Test
@@ -121,15 +118,6 @@ public class UserDaoImplTest {
 	}
 
 	@Test
-	public void testIsAuthorized () throws Exception {
-		createEntities();
-		boolean isAuthorized;
-		isAuthorized = userDao.isAuthorized(expectedUser.getLogin(), expectedUser.getPassword());
-		Assert.assertTrue("isAuthorized() method failed: ", isAuthorized);
-		delete();
-	}
-
-	@Test
 	public void testDelete () throws Exception {
 		createEntities();
 		delete();
@@ -139,7 +127,6 @@ public class UserDaoImplTest {
 
 	@After
 	public void tearDown () throws Exception {
-		session.getTransaction().commit();
 		expectedUser = null;
 		actualUser = null;
 		course = null;
@@ -149,16 +136,10 @@ public class UserDaoImplTest {
 		courseId = null;
 		markId = null;
 		accessLevelId = null;
-		transaction = null;
-	}
-
-	@AfterClass
-	public static void closeTest() throws Exception{
 		userDao = null;
 		courseDao = null;
 		markDao = null;
 		accessLevelDao = null;
-		util = null;
 	}
 
 	private void createEntities() throws Exception {

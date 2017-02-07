@@ -9,6 +9,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.junit.*;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.AssertFalse;
 import java.io.Serializable;
@@ -19,27 +24,20 @@ import java.util.Calendar;
  * Created by: USER
  * Date: 25.01.17.
  */
+@ContextConfiguration("/test-dao-context.xml")
+@RunWith(SpringJUnit4ClassRunner.class)
+@Transactional(transactionManager = "testDaoTransactionManager")
 public class CourseDaoImplTest {
 	private Course expectedCourse;
 	private Course actualCourse;
 	private Serializable courseId;
-	private Transaction transaction;
 
-	private static HibernateUtil util;
-	private static Session session;
-	private static CourseDaoImpl courseDao;
-
-	@BeforeClass
-	public static void initTest () throws Exception {
-		util = HibernateUtil.getInstance();
-		session = util.getSession();
-		courseDao = CourseDaoImpl.getInstance();
-	}
+	@Autowired
+	private CourseDaoImpl courseDao;
 
 	@Before
 	public void setUp() throws Exception {
 		expectedCourse = EntityBuilder.buildCourse("TEST", 100, CourseStatusType.OPEN, Calendar.getInstance(), Calendar.getInstance(), null);
-		transaction = session.beginTransaction();
 	}
 
 	@Test
@@ -84,17 +82,10 @@ public class CourseDaoImplTest {
 
 	@After
 	public void tearDown () throws Exception {
-		session.getTransaction().commit();
 		expectedCourse = null;
 		actualCourse = null;
 		courseId = null;
-		transaction = null;
-	}
-
-	@AfterClass
-	public static void closeTest() throws Exception{
 		courseDao = null;
-		util = null;
 	}
 
 	private void createEntities() throws Exception {

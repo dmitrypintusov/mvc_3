@@ -32,6 +32,9 @@
 
         <springframework.version>4.3.6.RELEASE</springframework.version>
         <aspectj.version>1.8.4</aspectj.version>
+        <taglibs.version>1.1.2</taglibs.version>
+        <cglib.version>3.2.0</cglib.version>
+        <inject.version>1</inject.version>
     </properties>
 
     <modules>
@@ -205,7 +208,35 @@
                 <artifactId>aspectjweaver</artifactId>
                 <version>${aspectj.version}</version>
             </dependency>
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjrt</artifactId>
+				<version>${aspectj.version}</version>
+			</dependency>
+
+            <!--Cglib-->
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib</artifactId>
+                <version>${cglib.version}</version>
+            </dependency>
+
+            <!-- Taglib -->
+            <dependency>
+                <groupId>taglibs</groupId>
+                <artifactId>standard</artifactId>
+                <version>${taglibs.version}</version>
+            </dependency>
+
+            <!-- Inject -->
+            <dependency>
+                <groupId>javax.inject</groupId>
+                <artifactId>javax.inject</artifactId>
+                <version>${inject.version}</version>
+            </dependency>
         </dependencies>
+
+
     </dependencyManagement>
 
     <build>

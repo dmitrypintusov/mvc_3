@@ -17,5 +17,4 @@ public interface IUserDao extends IDao<User> {
 	 * @throws DaoException
 	 */
 	User getUserByLogin (String login) throws DaoException;
-	boolean isAuthorized(String login, String password) throws DaoException;
 }
