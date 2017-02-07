@@ -3,13 +3,6 @@
          errorPage="/WEB-INF/assets/pages/error/error.jsp" language="java" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <html>
-    <style type="text/css">
-        a:link { text-decoration: none; }
-        a:visited { text-decoration: none; }
-        a:active { text-decoration: none; }
-        a:hover { text-decoration: underline; }
-    </style>
-
     <head>
         <title>Регистрация</title>
     </head>

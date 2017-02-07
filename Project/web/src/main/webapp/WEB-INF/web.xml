@@ -6,14 +6,51 @@
 
     <display-name>CoursesSystem</display-name>
 
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            WEB-INF/config/application-context.xml
+        </param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+
     <servlet>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/config/mvc-config.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/assets/pages/error/error.jsp</location>
+    </error-page>
+
+    <!--<servlet>
         <servlet-name>Controller</servlet-name>
         <servlet-class>by.pvt.pintusov.courses.controllers.Controller</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
         <url-pattern>/controller</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
 
     <session-config>
         <session-timeout>10</session-timeout>
@@ -25,7 +62,7 @@
     </filter>
     <filter-mapping>
         <filter-name>SecurityFilter</filter-name>
-        <servlet-name>Controller</servlet-name>
+        <url-pattern>/*</url-pattern>
     </filter-mapping>
 
     <filter>
@@ -34,11 +71,7 @@
     </filter>
     <filter-mapping>
         <filter-name>SessionClosing</filter-name>
-        <servlet-name>Controller</servlet-name>
+        <url-pattern>/*</url-pattern>
     </filter-mapping>
-
-    <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
-    </welcome-file-list>
 
 </web-app>
