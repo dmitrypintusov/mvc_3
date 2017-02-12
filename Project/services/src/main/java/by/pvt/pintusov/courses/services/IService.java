@@ -17,7 +17,7 @@ public interface IService <T extends AbstractEntity> {
 
 	Serializable saveOrUpdate(T entity) throws ServiceException;
 	T getById(Integer id) throws ServiceException;
-	T load(Integer id) throws ServiceException;
+	List<T> getAll () throws ServiceException;
 	void delete(Integer id) throws ServiceException;
 }
 

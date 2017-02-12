@@ -12,9 +12,7 @@ import by.pvt.pintusov.courses.pojos.User;
  */
 public interface IUserService extends IService<User> {
 
-	boolean checkUserAuthorization(String login, String password) throws ServiceException;
 	User getUserByLogin(String login) throws ServiceException;
-	AccessLevelType checkAccessLevel(User user) throws ServiceException;
-	boolean checkIsNewUser(User user) throws ServiceException;
+	boolean checkIsNewUser(String login) throws ServiceException;
 	void bookUser(User user) throws ServiceException;
 }

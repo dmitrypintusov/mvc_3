@@ -6,6 +6,7 @@ import by.pvt.pintusov.courses.pojos.Archive;
 import by.pvt.pintusov.courses.pojos.Course;
 import by.pvt.pintusov.courses.pojos.User;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -15,10 +16,6 @@ import java.util.Set;
  */
 public interface ICourseService extends IService<Course> {
 
-	Set<User> getCourseStudents () throws ServiceException;
-	Set<User> getCourseTeachers () throws ServiceException;
-	Set<Course> getOpenCourses() throws ServiceException;
-	void updateCourseStatus(Integer id, CourseStatusType courseStatus) throws ServiceException;
-	boolean checkCourseStatus(Integer id) throws ServiceException;
-	void addCourseToArchive(Course course, CourseStatusType courseStatus, Archive archive) throws ServiceException;
+	int getNumberOfPages(int recordsPerPage) throws ServiceException;
+	List<Course> getAllToPage(int recordsPerPage, int pageNumber, String sorting) throws ServiceException;
 }

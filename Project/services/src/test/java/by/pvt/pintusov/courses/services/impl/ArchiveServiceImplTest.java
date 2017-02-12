@@ -1,11 +1,16 @@
 package by.pvt.pintusov.courses.services.impl;
 
 import by.pvt.pintusov.courses.pojos.Archive;
+import by.pvt.pintusov.courses.services.IArchiveService;
 import by.pvt.pintusov.courses.utils.EntityBuilder;
 import by.pvt.pintusov.courses.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.*;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.Serializable;
 
@@ -14,30 +19,20 @@ import java.io.Serializable;
  * Created by: USER
  * Date: 24.01.17.
  */
+@ContextConfiguration("/test-services-context.xml")
+@RunWith(SpringJUnit4ClassRunner.class)
 public class ArchiveServiceImplTest {
+
+	@Autowired
+	private IArchiveService archiveService;
+
 	private Archive expectedArchive;
 	private Archive actualAccessLevel;
 	private Serializable archiveId;
-	private static ArchiveServiceImpl archiveService;
-
-	private static HibernateUtil util;
-	private static Session session;
-
-	@BeforeClass
-	public static void initTest () throws Exception {
-		util = HibernateUtil.getInstance();
-		session = util.getSession();
-		archiveService = ArchiveServiceImpl.getInstance();
-	}
 
 	@Before
 	public void setUp() throws Exception {
 		expectedArchive = EntityBuilder.buildArchive(null);
-	}
-
-	private void createEntities() throws Exception {
-		archiveId = archiveService.saveOrUpdate(expectedArchive);
-		expectedArchive.setId((Integer) archiveId);
 	}
 
 	@Test
@@ -57,14 +52,6 @@ public class ArchiveServiceImplTest {
 	}
 
 	@Test
-	public void testLoad() throws Exception {
-		createEntities();
-		actualAccessLevel = archiveService.load((Integer) archiveId);
-		Assert.assertEquals("getById() method failed: ", expectedArchive, actualAccessLevel);
-		delete();
-	}
-
-	@Test
 	public void testDelete () throws Exception {
 		createEntities();
 		delete();
@@ -77,12 +64,12 @@ public class ArchiveServiceImplTest {
 		expectedArchive = null;
 		actualAccessLevel = null;
 		archiveId = null;
+		archiveService = null;
 	}
 
-	@AfterClass
-	public static void closeTest() throws Exception{
-		archiveService = null;
-		util = null;
+	private void createEntities() throws Exception {
+		archiveId = archiveService.saveOrUpdate(expectedArchive);
+		expectedArchive.setId((Integer) archiveId);
 	}
 
 	private void delete() throws Exception {

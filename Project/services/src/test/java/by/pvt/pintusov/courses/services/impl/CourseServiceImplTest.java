@@ -2,11 +2,16 @@ package by.pvt.pintusov.courses.services.impl;
 
 import by.pvt.pintusov.courses.enums.CourseStatusType;
 import by.pvt.pintusov.courses.pojos.Course;
+import by.pvt.pintusov.courses.services.ICourseService;
 import by.pvt.pintusov.courses.utils.EntityBuilder;
 import by.pvt.pintusov.courses.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.*;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.Serializable;
 
@@ -15,30 +20,20 @@ import java.io.Serializable;
  * Created by: USER
  * Date: 24.01.17.
  */
+@ContextConfiguration("/test-services-context.xml")
+@RunWith(SpringJUnit4ClassRunner.class)
 public class CourseServiceImplTest {
+
+	@Autowired
+	private ICourseService courseService;
+
 	private Course expectedCourse;
 	private Course actualCourse;
 	private Serializable courseId;
-	private static CourseServiceImpl courseService;
-
-	private static HibernateUtil util;
-	private static Session session;
-
-	@BeforeClass
-	public static void initTest () throws Exception {
-		util = HibernateUtil.getInstance();
-		session = util.getSession();
-		courseService = CourseServiceImpl.getInstance();
-	}
 
 	@Before
 	public void setUp() throws Exception {
 		expectedCourse = EntityBuilder.buildCourse("TEST", 100, CourseStatusType.OPEN, null, null, null);
-	}
-
-	private void createEntities() throws Exception {
-		courseId = courseService.saveOrUpdate(expectedCourse);
-		expectedCourse.setId((Integer) courseId);
 	}
 
 	@Test
@@ -58,14 +53,6 @@ public class CourseServiceImplTest {
 	}
 
 	@Test
-	public void testLoad() throws Exception {
-		createEntities();
-		actualCourse = courseService.load((Integer) courseId);
-		Assert.assertEquals("getById() method failed: ", expectedCourse, actualCourse);
-		delete();
-	}
-
-	@Test
 	public void testDelete () throws Exception {
 		createEntities();
 		delete();
@@ -78,12 +65,12 @@ public class CourseServiceImplTest {
 		expectedCourse = null;
 		actualCourse = null;
 		courseId = null;
+		courseService = null;
 	}
 
-	@AfterClass
-	public static void closeTest() throws Exception{
-		courseService = null;
-		util = null;
+	private void createEntities() throws Exception {
+		courseId = courseService.saveOrUpdate(expectedCourse);
+		expectedCourse.setId((Integer) courseId);
 	}
 
 	private void delete() throws Exception {

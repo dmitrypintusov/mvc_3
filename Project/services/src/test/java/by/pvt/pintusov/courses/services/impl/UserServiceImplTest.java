@@ -1,41 +1,36 @@
 package by.pvt.pintusov.courses.services.impl;
 
 import by.pvt.pintusov.courses.pojos.User;
+import by.pvt.pintusov.courses.services.IUserService;
 import by.pvt.pintusov.courses.utils.EntityBuilder;
 import by.pvt.pintusov.courses.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.*;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.Serializable;
 
 /**
  * Created by USER on 09.01.17.
  */
+@ContextConfiguration ("/test-services-context.xml")
+@RunWith(SpringJUnit4ClassRunner.class)
 public class UserServiceImplTest {
+
+	@Autowired
+	private IUserService userService;
+
 	private User expectedUser;
 	private User actualUser;
 	private Serializable userId;
-	private static UserServiceImpl userService;
-
-	private static HibernateUtil util;
-	private static Session session;
-
-	@BeforeClass
-	public static void initTest () throws Exception {
-		util = HibernateUtil.getInstance();
-		session = util.getSession();
-		userService = UserServiceImpl.getInstance();
-	}
 
 	@Before
 	public void setUp() throws Exception {
 		expectedUser = EntityBuilder.buildUser("TEST", "TEST", "TEST", "TEST", null, null, null);
-	}
-
-	private void createEntities() throws Exception {
-		userId = userService.saveOrUpdate(expectedUser);
-		expectedUser.setId((Integer) userId);
 	}
 
 	@Test
@@ -55,14 +50,6 @@ public class UserServiceImplTest {
 	}
 
 	@Test
-	public void testLoad() throws Exception {
-		createEntities();
-		actualUser = userService.load((Integer) userId);
-		Assert.assertEquals("getById() method failed: ", expectedUser, actualUser);
-		delete();
-	}
-
-	@Test
 	public void testDelete () throws Exception {
 		createEntities();
 		delete();
@@ -70,25 +57,17 @@ public class UserServiceImplTest {
 		Assert.assertNull("delete() method failed: ", actualUser);
 	}
 
-	@Test
-	public void testIsAuthorized () throws Exception {
-		createEntities();
-		boolean authorized = userService.checkUserAuthorization(expectedUser.getLogin(), expectedUser.getPassword());
-		Assert.assertTrue("UserAuthorization() method failed: ", authorized);
-		delete();
-	}
-
 	@After
 	public void tearDown () throws Exception {
 		expectedUser = null;
 		actualUser = null;
 		userId = null;
+		userService = null;
 	}
 
-	@AfterClass
-	public static void closeTest() throws Exception{
-		userService = null;
-		util = null;
+	private void createEntities() throws Exception {
+		userId = userService.saveOrUpdate(expectedUser);
+		expectedUser.setId((Integer) userId);
 	}
 
 	private void delete() throws Exception {

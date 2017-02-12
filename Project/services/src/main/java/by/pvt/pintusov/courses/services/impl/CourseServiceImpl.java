@@ -1,5 +1,6 @@
 package by.pvt.pintusov.courses.services.impl;
 
+import by.pvt.pintusov.courses.dao.ICourseDao;
 import by.pvt.pintusov.courses.dao.Impl.CourseDaoImpl;
 import by.pvt.pintusov.courses.enums.CourseStatusType;
 import by.pvt.pintusov.courses.enums.ServiceConstants;
@@ -15,6 +16,10 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.util.List;
 import java.util.Set;
@@ -26,76 +31,44 @@ import java.util.Set;
  */
 public class CourseServiceImpl extends AbstractService<Course> implements ICourseService {
 	private static Logger logger = Logger.getLogger(CourseServiceImpl.class);
-	private static CourseServiceImpl instance;
-	private CourseDaoImpl courseDao = CourseDaoImpl.getInstance();
 
-	public static synchronized CourseServiceImpl getInstance () {
-		if (instance == null) {
-			instance = new CourseServiceImpl();
-		}
-		return instance;
-	}
+	@Autowired
+	private ICourseDao courseDao;
 
-	private CourseServiceImpl () {
-		super (Course.class, CourseDaoImpl.getInstance());
+	@Autowired
+	public CourseServiceImpl (ICourseDao courseDao) {
+		super (courseDao);
+		this.courseDao = courseDao;
 	}
 
 	@Override
-	public Set<User> getCourseStudents() throws ServiceException {
-		return null;
-	}
-
-	@Override
-	public Set<User> getCourseTeachers() throws ServiceException {
-		return null;
-	}
-
-	@Override
-	public Set<Course> getOpenCourses() throws ServiceException {
-		return null;
-	}
-
-	@Override
-	public void updateCourseStatus(Integer id, CourseStatusType courseStatus) throws ServiceException {
-
-	}
-
-	@Override
-	public boolean checkCourseStatus(Integer id) throws ServiceException {
-		return false;
-	}
-
-	@Override
-	public void addCourseToArchive(Course course, CourseStatusType courseStatus, Archive archive) throws ServiceException {
-
-	}
-
+	@Transactional (propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getNumberOfPages(int recordsPerPage) throws ServiceException{
 		int numberOfPages;
-		Session session = util.getSession();
 		try {
-			TransactionUtil.beginTransaction(session);
 			Long numberOfRecords = courseDao.getNumberRecords();
 			numberOfPages = (int) Math.ceil(numberOfRecords * 1.0 / recordsPerPage);
-			TransactionUtil.commitTransaction(session);
+			logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
 		}
 		catch (DaoException e) {
-			TransactionUtil.rollbackTransaction(session);
+			logger.error(ServiceConstants.TRANSACTION_FAILED, e);
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED + e);
 		}
 		return numberOfPages;
 	}
 
+	@Override
+	@Transactional (propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Course> getAllToPage(int recordsPerPage, int pageNumber, String sorting) throws ServiceException {
 		List<Course> results;
-		Session session = util.getSession();
 		try {
-			TransactionUtil.beginTransaction(session);
-			results = courseDao.getAllCourses(recordsPerPage, pageNumber, sorting);
-			TransactionUtil.commitTransaction(session);
+			results = courseDao.getCourses(recordsPerPage, pageNumber, sorting);
+			logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
 		}
 		catch (DaoException e) {
-			TransactionUtil.rollbackTransaction(session);
+			logger.error(ServiceConstants.TRANSACTION_FAILED, e);
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED + e);
 		}
 		return results;

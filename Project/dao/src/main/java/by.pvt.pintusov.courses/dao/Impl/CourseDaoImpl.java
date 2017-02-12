@@ -48,4 +48,20 @@ public class CourseDaoImpl extends AbstractDao <Course> implements ICourseDao {
 		}
 		return isEnded;
 	}
+
+	@Override
+	public List<Course> getCourses(int recordsPerPage, int pageNumber, String sorting) throws DaoException {
+		List<Course> list;
+		try {
+			Session session = getCurrentSession();
+			Query query = session.createQuery(DaoConstants.HQL_GET_COURSES + sorting);
+			query.setFirstResult((pageNumber - 1) * recordsPerPage);
+			query.setMaxResults(recordsPerPage);
+			list = query.list();
+		} catch (HibernateException e) {
+			logger.error(DaoConstants.ERROR_COURSES_LIST + e);
+			throw new DaoException(DaoConstants.ERROR_COURSES_LIST, e);
+		}
+		return list;
+	}
 }

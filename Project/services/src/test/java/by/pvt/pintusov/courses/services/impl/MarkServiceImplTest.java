@@ -1,11 +1,16 @@
 package by.pvt.pintusov.courses.services.impl;
 
 import by.pvt.pintusov.courses.pojos.Mark;
+import by.pvt.pintusov.courses.services.IMarkService;
 import by.pvt.pintusov.courses.utils.EntityBuilder;
 import by.pvt.pintusov.courses.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.*;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.Serializable;
 
@@ -14,30 +19,20 @@ import java.io.Serializable;
  * Created by: USER
  * Date: 24.01.17.
  */
+@ContextConfiguration("/test-services-context.xml")
+@RunWith(SpringJUnit4ClassRunner.class)
 public class MarkServiceImplTest {
+
+	@Autowired
+	private IMarkService markService;
+
 	private Mark expectedMark;
 	private Mark actualMark;
 	private Serializable markId;
-	private static MarkServiceImpl markService;
-
-	private static HibernateUtil util;
-	private static Session session;
-
-	@BeforeClass
-	public static void initTest () throws Exception {
-		util = HibernateUtil.getInstance();
-		session = util.getSession();
-		markService = MarkServiceImpl.getInstance();
-	}
 
 	@Before
 	public void setUp() throws Exception {
 		expectedMark = EntityBuilder.buildMark(10, null, null, null);
-	}
-
-	private void createEntities() throws Exception {
-		markId = markService.saveOrUpdate(expectedMark);
-		expectedMark.setId((Integer) markId);
 	}
 
 	@Test
@@ -57,14 +52,6 @@ public class MarkServiceImplTest {
 	}
 
 	@Test
-	public void testLoad() throws Exception {
-		createEntities();
-		actualMark = markService.load((Integer) markId);
-		Assert.assertEquals("getById() method failed: ", expectedMark, actualMark);
-		delete();
-	}
-
-	@Test
 	public void testDelete () throws Exception {
 		createEntities();
 		delete();
@@ -77,12 +64,12 @@ public class MarkServiceImplTest {
 		expectedMark = null;
 		actualMark = null;
 		markId = null;
+		markService = null;
 	}
 
-	@AfterClass
-	public static void closeTest() throws Exception{
-		markService = null;
-		util = null;
+	private void createEntities() throws Exception {
+		markId = markService.saveOrUpdate(expectedMark);
+		expectedMark.setId((Integer) markId);
 	}
 
 	private void delete() throws Exception {

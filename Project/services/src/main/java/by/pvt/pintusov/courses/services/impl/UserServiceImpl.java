@@ -1,5 +1,9 @@
 package by.pvt.pintusov.courses.services.impl;
 
+import by.pvt.pintusov.courses.dao.IAccessLevelDao;
+import by.pvt.pintusov.courses.dao.ICourseDao;
+import by.pvt.pintusov.courses.dao.IMarkDao;
+import by.pvt.pintusov.courses.dao.IUserDao;
 import by.pvt.pintusov.courses.dao.Impl.AccessLevelDaoImpl;
 import by.pvt.pintusov.courses.dao.Impl.UserDaoImpl;
 import by.pvt.pintusov.courses.enums.AccessLevelType;
@@ -7,6 +11,7 @@ import by.pvt.pintusov.courses.enums.ServiceConstants;
 import by.pvt.pintusov.courses.exceptions.DaoException;
 import by.pvt.pintusov.courses.exceptions.ServiceException;
 import by.pvt.pintusov.courses.pojos.AccessLevel;
+import by.pvt.pintusov.courses.pojos.Course;
 import by.pvt.pintusov.courses.pojos.User;
 import by.pvt.pintusov.courses.services.AbstractService;
 import by.pvt.pintusov.courses.services.IUserService;
@@ -14,6 +19,11 @@ import by.pvt.pintusov.courses.utils.TransactionUtil;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.util.List;
 import java.util.Set;
@@ -22,129 +32,80 @@ import java.util.Set;
 /**
  * User service implementation
  * @author pintusov
- * @version 1.1
+ * @version 1.2
  */
 
+@Service
+@Transactional (propagation = Propagation.REQUIRES_NEW, rollbackFor = DaoException.class)
 public class UserServiceImpl extends AbstractService <User> implements IUserService {
 	private static Logger logger = Logger.getLogger(UserServiceImpl.class);
-	private static UserServiceImpl instance;
-	private UserDaoImpl userDao = UserDaoImpl.getInstance();
 
-	public static synchronized UserServiceImpl getInstance () {
-		if (instance == null) {
-			instance = new UserServiceImpl();
-		}
-		return instance;
-	}
+	@Autowired
+	private IUserDao userDao;
+	@Autowired
+	private IAccessLevelDao accessDao;
+	@Autowired
+	private ICourseDao courseDao;
+	@Autowired
+	private IMarkDao markDao;
 
-	private UserServiceImpl () {
-		super (User.class, UserDaoImpl.getInstance());
-	}
-
-	@Override
-	public boolean checkUserAuthorization(String login, String password) throws ServiceException {
-		boolean isAuthorized = false;
-		Session session = util.getSession();
-		try {
-			TransactionUtil.beginTransaction(session);
-			isAuthorized = userDao.isAuthorized(login, password);
-			TransactionUtil.commitTransaction(session);
-			logger.info("User " + login + " is authorized");
-		}
-		catch (DaoException e) {
-			TransactionUtil.rollbackTransaction(session);
-			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED + e);
-		}
-		return isAuthorized;
+	@Autowired
+	public UserServiceImpl (IUserDao userDao) {
+		super (userDao);
+		this.userDao = userDao;
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public User getUserByLogin(String login) throws ServiceException {
 		User user;
-		Session session = util.getSession();
 		try {
-			TransactionUtil.beginTransaction(session);
 			user = userDao.getUserByLogin(login);
-			TransactionUtil.commitTransaction(session);
-			logger.info("User by login: " + user);
 		}
 		catch (DaoException e) {
-			TransactionUtil.rollbackTransaction(session);
-			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED + e);
+			logger.error(ServiceConstants.TRANSACTION_FAILED, e);
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED, e);
 		}
 		return user;
 	}
 
-	//TODO: добавить dao для проверки access level
 	@Override
-	public AccessLevelType checkAccessLevel(User user) throws ServiceException {
-		AccessLevel accessLevel = new AccessLevel();
-		AccessLevelType accessLevelType = null;
-		Set<AccessLevel> accessLevels = user.getAccessLevels();
-		for (AccessLevel access: accessLevels) {
-			if(access.getAccessLevelType().equals(AccessLevelType.TEACHER)){
-				accessLevelType = AccessLevelType.TEACHER;
-			} else if (access.getAccessLevelType().equals(AccessLevelType.ADMIN)) {
-				accessLevelType = AccessLevelType.ADMIN;
-			} else {
-				accessLevelType = AccessLevelType.STUDENT;
-			}
-		}
-		return accessLevelType;
-	}
-
-	@Override
-	public boolean checkIsNewUser(User user) throws ServiceException {
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean checkIsNewUser(String login) throws ServiceException {
 		boolean isNew = false;
-		Session session = util.getSession();
 		try {
-			TransactionUtil.beginTransaction(session);
-			if(userDao.getUserByLogin(user.getLogin()) == null){
+			User user = userDao.getUserByLogin(login);
+			if (user == null) {
 				isNew = true;
 			}
-			TransactionUtil.commitTransaction(session);
-			logger.info("User " + user + " is new");
-		}
-		catch (DaoException e) {
-			TransactionUtil.rollbackTransaction(session);
-			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED + e);
+			logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
+			logger.info("User with login " +login + " is new");
+		} catch (DaoException e) {
+			logger.error(ServiceConstants.TRANSACTION_FAILED, e);
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED, e);
 		}
 		return isNew;
 	}
 
 	@Override
+	@Transactional (propagation = Propagation.SUPPORTS, readOnly = true)
 	public void bookUser(User user) throws ServiceException {
-		Session session = util.getSession();
 		try {
-			TransactionUtil.beginTransaction(session);
-			AccessLevel accessLevel = new AccessLevel();
-			accessLevel.setAccessLevelType(AccessLevelType.STUDENT);
+			AccessLevel accessLevel = accessDao.getByAccessLevelType(AccessLevelType.STUDENT);
 			user.addAccessLevel(accessLevel);
 			accessLevel.addUser(user);
-			AccessLevelDaoImpl.getInstance().saveOrUpdate(accessLevel);
 			userDao.saveOrUpdate(user);
-			TransactionUtil.commitTransaction(session);
+			accessDao.saveOrUpdate(accessLevel);
+
+			logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
 			logger.info(user);
 			logger.info(accessLevel);
 		} catch (DaoException e) {
-			TransactionUtil.rollbackTransaction(session);
-			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED + e);
+			logger.error(ServiceConstants.TRANSACTION_FAILED, e);
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED, e);
 		}
-	}
-
-	public List<User> getAll() throws ServiceException {
-		List<User> users;
-		Session session = util.getSession();
-		try {
-			TransactionUtil.beginTransaction(session);
-			users = userDao.getAll();
-			TransactionUtil.commitTransaction(session);
-			logger.info(users);
-		}
-		catch (DaoException e) {
-			TransactionUtil.rollbackTransaction(session);
-			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED + e);
-		}
-		return users;
 	}
 }
