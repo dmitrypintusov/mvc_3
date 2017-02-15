@@ -43,7 +43,7 @@ abstract public class AbstractService <T extends AbstractEntity> implements ISer
 					logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
 					logger.info(entity);
 				} catch (DaoException e) {
-					logger.info(ServiceConstants.TRANSACTION_FAILED + e);
+					logger.error(ServiceConstants.TRANSACTION_FAILED + e);
 					status.setRollbackOnly();
 				}
 				return id;
@@ -63,7 +63,7 @@ abstract public class AbstractService <T extends AbstractEntity> implements ISer
 					logger.info(entity);
 				}
 				catch (DaoException e) {
-					logger.info(ServiceConstants.TRANSACTION_FAILED + e);
+					logger.error(ServiceConstants.TRANSACTION_FAILED + e);
 					status.setRollbackOnly();
 				}
 				return entity;
@@ -101,7 +101,7 @@ abstract public class AbstractService <T extends AbstractEntity> implements ISer
 					logger.info(ServiceConstants.DELETE_MESSAGE + id);
 				}
 				catch (DaoException e) {
-					logger.info(ServiceConstants.TRANSACTION_FAILED + e);
+					logger.error(ServiceConstants.TRANSACTION_FAILED + e);
 					status.setRollbackOnly();
 				}
 				return null;

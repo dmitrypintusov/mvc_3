@@ -3,14 +3,12 @@ package by.pvt.pintusov.courses.services.impl;
 import by.pvt.pintusov.courses.pojos.Archive;
 import by.pvt.pintusov.courses.services.IArchiveService;
 import by.pvt.pintusov.courses.utils.EntityBuilder;
-import by.pvt.pintusov.courses.utils.HibernateUtil;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 
@@ -19,6 +17,7 @@ import java.io.Serializable;
  * Created by: USER
  * Date: 24.01.17.
  */
+@Transactional
 @ContextConfiguration("/test-services-context.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ArchiveServiceImplTest {

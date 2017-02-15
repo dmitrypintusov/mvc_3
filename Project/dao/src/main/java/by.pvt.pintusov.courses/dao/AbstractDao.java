@@ -3,12 +3,12 @@ package by.pvt.pintusov.courses.dao;
 import by.pvt.pintusov.courses.constants.DaoConstants;
 import by.pvt.pintusov.courses.exceptions.DaoException;
 import by.pvt.pintusov.courses.pojos.AbstractEntity;
-import by.pvt.pintusov.courses.utils.HibernateUtil;
 import org.apache.log4j.Logger;
 import org.hibernate.*;
 import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.List;
  * @author dpintusov
  * @version 1.1
  */
-
+@Repository
 public abstract class AbstractDao <T extends AbstractEntity> implements IDao <T> {
 	private static Logger logger = Logger.getLogger(AbstractDao.class);
 	private Class persistentClass;

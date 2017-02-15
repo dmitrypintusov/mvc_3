@@ -21,7 +21,7 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <tx:annotation-driven transaction-manager="serviceTransactionManager" proxy-target-class="true"/>
+    <tx:annotation-driven transaction-manager="serviceTransactionManager" proxy-target-class="true" />
 
     <bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
         <property name="transactionManager" ref="serviceTransactionManager"/>

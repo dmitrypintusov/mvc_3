@@ -1,30 +1,35 @@
 package by.pvt.pintusov.courses.filters;
 
 
+import org.apache.log4j.Logger;
+
 import javax.servlet.*;
 import java.io.IOException;
 
 /**
  * Encoding filter
  * @author pintusov
- * @version 1.0
+ * @version 1.2
  */
 
 public class EncodingFilter implements Filter {
-	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {}
+	private Logger logger = Logger.getLogger(EncodingFilter.class);
+	private String initParameterEncoding;
 
-	/**
-	 * Execute filter
-	 * @param request - from server
-	 * @param response - to server
-	 * @param filterChain - use filter chain
-	 * @throws ServletException
-	 * @throws IOException
-	 */
+	@Override
+	public void init(FilterConfig filterConfig) throws ServletException {
+		initParameterEncoding = filterConfig.getInitParameter("encoding");
+	}
+
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
-		request.setCharacterEncoding("UTF-8");
+		String requestEncoding = request.getCharacterEncoding();
+		if (initParameterEncoding != null && !initParameterEncoding.equalsIgnoreCase(requestEncoding)) {
+			request.setCharacterEncoding(initParameterEncoding);
+			response.setCharacterEncoding(initParameterEncoding);
+		}
+		response.setContentType("UTF-8");
+		logger.info("Character Encoding was set");
 		filterChain.doFilter(request, response);
 	}
 

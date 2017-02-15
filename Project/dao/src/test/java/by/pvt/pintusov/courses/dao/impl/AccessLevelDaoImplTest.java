@@ -1,14 +1,9 @@
 package by.pvt.pintusov.courses.dao.impl;
 
 import by.pvt.pintusov.courses.dao.IAccessLevelDao;
-import by.pvt.pintusov.courses.dao.Impl.AccessLevelDaoImpl;
 import by.pvt.pintusov.courses.enums.AccessLevelType;
 import by.pvt.pintusov.courses.pojos.AccessLevel;
 import by.pvt.pintusov.courses.utils.EntityBuilder;
-import by.pvt.pintusov.courses.utils.HibernateUtil;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

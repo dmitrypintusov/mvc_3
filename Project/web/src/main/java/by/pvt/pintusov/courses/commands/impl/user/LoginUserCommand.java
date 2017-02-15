@@ -1,16 +1,13 @@
 package by.pvt.pintusov.courses.commands.impl.user;
 
 import by.pvt.pintusov.courses.commands.AbstractCommand;
-import by.pvt.pintusov.courses.constants.MessageConstants;
 import by.pvt.pintusov.courses.constants.PagePath;
 import by.pvt.pintusov.courses.constants.Parameters;
 import by.pvt.pintusov.courses.enums.AccessLevelType;
 import by.pvt.pintusov.courses.exceptions.ServiceException;
 import by.pvt.pintusov.courses.managers.PagePathManager;
-import by.pvt.pintusov.courses.managers.MessageManager;
 import by.pvt.pintusov.courses.pojos.User;
 import by.pvt.pintusov.courses.services.impl.UserServiceImpl;
-import by.pvt.pintusov.courses.utils.RequestParameterParser;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

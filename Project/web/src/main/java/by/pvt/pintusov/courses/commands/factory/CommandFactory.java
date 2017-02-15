@@ -2,7 +2,6 @@ package by.pvt.pintusov.courses.commands.factory;
 
 import by.pvt.pintusov.courses.commands.ICommand;
 import by.pvt.pintusov.courses.commands.impl.user.LoginUserCommand;
-import by.pvt.pintusov.courses.utils.RequestParameterParser;
 
 import javax.servlet.http.HttpServletRequest;
 

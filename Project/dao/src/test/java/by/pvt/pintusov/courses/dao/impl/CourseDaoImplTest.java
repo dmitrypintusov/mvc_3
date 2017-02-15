@@ -1,14 +1,9 @@
 package by.pvt.pintusov.courses.dao.impl;
 
 import by.pvt.pintusov.courses.dao.ICourseDao;
-import by.pvt.pintusov.courses.dao.Impl.CourseDaoImpl;
 import by.pvt.pintusov.courses.enums.CourseStatusType;
 import by.pvt.pintusov.courses.pojos.Course;
 import by.pvt.pintusov.courses.utils.EntityBuilder;
-import by.pvt.pintusov.courses.utils.HibernateUtil;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +11,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.constraints.AssertFalse;
 import java.io.Serializable;
 import java.util.Calendar;
 

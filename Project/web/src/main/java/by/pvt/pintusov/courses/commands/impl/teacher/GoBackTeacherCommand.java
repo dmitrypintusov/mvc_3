@@ -4,7 +4,6 @@ import by.pvt.pintusov.courses.commands.AbstractCommand;
 import by.pvt.pintusov.courses.constants.PagePath;
 import by.pvt.pintusov.courses.enums.AccessLevelType;
 import by.pvt.pintusov.courses.managers.PagePathManager;
-import by.pvt.pintusov.courses.utils.RequestParameterParser;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

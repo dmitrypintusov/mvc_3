@@ -12,7 +12,7 @@
                            http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <context:component-scan base-package="by.pvt.pintusov.courses.dao" />
-    <aop:aspectj-autoproxy proxy-target-class="true" expose-proxy="false"/>
+    <aop:aspectj-autoproxy />
 
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 
@@ -49,7 +49,7 @@
     >
         <property name="packagesToScan">
             <list>
-                <value>courses.pojos</value>
+                <value>by.pvt.pintusov.courses.pojos</value>
             </list>
         </property>
         <property name="hibernateProperties">

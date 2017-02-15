@@ -77,7 +77,6 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-nop</artifactId>
@@ -220,7 +219,7 @@
                 <version>${springframework.security.version}</version>
             </dependency>
 
-            <!--AspectJ -->
+            <!-- AspectJ -->
             <dependency>
                 <groupId>org.aspectj</groupId>
                 <artifactId>aspectjweaver</artifactId>
@@ -232,7 +231,7 @@
 				<version>${aspectj.version}</version>
 			</dependency>
 
-            <!--Cglib-->
+            <!-- Cglib -->
             <dependency>
                 <groupId>cglib</groupId>
                 <artifactId>cglib</artifactId>
