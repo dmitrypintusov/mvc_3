@@ -3,7 +3,7 @@ package by.pvt.pintusov.courses.utils;
 import by.pvt.pintusov.courses.commands.ICommand;
 import by.pvt.pintusov.courses.commands.factory.CommandFactory;
 import by.pvt.pintusov.courses.constants.PagePath;
-import by.pvt.pintusov.courses.managers.ConfigurationManager;
+import by.pvt.pintusov.courses.managers.PagePathManager;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -35,7 +35,7 @@ public class RequestHandler {
 			RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher(page);
 			dispatcher.forward(request, response);
 		} else {
-			page = ConfigurationManager.getInstance().getProperty(PagePath.INDEX_PAGE_PATH);
+			page = PagePathManager.getInstance().getProperty(PagePath.INDEX_PAGE_PATH);
 			response.sendRedirect(request.getContextPath() + page);
 		}
 	}

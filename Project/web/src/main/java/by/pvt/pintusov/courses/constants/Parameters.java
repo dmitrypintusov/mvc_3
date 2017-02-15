@@ -37,5 +37,8 @@ public class Parameters {
 	public static final String ORDER_BY_START_DATE = "ORDER BY startDate";
 	public static final String ORDER_BY_UPDATE_DATE = "ORDER BY updateDate";
 
+	public static final String WRONG_LOGIN_OR_PASSWORD = "errorLoginOrPassword";
+	public static final String NEW_USER = "newUser";
+
 	private Parameters () {}
 }

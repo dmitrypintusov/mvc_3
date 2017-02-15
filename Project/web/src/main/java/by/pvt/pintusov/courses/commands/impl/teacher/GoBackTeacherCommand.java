@@ -3,7 +3,7 @@ package by.pvt.pintusov.courses.commands.impl.teacher;
 import by.pvt.pintusov.courses.commands.AbstractCommand;
 import by.pvt.pintusov.courses.constants.PagePath;
 import by.pvt.pintusov.courses.enums.AccessLevelType;
-import by.pvt.pintusov.courses.managers.ConfigurationManager;
+import by.pvt.pintusov.courses.managers.PagePathManager;
 import by.pvt.pintusov.courses.utils.RequestParameterParser;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,9 +22,9 @@ public class GoBackTeacherCommand extends AbstractCommand {
 		HttpSession session = request.getSession();
 		AccessLevelType accessLevel = RequestParameterParser.getAccessLevelType(request);
 		if (accessLevel == AccessLevelType.TEACHER) {
-			page = ConfigurationManager.getInstance().getProperty(PagePath.TEACHER_PAGE_PATH);
+			page = PagePathManager.getInstance().getProperty(PagePath.TEACHER_PAGE_PATH);
 		} else {
-			page = ConfigurationManager.getInstance().getProperty(PagePath.INDEX_PAGE_PATH);
+			page = PagePathManager.getInstance().getProperty(PagePath.INDEX_PAGE_PATH);
 			session.invalidate();
 		}
 		return page;

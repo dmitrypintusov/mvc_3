@@ -5,7 +5,7 @@ import by.pvt.pintusov.courses.constants.MessageConstants;
 import by.pvt.pintusov.courses.constants.PagePath;
 import by.pvt.pintusov.courses.constants.Parameters;
 import by.pvt.pintusov.courses.exceptions.ServiceException;
-import by.pvt.pintusov.courses.managers.ConfigurationManager;
+import by.pvt.pintusov.courses.managers.PagePathManager;
 import by.pvt.pintusov.courses.managers.MessageManager;
 import by.pvt.pintusov.courses.pojos.User;
 import by.pvt.pintusov.courses.services.impl.UserServiceImpl;
@@ -30,25 +30,25 @@ public class RegistrationCommand extends AbstractCommand {
 			if (areFieldsFullStocked()) {
 				if(UserServiceImpl.getInstance().checkIsNewUser(user)){
 					UserServiceImpl.getInstance().bookUser(user);
-					page = ConfigurationManager.getInstance().getProperty(PagePath.REGISTRATION_PAGE_PATH);
+					page = PagePathManager.getInstance().getProperty(PagePath.REGISTRATION_PAGE_PATH);
 					request.setAttribute(Parameters.OPERATION_MESSAGE, MessageManager.getInstance().getProperty(MessageConstants.SUCCESS_OPERATION));
 				} else {
-					page = ConfigurationManager.getInstance().getProperty(PagePath.REGISTRATION_PAGE_PATH);
+					page = PagePathManager.getInstance().getProperty(PagePath.REGISTRATION_PAGE_PATH);
 					request.setAttribute(Parameters.ERROR_USER_EXISTS, MessageManager.getInstance().getProperty(MessageConstants.USER_EXISTS));
 				}
 			} else {
 				request.setAttribute(Parameters.OPERATION_MESSAGE, MessageManager.getInstance().getProperty(MessageConstants.EMPTY_FIELDS));
-				page = ConfigurationManager.getInstance().getProperty(PagePath.REGISTRATION_PAGE_PATH);
+				page = PagePathManager.getInstance().getProperty(PagePath.REGISTRATION_PAGE_PATH);
 			}
 		} catch (ServiceException e) {
-			page = ConfigurationManager.getInstance().getProperty(PagePath.ERROR_PAGE_PATH);
+			page = PagePathManager.getInstance().getProperty(PagePath.ERROR_PAGE_PATH);
 			request.setAttribute(Parameters.ERROR_DATABASE, MessageManager.getInstance().getProperty(MessageConstants.ERROR_DATABASE));
 		} catch (NumberFormatException e) {
 			request.setAttribute(Parameters.OPERATION_MESSAGE, MessageManager.getInstance().getProperty(MessageConstants.INVALID_NUMBER_FORMAT));
-			page = ConfigurationManager.getInstance().getProperty(PagePath.REGISTRATION_PAGE_PATH);
+			page = PagePathManager.getInstance().getProperty(PagePath.REGISTRATION_PAGE_PATH);
 		}
 		catch (NullPointerException e) {
-			page = ConfigurationManager.getInstance().getProperty(PagePath.INDEX_PAGE_PATH);
+			page = PagePathManager.getInstance().getProperty(PagePath.INDEX_PAGE_PATH);
 		}
 		return page;
 	}

@@ -3,7 +3,7 @@ package by.pvt.pintusov.courses.filters;
 import by.pvt.pintusov.courses.commands.factory.CommandType;
 import by.pvt.pintusov.courses.constants.PagePath;
 import by.pvt.pintusov.courses.enums.AccessLevelType;
-import by.pvt.pintusov.courses.managers.ConfigurationManager;
+import by.pvt.pintusov.courses.managers.PagePathManager;
 import by.pvt.pintusov.courses.utils.RequestParameterParser;
 
 import javax.servlet.*;
@@ -46,7 +46,7 @@ public class SecurityFilter implements Filter {
 				} else if (commandType == CommandType.REGISTRATION) {
 					filterChain.doFilter(request, response);
 				} else {
-					String page = ConfigurationManager.getInstance().getProperty(PagePath.INDEX_PAGE_PATH);
+					String page = PagePathManager.getInstance().getProperty(PagePath.INDEX_PAGE_PATH);
 					RequestDispatcher dispatcher = request.getRequestDispatcher(page);
 					dispatcher.forward(httpRequest, httpResponse);
 					session.invalidate();
@@ -55,7 +55,7 @@ public class SecurityFilter implements Filter {
 				filterChain.doFilter(request, response);
 			}
 		} catch (IllegalArgumentException e) {
-			String page = ConfigurationManager.getInstance().getProperty(PagePath.INDEX_PAGE_PATH);
+			String page = PagePathManager.getInstance().getProperty(PagePath.INDEX_PAGE_PATH);
 			RequestDispatcher dispatcher = request.getRequestDispatcher(page);
 			dispatcher.forward(httpRequest, httpResponse);
 		}

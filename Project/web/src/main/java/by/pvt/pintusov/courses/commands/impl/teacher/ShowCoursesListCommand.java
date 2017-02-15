@@ -6,7 +6,7 @@ import by.pvt.pintusov.courses.constants.PagePath;
 import by.pvt.pintusov.courses.constants.Parameters;
 import by.pvt.pintusov.courses.enums.AccessLevelType;
 import by.pvt.pintusov.courses.exceptions.ServiceException;
-import by.pvt.pintusov.courses.managers.ConfigurationManager;
+import by.pvt.pintusov.courses.managers.PagePathManager;
 import by.pvt.pintusov.courses.managers.MessageManager;
 import by.pvt.pintusov.courses.pojos.Course;
 import by.pvt.pintusov.courses.services.impl.CourseServiceImpl;
@@ -41,15 +41,15 @@ public class ShowCoursesListCommand extends AbstractCommand {
 				session.setAttribute(Parameters.CURRENT_PAGE, currentPage);
 				session.setAttribute(Parameters.RECORDS_PER_PAGE, recordsPerPage);
 				session.setAttribute(Parameters.ORDERING, ordering);
-				page = ConfigurationManager.getInstance().getProperty(PagePath.TEACHER_COURSES_PAGE);
+				page = PagePathManager.getInstance().getProperty(PagePath.TEACHER_COURSES_PAGE);
 			}
 			catch (ServiceException e) {
-				page = ConfigurationManager.getInstance().getProperty(PagePath.ERROR_PAGE_PATH);
+				page = PagePathManager.getInstance().getProperty(PagePath.ERROR_PAGE_PATH);
 				request.setAttribute(Parameters.ERROR_DATABASE, MessageManager.getInstance().getProperty(MessageConstants.ERROR_DATABASE));
 			}
 		}
 		else{
-			page = ConfigurationManager.getInstance().getProperty(PagePath.INDEX_PAGE_PATH);
+			page = PagePathManager.getInstance().getProperty(PagePath.INDEX_PAGE_PATH);
 			session.invalidate();
 		}
 		return page;
