@@ -7,6 +7,7 @@ package by.pvt.pintusov.courses.constants;
  */
 
 public class PagePath {
+	public static final String CONFIGS_SOURCE = "configs";
 	//Main pages path
 	public static final String HOME_PAGE_PATH = "path.page.home";
 	public static final String INDEX_PAGE_PATH = "path.page.index";

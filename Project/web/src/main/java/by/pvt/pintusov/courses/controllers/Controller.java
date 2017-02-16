@@ -1,7 +1,5 @@
 package by.pvt.pintusov.courses.controllers;
 
-import by.pvt.pintusov.courses.utils.RequestHandler;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

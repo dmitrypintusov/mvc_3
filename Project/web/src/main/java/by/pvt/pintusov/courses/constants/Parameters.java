@@ -7,6 +7,7 @@ package by.pvt.pintusov.courses.constants;
  */
 
 public class Parameters {
+
 	//user parameters
 	public static final String USER = "user";
 	public static final String USER_FIRST_NAME = "firstname";
@@ -25,8 +26,6 @@ public class Parameters {
 	public static final String ERROR_DATABASE = "errorDatabase";
 	public static final String ERROR_LOGIN_OR_PASSWORD = "errorLoginOrPassword";
 	public static final String ERROR_USER_EXISTS = "errorUserExists";
-
-	public static final String WRONG_LOGIN_OR_PASSWORD = "errorLoginOrPassword";
 	public static final String NEW_USER = "newUser";
 
 	public static final String NUMBER_OF_PAGES = "numberOfPages";
