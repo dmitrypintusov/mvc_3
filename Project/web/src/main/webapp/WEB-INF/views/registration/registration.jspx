@@ -1,0 +1,102 @@
+<!--
+  User: lexxa
+  Date: 22.02.2016
+  Time: 18:38
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:sf="http://www.springframework.org/tags/form"
+          xmlns:s="http://www.springframework.org/tags"
+          version="2.0" >
+    <div class="content">
+        <s:url value="/registration" var="registrationUrl"/>
+        <sf:form name="registrationForm"
+                 action="${registrationUrl}"
+                 method="post"
+                 modelAttribute="newUser"
+                 onsubmit="return validateForm()">
+            <fieldset>
+            <p align="center"><b><s:message code="page.registration.banner"/></b></p>
+            <br/>
+                <table align="left" cellpadding="5" cellspacing="5">
+                    <tr>
+                        <td><label for="firstName"><s:message code="page.common.input.firstname"/></label></td>
+                        <td><sf:input path="firstName" cssClass="inputStyle" id="firstName"/></td>
+                        <td>
+                            <span id="emptyFirstName"/>
+                            <sf:errors path="firstName"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="lastName"><s:message code="page.common.input.lastname"/></label></td>
+                        <td><sf:input path="lastName" cssClass="inputStyle" id="lastName"/></td>
+                        <td>
+                            <span id="emptyLastName"/>
+                            <sf:errors path="lastName"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="login"><s:message code="page.common.input.login"/></label></td>
+                        <td><sf:input path="login" cssClass="inputStyle" id="login"/></td>
+                        <td>
+                            <span id="emptyLogin"/>
+                            <sf:errors path="login"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="password_1"><s:message code="page.registration.input.password_1"/></label></td>
+                        <td><sf:password path="password_1" cssClass="inputStyle" id="password_1"/></td>
+                        <td>
+                            <span id="emptyPassword_1"/>
+                            <sf:errors path="password_1"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="password_2"><s:message code="page.registration.input.password_2"/></label></td>
+                        <td><sf:password path="password_2" cssClass="inputStyle" id="password_2"/></td>
+                        <td>
+                            <span id="emptyPassword_2"/>
+                            <sf:errors path="password_2"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="accountNumber"><s:message code="page.registration.input.account"/></label></td>
+                        <td><sf:input path="accountNumber" cssClass="inputStyle" id="accountNumber"/></td>
+                        <td>
+                            <span id="emptyAccountNumber"/>
+                            <sf:errors path="accountNumber"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><s:message code="page.common.currency"/></td>
+                        <td>
+                            <sf:radiobutton path="currency" value="BYR" checked="checked"/>BYR
+                            <sf:radiobutton path="currency" value="USD"/>USD
+                            <sf:radiobutton path="currency" value="EUR"/>EUR
+                            <br/>
+                        </td>
+                        <td>
+                            <span id="emptyCurrency"/>
+                            <sf:errors path="currency"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <span id="inputError"/>
+                            <label id="label">
+                                ${operationMessage}
+                                ${errorUserExists}
+                            </label>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <p align="center">
+                    <s:message var="button" code="page.registration.button"/>
+                    <input type="submit" value="${button}" onclick="clearResult()"/>
+                </p>
+                <br/>
+            </fieldset>
+        </sf:form>
+    </div>
+</jsp:root>

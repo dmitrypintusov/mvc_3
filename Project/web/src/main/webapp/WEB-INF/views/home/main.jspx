@@ -1,0 +1,45 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:s="http://www.springframework.org/tags"
+          xmlns="http://www.w3.org/1999/xhtml"
+          version="2.0">
+
+    <div class="content">
+        <s:url value="/login" var="authUrl" />
+        <form name="loginForm" method="post" action="${authUrl}" onsubmit="return validateForm()">
+            <br/>
+            <p align="center"><strong><s:message code="page.gome.banner"</strong></p>
+            <table align="center" cellpadding="5" cellspacing="5">
+                <tr>
+                    <td>
+                        <s:message var="inputLogin" code="page.common.input.login"/>
+                        <input type="text" id="login" name="login" class="inputStyle" placeholder="${inputLogin}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="20" align="center">
+                        <span id="emptyLogin"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <s:message var="inputPassword" code="page.common.input.password"/>
+                        <input type="password" id="password" name="password" class="inputStyle" placeholder="${inputPassword}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td width="20" align="center">
+                        <label id="label">
+                            ${errorLoginOrPassword}
+                            ${operationMessage}
+                        </label>
+                    </td>
+                </tr>
+            </table>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"><jsp:text/></input>
+            <p align="center">
+                <s:message var="buttonName" code="page.home.button"/>
+                <input type="submit" value="${buttonName}" onClick="clearResult()"/>
+            </p>
+        </form>
+    </div>
+</jsp:root>
