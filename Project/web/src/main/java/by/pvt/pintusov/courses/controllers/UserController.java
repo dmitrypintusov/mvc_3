@@ -37,10 +37,8 @@ public class UserController {
 
 	@Autowired
 	private IUserService userService;
-
 	@Autowired
 	private PagePathManager pagePathManager;
-
 	@Autowired
 	private MessageSource messageSource;
 
@@ -61,7 +59,7 @@ public class UserController {
 	                          Locale locale) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().equalsIgnoreCase(WebConstants.ANONYMOUS_USER)) {
-			redirectAttributes.addFlashAttribute(Parameters.WRONG_LOGIN_OR_PASSWORD, messageSource.getMessage("message.loginerror", null, locale));
+			redirectAttributes.addFlashAttribute(Parameters.ERROR_LOGIN_OR_PASSWORD, messageSource.getMessage("message.loginerror", null, locale));
 		}
 		if (authentication != null) {
 			new SecurityContextLogoutHandler().logout(request, response, authentication);

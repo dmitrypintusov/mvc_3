@@ -10,29 +10,9 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>
             WEB-INF/config/application-context.xml
+            WEB-INF/config/security-context.xml
         </param-value>
     </context-param>
-
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-    <listener>
-        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
-    </listener>
-
-    <servlet>
-        <servlet-name>dispatcherServlet</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>/WEB-INF/config/mvc-config.xml</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>dispatcherServlet</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
@@ -43,35 +23,56 @@
         <location>/WEB-INF/assets/pages/error/error.jsp</location>
     </error-page>
 
-    <!--<servlet>
-        <servlet-name>Controller</servlet-name>
-        <servlet-class>by.pvt.pintusov.courses.controllers.Controller</servlet-class>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>Controller</servlet-name>
-        <url-pattern>/controller</url-pattern>
-    </servlet-mapping>-->
+        <servlet-name>dispatcherServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>hibernateFilter</filter-name>
+        <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
+        <init-param>
+            <param-name>sessionFactoryBeanName</param-name>
+            <param-value>sessionFactory</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>hibernateFilter</filter-name>
+        <url-pattern>*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>by.pvt.pintusov.courses.filters.EncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
     <session-config>
         <session-timeout>10</session-timeout>
     </session-config>
-
-    <filter>
-        <filter-name>SecurityFilter</filter-name>
-        <filter-class>by.pvt.pintusov.courses.filters.SecurityFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>SecurityFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
-    <filter>
-         <filter-name>SessionClosing</filter-name>
-        <filter-class>by.pvt.pintusov.courses.filters.SessionClosingFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>SessionClosing</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
 </web-app>
