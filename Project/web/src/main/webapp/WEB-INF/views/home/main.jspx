@@ -7,7 +7,7 @@
         <s:url value="/login" var="authUrl" />
         <form name="loginForm" method="post" action="${authUrl}" onsubmit="return validateForm()">
             <br/>
-            <p align="center"><strong><s:message code="page.gome.banner"</strong></p>
+            <p align="center"><strong><s:message code="page.home.banner"/></strong></p>
             <table align="center" cellpadding="5" cellspacing="5">
                 <tr>
                     <td>

@@ -10,7 +10,6 @@ public class PagePath {
 	public static final String CONFIGS_SOURCE = "configs";
 	//Main pages path
 	public static final String HOME_PAGE_PATH = "path.page.home";
-	public static final String INDEX_PAGE_PATH = "path.page.index";
 	public static final String REGISTRATION_PAGE_PATH = "path.page.registration";
 	public static final String ERROR_PAGE_PATH = "path.page.error";
 	//Teacher pages path

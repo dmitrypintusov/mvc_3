@@ -3,36 +3,64 @@
 <html xmlns:jsp="http://java.sun.com/JSP/Page"
       xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:s="http://www.springframework.org/tags"
-      xmlns:tiles="http://tiles.apache.org/tags-tiles">
+      xmlns:tiles="http://tiles.apache.org/tags-tiles"
+      xmlns:u="urn:jsptagdir:/WEB-INF/tags/utils"
+      xmlns:com="urn:jsptagdir:/WEB-INF/tags/common">
 
-<jsp:output doctype-public="-//W3C//DTD XHTML 1.1//EN"
-            doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"
-            doctype-root-element="html"
-            omit-xml-declaration="false"
-/>
+    <jsp:output doctype-public="-//W3C//DTD XHTML 1.1//EN"
+                doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"
+                doctype-root-element="html"
+                omit-xml-declaration="false"
+    />
 
-<jsp:directive.page pageEncoding="UTF-8" contentType="text/html; UTF-8"/>
+    <jsp:directive.page pageEncoding="UTF-8" contentType="text/html; UTF-8"/>
 
-<head>
-    <link href="${pageContext.request.contextPath}/assets/css/page_style.css" rel="stylesheet" type="text/css"/>
-    <link href="${pageContext.request.contextPath}/assets/css/sidebar_style.css" rel="stylesheet" type="text/css"/>
-    <link href="${pageContext.request.contextPath}/assets/css/logo_style.css" rel="stylesheet" type="text/css"/>
-    <link href="${pageContext.request.contextPath}/assets/css/button_style.css" rel="stylesheet" type="text/css"/>
-    <link href="${pageContext.request.contextPath}/assets/css/input_style.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/registration_form_validation.js"><jsp:text/></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/clear_result.js"><jsp:text/></script>
+    <head>
 
+        <![CDATA[
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link href="../WEB-INF/resources/css/page_style.css" rel="stylesheet" type="text/css"/>
+            <link href="../WEB-INF/resources/css/sidebar_style.css" rel="stylesheet" type="text/css"/>
+            <link href="../WEB-INF/resources/css/logo_style.css" rel="stylesheet" type="text/css"/>
+            <link href="../WEB-INF/resources/css/button_style.css" rel="stylesheet" type="text/css"/>
+            <link href="../WEB-INF/resources/css/input_style.css" rel="stylesheet" type="text/css"/>
+            <script src="../WEB-INF/resources/js/registration_form_validation.js" type="text/javascript"><jsp:text/></script>
+            <script src="../WEB-INF/resources/js/clear_result.js" type="text/javascript"><jsp:text/></script>
 
-    <c:set var="title"><tiles:getAsString name="title"/></c:set>
-    <title><s:message code="${title}"/> </title>
+            <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+            <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css "rel="stylesheet">
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        ]]>
 
-</head>
+        <style>
+            .navbar {
+                margin-bottom: 0;
+                border-radius: 0;
+            }
 
-<body>
-<div class="container">
-    <tiles:insertAttribute name="header"/>
-    <tiles:insertAttribute name="sidebar"/>
-    <tiles:insertAttribute name="body"/>
-</div>
-</body>
+            /* Add a gray background color and some padding to the footer */
+            footer {
+                background-color: #f2f2f2;
+                padding: 25px;
+            }
+        </style>
+
+        <c:set var="title"><tiles:getAsString name="title"/></c:set>
+        <title><s:message code="${title}"/></title>
+        <u:icon file="mvc-page-title.png"/>
+    </head>
+
+    <body>
+    <com:header-navigation/>
+    <div class="jumbotron">
+        <div class="container text-center">
+            <tiles:insertAttribute name="sidebar" />
+            <tiles:insertAttribute name="body"/>
+        </div>
+    </div>
+    <tiles:insertAttribute name="footer"/>
+    </body>
 </html>

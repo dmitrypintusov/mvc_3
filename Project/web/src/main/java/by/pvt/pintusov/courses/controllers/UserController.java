@@ -14,9 +14,10 @@ import org.springframework.context.MessageSource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,7 +33,7 @@ import java.util.Locale;
  * Created by: USER
  * Date: 15.02.17.
  */
-@Component
+@Controller
 public class UserController {
 
 	@Autowired
@@ -42,12 +43,12 @@ public class UserController {
 	@Autowired
 	private MessageSource messageSource;
 
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	@GetMapping(value = "/home")
 	public String showHomePage () {
 		return pagePathManager.getProperty(PagePath.HOME_PAGE_PATH);
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@GetMapping(value = "/login")
 	public String loginUser () {
 		return pagePathManager.getProperty(PagePath.HOME_PAGE_PATH);
 	}
@@ -69,8 +70,8 @@ public class UserController {
 
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public String registerUser (@ModelAttribute(Parameters.NEW_USER) @Valid UserDTO userDTO,
-	                            Locale locale,
 	                            BindingResult bindingResult,
+	                            Locale locale,
 	                            ModelMap modelMap) {
 		String pagePath;
 		if(!bindingResult.hasErrors()) {

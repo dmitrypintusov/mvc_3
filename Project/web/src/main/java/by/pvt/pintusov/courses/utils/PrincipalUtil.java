@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
  * Created by: USER
  * Date: 17.02.17.
  */
+
 @Component
 public class PrincipalUtil {
 	public User getPrincipal() {

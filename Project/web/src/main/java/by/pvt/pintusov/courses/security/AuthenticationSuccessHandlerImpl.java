@@ -34,7 +34,6 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
 
 	@Autowired
 	private PagePathManager pagePathManager;
-
 	@Autowired
 	private MessageSource messageSource;
 
@@ -42,6 +41,13 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
 	public void onAuthenticationSuccess(HttpServletRequest request,
 	                                    HttpServletResponse response,
 	                                    Authentication authentication) throws IOException, ServletException {
+		handle(request, response, authentication);
+		clearAuthenticationAttributes(request);
+	}
+
+	protected void handle (HttpServletRequest request,
+	                       HttpServletResponse response,
+	                       Authentication authentication) throws IOException {
 		String targetUrl = determineTargetUrl (authentication);
 		if (response.isCommitted()) {
 			logger.info(WebConstants.UNABLE_TO_REDIRECT + targetUrl);
@@ -96,7 +102,6 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
 	public void setRedirectStrategy (RedirectStrategy redirectStrategy) {
 		this.redirectStrategy = redirectStrategy;
 	}
-
 	protected RedirectStrategy getRedirectStrategy() {
 		return redirectStrategy;
 	}

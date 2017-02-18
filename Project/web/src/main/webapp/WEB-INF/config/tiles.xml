@@ -4,17 +4,58 @@
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 
-    <!-- Home page -->
-   <definition name="home" extends="home_template"/>
-
-    <!-- Home page template -->
-    <definition name="home_template" template="/WEB-INF/views/layouts/home_layout.jspx">
-        <put-attribute name="title" value="page.home.title" />
-        <put-attribute name="header" value="/WEB-INF/views/home/header.jspx"/>
-        <put-attribute name="sidebar" value="/WEB-INF/views/home/sidebar.jspx"/>
-        <put-attribute name="body" value="/WEB-INF/views/home/main.jspx"/>
-        <put-attribute name="footer" value="/WEB-INF/views/home/footer.jspx"/>
+    <!-- PAGES TEMPLATE -->
+    <definition name="default" template="/WEB-INF/views/layouts/default_layout.jspx">
+        <put-attribute name="title" value="Courses System"/>
+        <put-attribute name="sidebar" value="/WEB-INF/views/common/sidebar.jspx"/>
+        <put-attribute name="body" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/views/common/footer.jspx"/>
     </definition>
 
+    <!-- HOME PAGE -->
+    <definition name="home" extends="default">
+        <put-attribute name="title" value="page.home.title"/>
+        <put-attribute name="body" value="/WEB-INF/views/home/main.jspx"/>
+        <put-attribute name="sidebar" value="/WEB-INF/views/home/sidebar.jspx"/>
+    </definition>
+
+    <!-- ADMIN PAGES -->
+    <definition name="admin_default" extends="default">
+        <put-attribute name="sidebar" value="/WEB-INF/views/admin/sidebar.jspx"/>
+    </definition>
+    <definition name="admin/main" extends="admin_default">
+        <put-attribute name="title" value="page.common.main.title"/>
+        <put-attribute name="body" value="/WEB-INF/views/admin/main.jspx"/>
+    </definition>
+
+    <!-- TEACHER PAGES -->
+    <definition name="teacher_default" extends="default">
+        <put-attribute name="sidebar" value="/WEB-INF/views/teacher/sidebar.jspx"/>
+    </definition>
+    <definition name="teacher/main" extends="teacher_default">
+        <put-attribute name="title" value="page.common.main.title"/>
+        <put-attribute name="body" value="/WEB-INF/views/teacher/main.jspx"/>
+    </definition>
+
+    <!-- STUDENT PAGES -->
+    <definition name="student_default" extends="default">
+        <put-attribute name="sidebar" value="/WEB-INF/views/student/sidebar.jspx"/>
+    </definition>
+    <definition name="student/main" extends="student_default">
+        <put-attribute name="title" value="page.common.main.title"/>
+        <put-attribute name="body" value="/WEB-INF/views/student/main.jspx"/>
+    </definition>
+
+    <!-- ERROR PAGE -->
+    <definition name="error/error" extends="default">
+        <put-attribute name="title" value="page.error.title"/>
+        <put-attribute name="body" value="/WEB-INF/views/errors/error.jspx"/>
+    </definition>
+
+    <!-- REGISTRATION PAGE -->
+    <definition name="registration" extends="default">
+        <put-attribute name="title" value="page.registration.title"/>
+        <put-attribute name="body" value="/WEB-INF/views/registration/registration.jspx"/>
+    </definition>
 </tiles-definitions>
 

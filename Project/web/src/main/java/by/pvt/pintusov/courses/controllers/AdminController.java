@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Project: courses
@@ -40,7 +37,7 @@ public class AdminController {
 		return new PaginationFilter();
 	}
 
-	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	@GetMapping(value = "/main")
 	public String showAdminMainPage (ModelMap modelMap) {
 		modelMap.addAttribute(Parameters.USER, principalUtil.getPrincipal());
 		return pagePathManager.getProperty(PagePath.ADMIN_PAGE_PATH);

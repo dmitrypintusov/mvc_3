@@ -11,17 +11,17 @@
                            http://www.springframework.org/schema/context
                            http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
-	<context:component-scan base-package="courses"/>
+	<context:component-scan base-package="by.pvt.pintusov.courses"/>
 
 	<import resource="classpath*:dao-context.xml"/>
 	<import resource="classpath*:services-context.xml"/>
 
-	<mvc:resources mapping="/assets/resources/**" location="/WEB-INF/"/>
+	<mvc:resources mapping="/resources/**" location="WEB-INF/resources"/>
 	<mvc:annotation-driven/>
 
 	<bean id="tilesConfigurer"
 	      class="org.springframework.web.servlet.view.tiles3.TilesConfigurer"
-	      p:definitions="/WEB-INF/tiles.xml"
+	      p:definitions="/WEB-INF/config/tiles.xml"
 	/>
 
 	<bean id="tilesViewResolver"
@@ -39,7 +39,7 @@
 	      class="org.springframework.web.servlet.i18n.CookieLocaleResolver"
 	      p:defaultLocale="ru"
 	      p:cookieName="LocaleCookie"
-	      p:cookieMaxAge="3600"
+	      p:cookieMaxAge="360000"
 	/>
 
 	<mvc:interceptors>
