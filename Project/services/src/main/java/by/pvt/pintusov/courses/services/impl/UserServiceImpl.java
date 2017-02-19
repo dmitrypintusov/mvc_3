@@ -43,7 +43,7 @@ public class UserServiceImpl extends AbstractService <User> implements IUserServ
 	@Autowired
 	private IUserDao userDao;
 	@Autowired
-	private IAccessLevelDao accessDao;
+	private IAccessLevelDao accessLevelDao;
 	@Autowired
 	private ICourseDao courseDao;
 	@Autowired
@@ -93,11 +93,11 @@ public class UserServiceImpl extends AbstractService <User> implements IUserServ
 	@Transactional (propagation = Propagation.SUPPORTS, readOnly = true)
 	public void bookUser(User user) throws ServiceException {
 		try {
-			AccessLevel accessLevel = accessDao.getByAccessLevelType(AccessLevelType.STUDENT);
+			AccessLevel accessLevel = accessLevelDao.getByAccessLevelType(AccessLevelType.STUDENT);
 			user.addAccessLevel(accessLevel);
 			accessLevel.addUser(user);
 			userDao.saveOrUpdate(user);
-			accessDao.saveOrUpdate(accessLevel);
+			accessLevelDao.saveOrUpdate(accessLevel);
 
 			logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
 			logger.info(user);

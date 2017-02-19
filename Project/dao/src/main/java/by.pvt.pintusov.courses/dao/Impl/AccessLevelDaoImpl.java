@@ -12,12 +12,14 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 /**
  * Project name: courses
  * Created by Дмитрий
  * Date: 22.01.2017.
  */
+@Repository
 public class AccessLevelDaoImpl  extends AbstractDao<AccessLevel> implements IAccessLevelDao {
 	private static Logger logger = Logger.getLogger(AccessLevelDaoImpl.class);
 

@@ -19,7 +19,7 @@ import java.util.List;
  * @author dpintusov
  * @version 1.1
  */
-@Repository
+
 public abstract class AbstractDao <T extends AbstractEntity> implements IDao <T> {
 	private static Logger logger = Logger.getLogger(AbstractDao.class);
 	private Class persistentClass;

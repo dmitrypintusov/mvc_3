@@ -6,12 +6,14 @@ import by.pvt.pintusov.courses.pojos.Mark;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 /**
  * Project: courses
  * Created by: USER
  * Date: 23.01.17.
  */
+@Repository
 public class MarkDaoImpl extends AbstractDao<Mark> implements IMarkDao {
 	private static Logger logger = Logger.getLogger(MarkDaoImpl.class);
 

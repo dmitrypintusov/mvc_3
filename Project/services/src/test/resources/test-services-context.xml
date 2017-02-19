@@ -14,7 +14,7 @@
                            http://www.springframework.org/schema/aop
                            http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <context:component-scan base-package="by.pvt.pintusov.courses"/>
+    <context:component-scan base-package="by.pvt.pintusov.courses.services"/>
     <aop:aspectj-autoproxy proxy-target-class="true" expose-proxy="false"/>
 
     <!-- Hikari -->
