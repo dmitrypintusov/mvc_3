@@ -37,7 +37,7 @@ public class AdminController {
 		return new PaginationFilter();
 	}
 
-	@GetMapping(value = "/main")
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String showAdminMainPage (ModelMap modelMap) {
 		modelMap.addAttribute(Parameters.USER, principalUtil.getPrincipal());
 		return pagePathManager.getProperty(PagePath.ADMIN_PAGE_PATH);

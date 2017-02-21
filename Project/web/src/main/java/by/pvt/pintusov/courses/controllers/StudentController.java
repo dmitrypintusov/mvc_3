@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -31,7 +30,7 @@ public class StudentController {
 	@Autowired
 	private PrincipalUtil principalUtil;
 
-	@GetMapping (value = "/main")
+	@RequestMapping (value = "/main", method = RequestMethod.GET)
 	public String showStudentMainPage (ModelMap modelMap) {
 		modelMap.addAttribute(Parameters.USER, principalUtil.getPrincipal());
 		return pagePathManager.getProperty(PagePath.STUDENT_PAGE_PATH);

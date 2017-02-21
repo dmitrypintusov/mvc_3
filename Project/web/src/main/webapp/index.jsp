@@ -3,11 +3,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
 <html>
-	<head>
-		<title>Index</title>
-	</head>
+<head>
+	<title>Index</title>
+</head>
 
 	<body>
-	<jsp:forward page="/home"/>
+		<jsp:forward page="/home"/>
 	</body>
 </html>

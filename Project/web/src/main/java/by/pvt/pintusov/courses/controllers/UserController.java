@@ -17,7 +17,6 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,12 +42,12 @@ public class UserController {
 	@Autowired
 	private MessageSource messageSource;
 
-	@GetMapping(value = "/home")
-	public String showHomePage () {
+	@RequestMapping(value = "/home" , method = RequestMethod.GET)
+	public String showHomePage(){
 		return pagePathManager.getProperty(PagePath.HOME_PAGE_PATH);
 	}
 
-	@GetMapping(value = "/login")
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginUser () {
 		return pagePathManager.getProperty(PagePath.HOME_PAGE_PATH);
 	}

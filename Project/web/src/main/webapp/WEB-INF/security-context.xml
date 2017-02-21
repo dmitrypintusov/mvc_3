@@ -18,8 +18,8 @@
                     password-parameter="password"
                     authentication-success-handler-ref="authenticationSuccessHandler"
                     authentication-failure-url="/logout"/>
-        <logout logout-success-url="/logout"
-                invalidate-session="true" />
+        <logout logout-url="/logout"
+                invalidate-session="true"/>
         <csrf/>
     </http>
 
@@ -27,7 +27,7 @@
         <authentication-provider user-service-ref="authenticationService"/>
     </authentication-manager>
 
-    <beans:bean id="authenticationSuccessHandler" class="by.pvt.pintusov.courses.security.AuthenticationSuccessHandlerImpl"/>
     <beans:bean id="authenticationService" class="by.pvt.pintusov.courses.security.AuthenticationService"/>
+    <beans:bean id="authenticationSuccessHandler" class="by.pvt.pintusov.courses.security.AuthenticationSuccessHandlerImpl"/>
 
 </beans:beans>
