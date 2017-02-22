@@ -16,7 +16,7 @@
     <import resource="classpath*:dao-context.xml"/>
     <import resource="classpath*:services-context.xml"/>
 
-    <mvc:resources mapping="/assets/**" location="resources"/>
+    <mvc:resources mapping="/resources/**" location="assets"/>
     <mvc:annotation-driven/>
 
     <bean id="tilesConfigurer"

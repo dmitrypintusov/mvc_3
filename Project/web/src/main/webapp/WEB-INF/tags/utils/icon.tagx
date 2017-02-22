@@ -4,6 +4,6 @@
 
     <jsp:directive.attribute name="file" required="true" />
 
-    <c:url var="icon" value="/WEB-INF/resources/tags/${file}" />
+    <c:url var="icon" value="/resources/tags/${file}" />
     <link href="${icon}" rel="shortcut icon" />
 </jsp:root>
