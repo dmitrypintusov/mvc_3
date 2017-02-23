@@ -4,25 +4,30 @@ function validateForm()
 	var messageLogin = document.getElementById("emptyLogin");
 	var messagePassword = document.getElementById("emptyPassword");
 	var login = document.getElementById("login").value;
-	var password = document.getElementById().value;
+	var password = document.getElementById("password").value;
+
 	var text = "" + "<br>";
 
-	if (getCookie('LocaleCookie') == 'en') {
+	if(getCookie('LocaleCookie') == 'en'){
 		text = "Field is empty";
-	} else {
-		text = "Поле не заполнено";
+	}
+	else {
+		text = "Поле не заполнено";
 	}
 
-	if (login == "") {
+	// проверка заполненности полей
+	if (login == ""){
 		messageLogin.innerHTML = text;
 		flag = false;
-	} else {
+	}
+	else{
 		messageLogin.innerHTML = "";
 	}
-	if (password == "") {
+	if (password == ""){
 		messagePassword.innerHTML = text;
 		flag = false;
-	} else {
+	}
+	else{
 		messagePassword.innerHTML = "";
 	}
 	return flag;

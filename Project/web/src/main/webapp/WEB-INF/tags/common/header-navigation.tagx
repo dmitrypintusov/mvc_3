@@ -16,7 +16,7 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <c:set var="navName"><spring:message code="header.navigation.product"/></c:set>
+                    <!--<c:set var="navName"><spring:message code="header.navigation.product"/></c:set>
                     <c:choose>
                         <c:when test="${currentPageName eq 'products'}">
                             <li class="active"><a href="#">${navName}</a></li>
@@ -51,6 +51,8 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+                    TODO: refactor
+                    -->
                 </ul>
             </div>
         </div>

@@ -9,7 +9,7 @@
           xmlns="http://www.w3.org/1999/xhtml"
           version="2.0">
     <div class="sidebar">
-        <br/>
+    <!--    <br/>
         <ul class="nav">
             <li><a href="${pageContext.request.contextPath}/admin/clients"><s:message code="page.admin.sidebar.clients"/></a></li>
             <li><a href="${pageContext.request.contextPath}/admin/operations"><s:message code="page.admin.sidebar.operations"/></a></li>
@@ -18,6 +18,10 @@
             </sec:authorize>
             <li><a href="${pageContext.request.contextPath}/logout"><s:message code="page.common.sidebar.logout"/></a></li>
         </ul>
+        TODO: refactor
+        -->
+
+
     </div>
 </jsp:root>
 
