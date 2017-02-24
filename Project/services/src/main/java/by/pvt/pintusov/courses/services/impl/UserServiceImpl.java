@@ -4,29 +4,20 @@ import by.pvt.pintusov.courses.dao.IAccessLevelDao;
 import by.pvt.pintusov.courses.dao.ICourseDao;
 import by.pvt.pintusov.courses.dao.IMarkDao;
 import by.pvt.pintusov.courses.dao.IUserDao;
-import by.pvt.pintusov.courses.dao.Impl.AccessLevelDaoImpl;
-import by.pvt.pintusov.courses.dao.Impl.UserDaoImpl;
 import by.pvt.pintusov.courses.enums.AccessLevelType;
 import by.pvt.pintusov.courses.enums.ServiceConstants;
 import by.pvt.pintusov.courses.exceptions.DaoException;
 import by.pvt.pintusov.courses.exceptions.ServiceException;
 import by.pvt.pintusov.courses.pojos.AccessLevel;
-import by.pvt.pintusov.courses.pojos.Course;
 import by.pvt.pintusov.courses.pojos.User;
 import by.pvt.pintusov.courses.services.AbstractService;
 import by.pvt.pintusov.courses.services.IUserService;
-import by.pvt.pintusov.courses.utils.TransactionUtil;
 import org.apache.log4j.Logger;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
-
-import java.util.List;
-import java.util.Set;
 
 
 /**
@@ -90,7 +81,6 @@ public class UserServiceImpl extends AbstractService <User> implements IUserServ
 	}
 
 	@Override
-	@Transactional (propagation = Propagation.SUPPORTS, readOnly = true)
 	public void bookUser(User user) throws ServiceException {
 		try {
 			AccessLevel accessLevel = accessLevelDao.getByAccessLevelType(AccessLevelType.STUDENT);

@@ -3,7 +3,10 @@ package by.pvt.pintusov.courses.services.impl;
 import by.pvt.pintusov.courses.pojos.User;
 import by.pvt.pintusov.courses.services.IUserService;
 import by.pvt.pintusov.courses.utils.EntityBuilder;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -30,6 +33,7 @@ public class UserServiceImplTest {
 	@Before
 	public void setUp() throws Exception {
 		expectedUser = EntityBuilder.buildUser("TEST", "TEST", "TEST", "TEST", null, null, null);
+
 	}
 
 	@Test

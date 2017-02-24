@@ -67,11 +67,17 @@ public class UserController {
 		return "redirect:/" + pagePathManager.getProperty(PagePath.HOME_PAGE_PATH);
 	}
 
+	@RequestMapping(value = "/registration", method = RequestMethod.GET)
+	public String showRegistrationForm(ModelMap modelMap) {
+		modelMap.addAttribute(Parameters.NEW_USER, new UserDTO());
+		return pagePathManager.getProperty(PagePath.REGISTRATION_PAGE_PATH);
+	}
+
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-	public String registerUser (@ModelAttribute(Parameters.NEW_USER) @Valid UserDTO userDTO,
-	                            BindingResult bindingResult,
-	                            Locale locale,
-	                            ModelMap modelMap) {
+	public String registerUser(@ModelAttribute(Parameters.NEW_USER) @Valid UserDTO userDTO,
+	                             Locale locale,
+	                             BindingResult bindingResult,
+	                             ModelMap modelMap) {
 		String pagePath;
 		if(!bindingResult.hasErrors()) {
 			try {
@@ -79,7 +85,7 @@ public class UserController {
 
 				if (userService.checkIsNewUser(user.getLogin())) {
 					userService.bookUser(user);
-					modelMap.addAttribute(Parameters.ERROR_USER_EXISTS, messageSource.getMessage("message.successoperation", null, locale));
+					modelMap.addAttribute(Parameters.SUCCESS_OPERATION, messageSource.getMessage("message.successoperation", null, locale));
 					pagePath = pagePathManager.getProperty(PagePath.HOME_PAGE_PATH);
 				} else {
 					modelMap.addAttribute(Parameters.ERROR_USER_EXISTS, messageSource.getMessage("message.userexsistserror", null, locale));

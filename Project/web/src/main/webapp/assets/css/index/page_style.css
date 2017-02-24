@@ -4,7 +4,6 @@ body {
 	font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
 	background-color:transparent;
 	background-position:center;
-	background-image: url(../../img/background_wall.png);  
 	margin: 0;
 	padding: 0;
 	color: #000;
@@ -20,7 +19,6 @@ body {
 }
 
 .content {
-	background-image: url(../../img/background.png);
 	margin-left: 30%;
 	width:40%;
 }

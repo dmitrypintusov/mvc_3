@@ -5,8 +5,8 @@
 <tiles-definitions>
 
     <!-- PAGES TEMPLATE -->
-    <definition name="default" template="/WEB-INF/views/layouts/default_layout.jspx">
-        <put-attribute name="title" value="Courses System"/>
+    <definition name="default" template="/WEB-INF/views/layouts/home_layout.jspx">
+        <put-attribute name="title" value=""/>
         <put-attribute name="sidebar" value="/WEB-INF/views/common/sidebar.jspx"/>
         <put-attribute name="body" value=""/>
         <put-attribute name="footer" value="/WEB-INF/views/common/footer.jspx"/>
@@ -58,8 +58,9 @@
     </definition>
 
     <!-- REGISTRATION PAGE -->
-    <definition name="registration" extends="default">
+    <definition name="registration" extends="home_template">
         <put-attribute name="title" value="page.registration.title"/>
+        <put-attribute name="sidebar" value="/WEB-INF/views/common/sidebar.jspx"/>
         <put-attribute name="body" value="/WEB-INF/views/registration/registration.jspx"/>
     </definition>
 </tiles-definitions>

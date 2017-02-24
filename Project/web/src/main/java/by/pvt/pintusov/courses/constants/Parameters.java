@@ -21,6 +21,7 @@ public class Parameters {
 	public static final String ERROR_DATABASE = "errorDatabase";
 	public static final String ERROR_LOGIN_OR_PASSWORD = "errorLoginOrPassword";
 	public static final String ERROR_USER_EXISTS = "errorUserExists";
+	public static final String SUCCESS_OPERATION = "successOperation";
 
 	/*PAGINATING PARAMETERS*/
 	public static final String NUMBER_OF_PAGES = "numberOfPages";

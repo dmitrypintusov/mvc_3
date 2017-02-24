@@ -56,31 +56,10 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><label for="accountNumber"><s:message code="page.registration.input.account"/></label></td>
-                        <td><sf:input path="accountNumber" cssClass="inputStyle" id="accountNumber"/></td>
-                        <td>
-                            <span id="emptyAccountNumber"/>
-                            <sf:errors path="accountNumber"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><s:message code="page.common.currency"/></td>
-                        <td>
-                            <sf:radiobutton path="currency" value="BYR" checked="checked"/>BYR
-                            <sf:radiobutton path="currency" value="USD"/>USD
-                            <sf:radiobutton path="currency" value="EUR"/>EUR
-                            <br/>
-                        </td>
-                        <td>
-                            <span id="emptyCurrency"/>
-                            <sf:errors path="currency"/>
-                        </td>
-                    </tr>
-                    <tr>
                         <td colspan="2" align="center">
                             <span id="inputError"/>
                             <label id="label">
-                                ${operationMessage}
+                                ${successOperation}
                                 ${errorUserExists}
                             </label>
                         </td>
