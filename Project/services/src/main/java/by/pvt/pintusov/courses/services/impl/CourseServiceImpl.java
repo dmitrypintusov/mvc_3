@@ -17,6 +17,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -29,6 +30,8 @@ import java.util.Set;
  * Created by: USER
  * Date: 24.01.17.
  */
+@Service
+@Transactional (propagation = Propagation.REQUIRES_NEW, rollbackFor = DaoException.class)
 public class CourseServiceImpl extends AbstractService<Course> implements ICourseService {
 	private static Logger logger = Logger.getLogger(CourseServiceImpl.class);
 

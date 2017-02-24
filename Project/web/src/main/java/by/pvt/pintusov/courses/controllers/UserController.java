@@ -82,10 +82,8 @@ public class UserController {
 	                           Locale locale) {
 		String pagePath;
 		if(!bindingResult.hasErrors()) {
-			logger.info(userDTO);
 			try {
 				User user = EntityBuilder.buildUser(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getLogin(), userDTO.getPassword_1(), null, null, null);
-				logger.info(user);
 				if (userService.checkIsNewUser(user.getLogin())) {
 					userService.bookUser(user);
 					modelMap.addAttribute(Parameters.SUCCESS_OPERATION, messageSource.getMessage("message.successoperation", null, locale));

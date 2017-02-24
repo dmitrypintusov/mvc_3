@@ -41,6 +41,10 @@
         <put-attribute name="title" value="page.common.main.title"/>
         <put-attribute name="body" value="/WEB-INF/views/teacher/main.jspx"/>
     </definition>
+    <definition name="teacher/addcourse" extends="teacher_default">
+        <put-attribute name="title" value="page.common.main.title"/>
+        <put-attribute name="body" value="/WEB-INF/views/teacher/addcourse.jspx"/>
+    </definition>
 
     <!-- STUDENT PAGES -->
     <definition name="student_default" extends="home_template">

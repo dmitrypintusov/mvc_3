@@ -1,0 +1,26 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: Дмитрий
+  Date: 24.02.2017
+  Time: 18:50
+  To change this template use File | Settings | File Templates.
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:spring="http://www.springframework.org/tags"
+          xmlns="http://www.w3.org/1999/xhtml"
+          version="2.0">
+    <div class="content" align="center">
+        <spring:url value="/teacher/addcourse" var="addCourseUrl"/>
+        <form name="addCourseForm" method="post" action="${addCourseUrl}">
+            <spring:message code="page.teacher.addcourse.banner"/><br/>
+            <spring:message code="page.teacher.input.coursename"/><br/>
+            <input type="text" name="courseName" value=""/><br/>
+            <spring:message code="page.teacher.input.hours"/><br/>
+            <input type="text" name="hours" value=""/><br/>
+            <spring:message var="button" code="page.teacher.addcourse.button"/><br/>
+            ${operationMessage} <br/>
+            <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"><jsp:text/></input>
+            <input type="submit" value="${button}"/> <br/>
+        </form>
+    </div>
+</jsp:root>
