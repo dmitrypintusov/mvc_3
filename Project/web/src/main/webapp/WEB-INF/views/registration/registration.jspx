@@ -13,7 +13,6 @@
                  onsubmit="return validateForm()">
             <fieldset>
             <p align="center"><b><s:message code="page.registration.banner"/></b></p>
-            <br/>
                 <table align="left" cellpadding="5" cellspacing="5">
                     <tr>
                         <td><label for="firstName"><s:message code="page.common.input.firstname"/></label></td>
@@ -69,8 +68,8 @@
                 <p align="center">
                     <s:message var="button" code="page.registration.button"/>
                     <input type="submit" value="${button}" onclick="clearResult()"/>
+                    <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"><jsp:text/></input>
                 </p>
-                <br/>
             </fieldset>
         </sf:form>
     </div>

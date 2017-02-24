@@ -9,6 +9,7 @@ import by.pvt.pintusov.courses.managers.PagePathManager;
 import by.pvt.pintusov.courses.pojos.User;
 import by.pvt.pintusov.courses.services.IUserService;
 import by.pvt.pintusov.courses.utils.EntityBuilder;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.core.Authentication;
@@ -34,6 +35,7 @@ import java.util.Locale;
  */
 @Controller
 public class UserController {
+	private static Logger logger = Logger.getLogger(UserController.class);
 
 	@Autowired
 	private IUserService userService;
@@ -68,21 +70,22 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
-	public String showRegistrationForm(ModelMap modelMap) {
-		modelMap.addAttribute(Parameters.NEW_USER, new UserDTO());
+	public String showRegistrationForm(ModelMap model){
+		model.addAttribute(Parameters.NEW_USER, new UserDTO());
 		return pagePathManager.getProperty(PagePath.REGISTRATION_PAGE_PATH);
 	}
 
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-	public String registerUser(@ModelAttribute(Parameters.NEW_USER) @Valid UserDTO userDTO,
-	                             Locale locale,
-	                             BindingResult bindingResult,
-	                             ModelMap modelMap) {
+	public String registerUser(ModelMap modelMap,
+	                           @ModelAttribute(Parameters.NEW_USER) @Valid UserDTO userDTO,
+	                           BindingResult bindingResult,
+	                           Locale locale) {
 		String pagePath;
 		if(!bindingResult.hasErrors()) {
+			logger.info(userDTO);
 			try {
 				User user = EntityBuilder.buildUser(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getLogin(), userDTO.getPassword_1(), null, null, null);
-
+				logger.info(user);
 				if (userService.checkIsNewUser(user.getLogin())) {
 					userService.bookUser(user);
 					modelMap.addAttribute(Parameters.SUCCESS_OPERATION, messageSource.getMessage("message.successoperation", null, locale));
@@ -95,6 +98,7 @@ public class UserController {
 				modelMap.addAttribute(Parameters.ERROR_DATABASE, messageSource.getMessage("message.databaseerror",null, locale));
 				pagePath = pagePathManager.getProperty(PagePath.ERROR_PAGE_PATH);
 			} catch (NullPointerException e) {
+				logger.error("Error in User Controller register method: ", e);
 				pagePath = pagePathManager.getProperty(PagePath.HOME_PAGE_PATH);
 			}
 		} else {

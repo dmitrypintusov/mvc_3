@@ -42,13 +42,13 @@ public class User extends AbstractEntity {
 	public void setCourses(Set<Course> courses) {
 		this.courses = courses;
 	}
+	private Set <Course> courses;
 	public void addCourse(Course course){
 		if(courses == null){
 			courses = new HashSet<>();
 		}
 		courses.add(course);
 	}
-	private Set <Course> courses;
 
 	@OneToMany (mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	public Set<Mark> getMarks() {
@@ -57,13 +57,13 @@ public class User extends AbstractEntity {
 	public void setMarks(Set<Mark> marks) {
 		this.marks = marks;
 	}
+	private Set<Mark> marks;
 	public void addMark(Mark mark){
 		if(marks == null){
 			marks = new HashSet<>();
 		}
 		marks.add(mark);
 	}
-	private Set<Mark> marks;
 
 	@ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	public Set<AccessLevel> getAccessLevels() {
@@ -72,13 +72,13 @@ public class User extends AbstractEntity {
 	public void setAccessLevels(Set<AccessLevel> accessLevels) {
 		this.accessLevels = accessLevels;
 	}
+	private Set<AccessLevel> accessLevels;
 	public void addAccessLevel(AccessLevel accessLevel){
 		if(accessLevels == null){
 			accessLevels = new HashSet<>();
 		}
 		accessLevels.add(accessLevel);
 	}
-	private Set<AccessLevel> accessLevels;
 
 	@Override
 	public boolean equals(Object o) {

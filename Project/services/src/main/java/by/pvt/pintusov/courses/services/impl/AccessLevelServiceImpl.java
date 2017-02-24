@@ -1,7 +1,6 @@
 package by.pvt.pintusov.courses.services.impl;
 
 import by.pvt.pintusov.courses.dao.IAccessLevelDao;
-import by.pvt.pintusov.courses.dao.Impl.AccessLevelDaoImpl;
 import by.pvt.pintusov.courses.enums.AccessLevelType;
 import by.pvt.pintusov.courses.enums.ServiceConstants;
 import by.pvt.pintusov.courses.exceptions.DaoException;
@@ -10,8 +9,8 @@ import by.pvt.pintusov.courses.pojos.AccessLevel;
 import by.pvt.pintusov.courses.services.AbstractService;
 import by.pvt.pintusov.courses.services.IAccessLevelService;
 import org.apache.log4j.Logger;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -21,7 +20,8 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
  * Created by: USER
  * Date: 24.01.17.
  */
-
+@Service
+@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = DaoException.class)
 public class AccessLevelServiceImpl extends AbstractService<AccessLevel> implements IAccessLevelService {
 	private static Logger logger = Logger.getLogger(AccessLevelServiceImpl.class);
 

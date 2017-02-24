@@ -83,7 +83,8 @@ public class UserServiceImpl extends AbstractService <User> implements IUserServ
 	@Override
 	public void bookUser(User user) throws ServiceException {
 		try {
-			AccessLevel accessLevel = accessLevelDao.getByAccessLevelType(AccessLevelType.STUDENT);
+			AccessLevel accessLevel = new AccessLevel();
+			accessLevel.setAccessLevelType(AccessLevelType.STUDENT);
 			user.addAccessLevel(accessLevel);
 			accessLevel.addUser(user);
 			userDao.saveOrUpdate(user);

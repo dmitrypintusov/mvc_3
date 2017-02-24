@@ -19,9 +19,9 @@ public class DaoConstants {
 	public static final String PARAMETER_ACCESS_LEVEL_TYPE = "accessLevelType";
 
 	public static final String HQL_GET_BY_LOGIN = "FROM User U WHERE U.login =:login";
-	public static final String HQL_GET_BY_ACCESS_LEVEL = "FROM AccessLevel A WHERE A.accessLevelType = :accessLevelType";
+	public static final String HQL_GET_BY_ACCESS_LEVEL = "FROM AccessLevel WHERE accessLevelType = :accessLevelType";
 	public static final String HQL_GET_ALL_USERS = "FROM User U";
-	public static final String HQL_GET_COURSES = "select Course C";
+	public static final String HQL_GET_COURSES = "SELECT Course C";
 
 	private DaoConstants () {}
 }

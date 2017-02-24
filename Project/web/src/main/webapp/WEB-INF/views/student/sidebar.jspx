@@ -1,8 +1,4 @@
-<!--
-  User: lexxa
-  Date: 22.02.2016
-  Time: 14:39
--->
+
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
           xmlns:s="http://www.springframework.org/tags"
           xmlns="http://www.w3.org/1999/xhtml"
@@ -10,10 +6,6 @@
     <div class="sidebar">
         <br/>
         <ul class="nav">
-            <li><a href="${pageContext.request.contextPath}/client/balance"><s:message code="page.client.sidebar.balance"/></a></li>
-            <li><a href="${pageContext.request.contextPath}/client/payments"><s:message code="page.client.sidebar.payments"/></a></li>
-            <li><a href="${pageContext.request.contextPath}/client/funds"><s:message code="page.client.sidebar.funds"/></a></li>
-            <li><a href="${pageContext.request.contextPath}/client/block"><s:message code="page.client.sidebar.block"/></a></li>
             <li><a href="${pageContext.request.contextPath}/logout"><s:message code="page.common.sidebar.logout"/></a></li>
         </ul>
     </div>

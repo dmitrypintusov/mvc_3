@@ -6,7 +6,6 @@ function validateForm()
 	var messageLogin = document.getElementById("emptyLogin");
 	var messagePassword_1 = document.getElementById("emptyPassword_1");
 	var messagePassword_2 = document.getElementById("emptyPassword_2");
-	var messageAccountNumber = document.getElementById("emptyAccountNumber");
 	var message = document.getElementById("inputError");
 	
 	var firstName = document.getElementById("firstName").value;
@@ -14,7 +13,6 @@ function validateForm()
 	var login = document.getElementById("login").value;
 	var password_1 = document.getElementById("password_1").value;
 	var password_2 = document.getElementById("password_2").value;
-	var accountNumber = document.getElementById("accountNumber").value;
 	
 	var point = "*";
 	var emptyField = "";
@@ -23,8 +21,6 @@ function validateForm()
 
 	var templateNames = /^[a-zA-Zа-яА-Я ]{2,30}$/;
 	var templatePassword = /\w*/g;
-	var templateAccountNumber = /^[0-9]{1,10}$/;
-
 
 	if(getCookie('LocaleCookie') == 'en'){
 		emptyField = "Fields are empty";
@@ -103,23 +99,6 @@ function validateForm()
 			messagePassword_2.innerHTML = "";
 		}
 	}
-	if (accountNumber == ""){
-		messageAccountNumber.innerHTML = point;
-		message.innerHTML = emptyField;
-		flag = false;
-	}
-	else{
-		// проверка валидности данных
-		if (!templateAccountNumber.exec(accountNumber)){
-			messageAccountNumber.innerHTML = point;
-			message.innerHTML = invalidSymbols + "(только цифры)";
-			flag = false;	
-		}
-		else{
-			messageAccountNumber.innerHTML = "";
-		}
-	}
-	
 	return flag;
 }
 
