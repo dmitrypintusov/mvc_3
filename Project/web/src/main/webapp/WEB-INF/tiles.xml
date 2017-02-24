@@ -25,7 +25,7 @@
     <definition name="home" extends="home_template"/>
 
     <!-- ADMIN PAGES -->
-    <definition name="admin_default" extends="default">
+    <definition name="admin_default" extends="home_template">
         <put-attribute name="sidebar" value="/WEB-INF/views/admin/sidebar.jspx"/>
     </definition>
     <definition name="admin/main" extends="admin_default">
