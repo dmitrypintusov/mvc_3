@@ -42,8 +42,6 @@ public class TeacherController {
 	@Autowired
 	private ICourseService courseService;
 	@Autowired
-	private IAccessLevelService accessLevelService;
-	@Autowired
 	private PagePathManager pagePathManager;
 	@Autowired
 	private MessageSource messageSource;
@@ -70,6 +68,7 @@ public class TeacherController {
 		String pagePath;
 			if(!bindingResult.hasErrors()) {
 				try {
+					//TODO: add method add Course with status OPEN and Date
 					courseService.saveOrUpdate(course);
 					modelMap.addAttribute(Parameters.SUCCESS_OPERATION, messageSource.getMessage("message.successoperation", null, locale));
 					pagePath = pagePathManager.getProperty(PagePath.TEACHER_ADD_COURSE_PATH);

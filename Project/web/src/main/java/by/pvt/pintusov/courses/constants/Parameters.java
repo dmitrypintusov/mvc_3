@@ -16,12 +16,14 @@ public class Parameters {
 
 	/*COURSE PARAMETERS*/
 	public static final String COURSES_LIST = "coursesList";
+	public static final String COURSE_ATTEND="toAttend";
 
 	/*ERROR PARAMETERS*/
 	public static final String ERROR_DATABASE = "errorDatabase";
 	public static final String ERROR_LOGIN_OR_PASSWORD = "errorLoginOrPassword";
 	public static final String ERROR_USER_EXISTS = "errorUserExists";
 	public static final String SUCCESS_OPERATION = "successOperation";
+	public static final String ERROR_EMPTY_LIST = "errorEmptyList";
 
 	/*PAGINATING PARAMETERS*/
 	public static final String NUMBER_OF_PAGES = "numberOfPages";

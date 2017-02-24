@@ -1,11 +1,13 @@
 package by.pvt.pintusov.courses.services.impl;
 
+import by.pvt.pintusov.courses.dao.IAccessLevelDao;
 import by.pvt.pintusov.courses.dao.ICourseDao;
 import by.pvt.pintusov.courses.dao.Impl.CourseDaoImpl;
 import by.pvt.pintusov.courses.enums.CourseStatusType;
 import by.pvt.pintusov.courses.enums.ServiceConstants;
 import by.pvt.pintusov.courses.exceptions.DaoException;
 import by.pvt.pintusov.courses.exceptions.ServiceException;
+import by.pvt.pintusov.courses.pojos.AccessLevel;
 import by.pvt.pintusov.courses.pojos.Archive;
 import by.pvt.pintusov.courses.pojos.Course;
 import by.pvt.pintusov.courses.pojos.User;
@@ -75,5 +77,19 @@ public class CourseServiceImpl extends AbstractService<Course> implements ICours
 			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED + e);
 		}
 		return results;
+	}
+
+	@Override
+	public void updateCourseStatus (String courseName, CourseStatusType courseStatus) throws ServiceException {
+		try {
+			Course course = courseDao.getByCourseName(courseName);
+			course.setCourseStatus(courseStatus);
+			courseDao.saveOrUpdate(course);
+			logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
+		} catch (DaoException e) {
+			logger.error(ServiceConstants.TRANSACTION_FAILED, e);
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED + e);
+		}
 	}
 }

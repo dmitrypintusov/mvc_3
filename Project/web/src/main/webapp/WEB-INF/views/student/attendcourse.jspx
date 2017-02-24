@@ -1,0 +1,37 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: Дмитрий
+  Date: 24.02.2017
+  Time: 19:57
+  To change this template use File | Settings | File Templates.
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:spring="http://www.springframework.org/tags"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns="http://www.w3.org/1999/xhtml"
+          version="2.0">
+      <div class="content" align="center">
+          <spring:url value="/student/attendcourse" var="attendCourseUrl"/>
+          <form name="attendCourseForm" method="post" action="${attendCourseUrl}">
+              <spring:message code="page.student.attendcourse.banner"/>
+              <table border="1">
+                  <tr bgcolor="#CCCCCC">
+                      <td align="center"><strong><spring:message code="page.student.courses.name"/></strong></td>
+                      <td align="center"><strong><spring:message code="page.student.courses.hours"/></strong></td>
+                  </tr>
+                  <c:forEach var="course" items="${coursesList}">
+                      <tr>
+                          <td><c:out value="${ course.courseName }" /></td>
+                          <td><c:out value="${ course.hours }" /></td>
+                          <td><input type="radio" name="toAttend" value="${ course.courseName }"/></td>
+                      </tr>
+                  </c:forEach>
+              </table>
+              ${errorEmptyChoice}<br/>
+              ${errorEmptyList} <br/>
+              <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"><jsp:text/></input>
+              <spring:message var="button" code="page.student.attendcourse.button"/>
+              <input type="submit" value="${button}"/>  <br/>
+          </form>
+      </div>
+</jsp:root>

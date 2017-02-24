@@ -66,4 +66,19 @@ public class CourseDaoImpl extends AbstractDao <Course> implements ICourseDao {
 		}
 		return list;
 	}
+
+	@Override
+	public Course getByCourseName (String courseName) throws DaoException {
+		Course course;
+		try {
+			Session session = getCurrentSession();
+			Criteria criteria = session.createCriteria(persistentClass);
+			criteria.add(Restrictions.eq(DaoConstants.PARAMETER_COURSE_NAME, courseName));
+			course = (Course) criteria.uniqueResult();
+		} catch (HibernateException e) {
+			logger.error(DaoConstants.ERROR_COURSE_NAME + e);
+			throw new DaoException(DaoConstants.ERROR_COURSE_NAME, e);
+		}
+		return course;
+	}
 }

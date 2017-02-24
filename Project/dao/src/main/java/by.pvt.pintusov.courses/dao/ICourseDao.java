@@ -14,4 +14,5 @@ public interface ICourseDao extends IDao<Course> {
 
 	boolean isCourseStatusEnded (Integer id) throws DaoException;
 	List<Course> getCourses (int recordsPerPage, int pageNumber, String sorting) throws DaoException;
+	Course getByCourseName (String courseName) throws DaoException;
 }
