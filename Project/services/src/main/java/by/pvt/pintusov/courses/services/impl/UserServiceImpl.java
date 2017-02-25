@@ -52,6 +52,7 @@ public class UserServiceImpl extends AbstractService <User> implements IUserServ
 		User user;
 		try {
 			user = userDao.getUserByLogin(login);
+
 		}
 		catch (DaoException e) {
 			logger.error(ServiceConstants.TRANSACTION_FAILED, e);
@@ -89,7 +90,6 @@ public class UserServiceImpl extends AbstractService <User> implements IUserServ
 			accessLevel.addUser(user);
 			userDao.saveOrUpdate(user);
 			accessLevelDao.saveOrUpdate(accessLevel);
-
 			logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
 			logger.info(user);
 			logger.info(accessLevel);

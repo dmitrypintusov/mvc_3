@@ -2,16 +2,11 @@ package by.pvt.pintusov.courses.controllers;
 
 import by.pvt.pintusov.courses.constants.PagePath;
 import by.pvt.pintusov.courses.constants.Parameters;
-import by.pvt.pintusov.courses.enums.AccessLevelType;
 import by.pvt.pintusov.courses.exceptions.ServiceException;
 import by.pvt.pintusov.courses.managers.PagePathManager;
-import by.pvt.pintusov.courses.pojos.AccessLevel;
 import by.pvt.pintusov.courses.pojos.Course;
-import by.pvt.pintusov.courses.pojos.User;
-import by.pvt.pintusov.courses.services.IAccessLevelService;
 import by.pvt.pintusov.courses.services.ICourseService;
 import by.pvt.pintusov.courses.services.IUserService;
-import by.pvt.pintusov.courses.utils.EntityBuilder;
 import by.pvt.pintusov.courses.utils.PrincipalUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,8 +63,7 @@ public class TeacherController {
 		String pagePath;
 			if(!bindingResult.hasErrors()) {
 				try {
-					//TODO: add method add Course with status OPEN and Date
-					courseService.saveOrUpdate(course);
+					courseService.startCourse(course);
 					modelMap.addAttribute(Parameters.SUCCESS_OPERATION, messageSource.getMessage("message.successoperation", null, locale));
 					pagePath = pagePathManager.getProperty(PagePath.TEACHER_ADD_COURSE_PATH);
 				} catch (ServiceException e) {

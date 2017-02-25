@@ -2,6 +2,7 @@ package by.pvt.pintusov.courses.dao;
 
 import by.pvt.pintusov.courses.exceptions.DaoException;
 import by.pvt.pintusov.courses.pojos.Course;
+import by.pvt.pintusov.courses.pojos.User;
 
 import java.util.List;
 

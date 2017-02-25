@@ -107,7 +107,6 @@ abstract public class AbstractService <T extends AbstractEntity> implements ISer
 				return null;
 			}
 		});
-
 	}
 }
 

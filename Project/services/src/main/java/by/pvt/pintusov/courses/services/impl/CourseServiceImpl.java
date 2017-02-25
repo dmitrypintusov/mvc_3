@@ -20,10 +20,15 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.springframework.transaction.support.TransactionCallback;
 
+import java.io.Serializable;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Set;
 
@@ -80,6 +85,7 @@ public class CourseServiceImpl extends AbstractService<Course> implements ICours
 	}
 
 	@Override
+	@Transactional (propagation = Propagation.SUPPORTS, readOnly = true)
 	public void updateCourseStatus (String courseName, CourseStatusType courseStatus) throws ServiceException {
 		try {
 			Course course = courseDao.getByCourseName(courseName);
@@ -91,5 +97,38 @@ public class CourseServiceImpl extends AbstractService<Course> implements ICours
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED + e);
 		}
+	}
+
+	@Override
+	public void startCourse(Course course) throws ServiceException {
+		try {
+			CourseStatusType courseStatus = CourseStatusType.OPEN;
+			course.setCourseStatus(courseStatus);
+			course.setStartDate(Calendar.getInstance());
+			courseDao.saveOrUpdate(course);
+			logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
+			logger.info(course);
+		} catch (DaoException e) {
+			logger.error(ServiceConstants.TRANSACTION_FAILED + e);
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED + e);
+		};
+	}
+
+	@Override
+	@Transactional (propagation = Propagation.SUPPORTS, readOnly = true)
+	public Course getByCourseName(String courseName) throws ServiceException {
+		Course course;
+		try {
+			course = courseDao.getByCourseName(courseName);
+			logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
+			logger.info("Course with name " + courseName + " found.");
+		}
+		catch (DaoException e) {
+			logger.error(ServiceConstants.TRANSACTION_FAILED, e);
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED, e);
+		}
+		return course;
 	}
 }

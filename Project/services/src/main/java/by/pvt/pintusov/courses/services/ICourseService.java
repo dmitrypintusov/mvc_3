@@ -20,4 +20,6 @@ public interface ICourseService extends IService<Course> {
 	int getNumberOfPages(int recordsPerPage) throws ServiceException;
 	List<Course> getAllToPage(int recordsPerPage, int pageNumber, String sorting) throws ServiceException;
 	public void updateCourseStatus (String courseName, CourseStatusType courseStatus) throws ServiceException;
+	void startCourse (Course course) throws ServiceException;
+	Course getByCourseName (String courseName) throws ServiceException;
 }
