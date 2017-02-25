@@ -15,7 +15,6 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Locale;
@@ -62,9 +61,8 @@ public class StudentController {
 	                            Locale locale) {
 		String pagePath;
 		try {
-			List<Course> coursesList = courseService.getAll();
-			logger.info(coursesList);
-			modelMap.addAttribute(Parameters.COURSES_LIST, coursesList);
+			List<Course> courseList = courseService.getAll();
+			modelMap.addAttribute(Parameters.COURSE_LIST, courseList);
 			pagePath = pagePathManager.getProperty(PagePath.STUDENT_ATTEND_COURSE_PATH);
 		} catch (ServiceException e) {
 			modelMap.addAttribute(Parameters.ERROR_DATABASE, messageSource.getMessage("message.databaseerror", null, locale));

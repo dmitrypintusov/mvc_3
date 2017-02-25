@@ -114,4 +114,9 @@ public class UserController {
 	public String showNewsPage(){
 		return pagePathManager.getProperty(PagePath.NEWS_PAGE_PATH);
 	}
+
+	@RequestMapping(value = "/error", method = RequestMethod.GET)
+	public String showErrorPage(){
+		return pagePathManager.getProperty(PagePath.ERROR_PAGE_PATH);
+	}
 }

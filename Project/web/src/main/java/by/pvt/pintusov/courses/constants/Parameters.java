@@ -15,7 +15,7 @@ public class Parameters {
 	public static final String USERS_LIST = "userList";
 
 	/*COURSE PARAMETERS*/
-	public static final String COURSES_LIST = "courseList";
+	public static final String COURSE_LIST = "courseList";
 	public static final String COURSE_ATTEND = "toAttend";
 	public static final String COURSE_END = "endCourse";
 

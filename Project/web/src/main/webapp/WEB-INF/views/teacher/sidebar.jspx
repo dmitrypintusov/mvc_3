@@ -9,6 +9,7 @@
             <li><a href="${pageContext.request.contextPath}/logout"><s:message code="page.common.sidebar.logout"/></a></li>
             <li><a href="${pageContext.request.contextPath}/teacher/addcourse"><s:message code="page.teacher.sidebar.addcourse"/></a></li>
             <li><a href="${pageContext.request.contextPath}/teacher/endcourse"><s:message code="page.teacher.sidebar.endcourse"/></a></li>
+            <li><a href="${pageContext.request.contextPath}/teacher/courses"><s:message code="page.teacher.sidebar.courses"/></a></li>
             <li><a href="${pageContext.request.contextPath}/teacher/students"><s:message code="page.teacher.sidebar.students"/></a></li>
         </ul>
     </div>

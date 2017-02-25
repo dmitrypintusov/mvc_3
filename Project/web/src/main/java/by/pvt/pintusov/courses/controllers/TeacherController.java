@@ -127,4 +127,19 @@ public class TeacherController {
 			}
 			return pagePath;
 	}
+
+	@RequestMapping (value = "/courses", method = GET)
+	public String showCoursesPage (ModelMap modelMap,
+	                                Locale locale) {
+		String pagePath;
+		try {
+			List<Course> courseList = courseService.getAll();
+			modelMap.addAttribute(Parameters.COURSE_LIST, courseList);
+			pagePath = pagePathManager.getProperty(PagePath.TEACHER_COURSES_PAGE);
+		} catch (ServiceException e) {
+			modelMap.addAttribute(Parameters.ERROR_DATABASE, messageSource.getMessage("message.databaseerror", null, locale));
+			pagePath = pagePathManager.getProperty(PagePath.ERROR_PAGE_PATH);
+		}
+		return pagePath;
+	}
 }
