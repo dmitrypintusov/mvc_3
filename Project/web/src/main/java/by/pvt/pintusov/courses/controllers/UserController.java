@@ -104,4 +104,14 @@ public class UserController {
 		}
 		return pagePath;
 	}
+
+	@RequestMapping(value = "/info", method = RequestMethod.GET)
+	public String showInfoPage(){
+		return pagePathManager.getProperty(PagePath.INFO_PAGE_PATH);
+	}
+
+	@RequestMapping(value = "/news", method = RequestMethod.GET)
+	public String showNewsPage(){
+		return pagePathManager.getProperty(PagePath.NEWS_PAGE_PATH);
+	}
 }

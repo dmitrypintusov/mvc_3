@@ -24,6 +24,18 @@
     <!-- HOME PAGE -->
     <definition name="home" extends="home_template"/>
 
+    <!-- INFO PAGE -->
+    <definition name="info" extends="home_template">
+        <put-attribute name="title" value="page.common.main.title"/>
+        <put-attribute name="body" value="/WEB-INF/views/info/info.jspx"/>
+    </definition>
+
+    <!-- NEWS PAGE -->
+    <definition name="news" extends="home_template">
+        <put-attribute name="title" value="page.common.main.title"/>
+        <put-attribute name="body" value="/WEB-INF/views/news/news.jspx"/>
+    </definition>
+
     <!-- ADMIN PAGES -->
     <definition name="admin_default" extends="home_template">
         <put-attribute name="sidebar" value="/WEB-INF/views/admin/sidebar.jspx"/>
@@ -45,6 +57,10 @@
         <put-attribute name="title" value="page.common.main.title"/>
         <put-attribute name="body" value="/WEB-INF/views/teacher/addcourse.jspx"/>
     </definition>
+    <definition name="teacher/students" extends="teacher_default">
+        <put-attribute name="title" value="page.common.main.title"/>
+        <put-attribute name="body" value="/WEB-INF/views/teacher/students.jspx"/>
+    </definition>
 
     <!-- STUDENT PAGES -->
     <definition name="student_default" extends="home_template">
@@ -58,9 +74,13 @@
         <put-attribute name="title" value="page.common.main.title"/>
         <put-attribute name="body" value="/WEB-INF/views/student/attendcourse.jspx"/>
     </definition>
+    <definition name="student/teachers" extends="student_default">
+        <put-attribute name="title" value="page.common.main.title"/>
+        <put-attribute name="body" value="/WEB-INF/views/student/teachers.jspx"/>
+    </definition>
 
     <!-- ERROR PAGE -->
-    <definition name="error/error" extends="default">
+    <definition name="error" extends="default">
         <put-attribute name="title" value="page.error.title"/>
         <put-attribute name="body" value="/WEB-INF/views/errors/error.jspx"/>
     </definition>

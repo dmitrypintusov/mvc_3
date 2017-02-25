@@ -5,6 +5,7 @@ import by.pvt.pintusov.courses.constants.Parameters;
 import by.pvt.pintusov.courses.exceptions.ServiceException;
 import by.pvt.pintusov.courses.managers.PagePathManager;
 import by.pvt.pintusov.courses.pojos.Course;
+import by.pvt.pintusov.courses.pojos.User;
 import by.pvt.pintusov.courses.services.ICourseService;
 import by.pvt.pintusov.courses.services.IUserService;
 import by.pvt.pintusov.courses.utils.PrincipalUtil;
@@ -58,18 +59,28 @@ public class StudentController {
 
 	@RequestMapping(value = "/attendcourse", method = POST)
 	public String attendCourse (ModelMap modelMap,
-	                            Course course,
 	                            Locale locale) {
 		String pagePath;
 		try {
 			List<Course> coursesList = courseService.getAll();
 			logger.info(coursesList);
-			if (coursesList.isEmpty()) {
-				modelMap.addAttribute(Parameters.ERROR_EMPTY_LIST, messageSource.getMessage("message.emptylist", null, locale));
-			} else {
-				modelMap.addAttribute(Parameters.COURSES_LIST, coursesList);
-			}
+			modelMap.addAttribute(Parameters.COURSES_LIST, coursesList);
 			pagePath = pagePathManager.getProperty(PagePath.STUDENT_ATTEND_COURSE_PATH);
+		} catch (ServiceException e) {
+			modelMap.addAttribute(Parameters.ERROR_DATABASE, messageSource.getMessage("message.databaseerror", null, locale));
+			pagePath = pagePathManager.getProperty(PagePath.ERROR_PAGE_PATH);
+		}
+		return pagePath;
+	}
+
+	@RequestMapping (value = "/teachers", method = GET)
+	public String showTeachersPage (ModelMap modelMap,
+	                                Locale locale) {
+		String pagePath;
+		try {
+			List<User> userList = userService.getAll();
+			modelMap.addAttribute(Parameters.USERS_LIST, userList);
+			pagePath = pagePathManager.getProperty(PagePath.STUDENT_SHOW_TEACHERS_PAGE_PATH);
 		} catch (ServiceException e) {
 			modelMap.addAttribute(Parameters.ERROR_DATABASE, messageSource.getMessage("message.databaseerror", null, locale));
 			pagePath = pagePathManager.getProperty(PagePath.ERROR_PAGE_PATH);

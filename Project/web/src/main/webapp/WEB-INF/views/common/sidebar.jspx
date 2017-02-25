@@ -1,8 +1,4 @@
-<!--
-  User: lexxa
-  Date: 22.02.2016
-  Time: 16:45
--->
+
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
           xmlns:s="http://www.springframework.org/tags"
           xmlns="http://www.w3.org/1999/xhtml"
@@ -11,8 +7,8 @@
         <br/>
         <ul class="nav">
             <li><a href="${pageContext.request.contextPath}/home" charset="utf-8"><s:message code="page.common.sidebar.back"/></a></li>
-            <li><a href="#"><s:message code="page.common.sidebar.info"/></a></li>
-            <li><a href="#"><s:message code="page.common.sidebar.news"/></a></li>
+            <li><a href="${pageContext.request.contextPath}/info"><s:message code="page.common.sidebar.info"/></a></li>
+            <li><a href="${pageContext.request.contextPath}/news"><s:message code="page.common.sidebar.news"/></a></li>
         </ul>
     </div>
 </jsp:root>

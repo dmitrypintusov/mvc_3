@@ -12,6 +12,8 @@ public class PagePath {
 	public static final String HOME_PAGE_PATH = "path.page.home";
 	public static final String REGISTRATION_PAGE_PATH = "path.page.registration";
 	public static final String ERROR_PAGE_PATH = "path.page.error";
+	public static final String INFO_PAGE_PATH = "path.page.info";
+	public static final String NEWS_PAGE_PATH = "path.page.news";
 	//Teacher pages path
 	public static final String TEACHER_PAGE_PATH = "path.page.teacher";
 	public static final String TEACHER_ADD_COURSE_PATH = "path.page.teacher.addcourse";

@@ -5,10 +5,12 @@ import by.pvt.pintusov.courses.constants.Parameters;
 import by.pvt.pintusov.courses.exceptions.ServiceException;
 import by.pvt.pintusov.courses.managers.PagePathManager;
 import by.pvt.pintusov.courses.pojos.Course;
+import by.pvt.pintusov.courses.pojos.User;
 import by.pvt.pintusov.courses.services.ICourseService;
 import by.pvt.pintusov.courses.services.IUserService;
 import by.pvt.pintusov.courses.utils.PrincipalUtil;
 import org.apache.log4j.Logger;
+import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
 import java.util.Locale;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -76,6 +79,21 @@ public class TeacherController {
 			} else {
 				pagePath = pagePathManager.getProperty(PagePath.REGISTRATION_PAGE_PATH);
 			}
+		return pagePath;
+	}
+
+	@RequestMapping (value = "/students", method = GET)
+	public String showStudentsPage (ModelMap modelMap,
+	                                Locale locale) {
+		String pagePath;
+		try {
+			List<User> userList = userService.getAll();
+			modelMap.addAttribute(Parameters.USERS_LIST, userList);
+			pagePath = pagePathManager.getProperty(PagePath.TEACHER_SHOW_STUDENTS_PAGE);
+		} catch (ServiceException e) {
+			modelMap.addAttribute(Parameters.ERROR_DATABASE, messageSource.getMessage("message.databaseerror", null, locale));
+			pagePath = pagePathManager.getProperty(PagePath.ERROR_PAGE_PATH);
+		}
 		return pagePath;
 	}
 }
