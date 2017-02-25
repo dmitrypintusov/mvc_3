@@ -40,7 +40,7 @@ public class Course extends AbstractEntity {
 	private Integer hours;
 
 	@Enumerated(EnumType.STRING)
-	@Column (columnDefinition = "enum('OPEN', 'CLOSED', 'ARCHIVE')")
+	@Column (columnDefinition = "enum('OPEN', 'ENDED', 'ARCHIVE')")
 	public CourseStatusType getCourseStatus() {
 		return courseStatus;
 	}

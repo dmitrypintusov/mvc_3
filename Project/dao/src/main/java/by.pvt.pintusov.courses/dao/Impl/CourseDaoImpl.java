@@ -38,12 +38,12 @@ public class CourseDaoImpl extends AbstractDao <Course> implements ICourseDao {
 	}
 
 	@Override
-	public boolean isCourseStatusEnded(Integer id) throws DaoException {
+	public boolean isCourseStatusEnded(String courseName) throws DaoException {
 		boolean isEnded = false;
 		try {
 			Session session = getCurrentSession();
 			Criteria criteria = session.createCriteria(persistentClass);
-			criteria.add(Restrictions.eq(DaoConstants.PARAMETER_ID, id));
+			criteria.add(Restrictions.eq(DaoConstants.PARAMETER_COURSE_NAME, courseName));
 			criteria.add(Restrictions.eq(DaoConstants.PARAMETER_COURSE_STATUS, CourseStatusType.ENDED));
 			if (criteria.uniqueResult() != null) {
 				isEnded = true;

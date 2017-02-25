@@ -85,13 +85,14 @@ public class CourseServiceImpl extends AbstractService<Course> implements ICours
 	}
 
 	@Override
-	@Transactional (propagation = Propagation.SUPPORTS, readOnly = true)
 	public void updateCourseStatus (String courseName, CourseStatusType courseStatus) throws ServiceException {
 		try {
 			Course course = courseDao.getByCourseName(courseName);
+			logger.info(course);
 			course.setCourseStatus(courseStatus);
 			courseDao.saveOrUpdate(course);
 			logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
+			logger.info(course);
 		} catch (DaoException e) {
 			logger.error(ServiceConstants.TRANSACTION_FAILED, e);
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -116,19 +117,32 @@ public class CourseServiceImpl extends AbstractService<Course> implements ICours
 	}
 
 	@Override
-	@Transactional (propagation = Propagation.SUPPORTS, readOnly = true)
 	public Course getByCourseName(String courseName) throws ServiceException {
 		Course course;
 		try {
 			course = courseDao.getByCourseName(courseName);
 			logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
 			logger.info("Course with name " + courseName + " found.");
-		}
-		catch (DaoException e) {
+		} catch (DaoException e) {
 			logger.error(ServiceConstants.TRANSACTION_FAILED, e);
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED, e);
 		}
 		return course;
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean isCourseStatusEnded(String courseName) throws ServiceException {
+		boolean isEnded;
+		try {
+			isEnded = courseDao.isCourseStatusEnded(courseName);
+			logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
+		} catch (DaoException e) {
+			logger.error(ServiceConstants.TRANSACTION_FAILED, e);
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED, e);
+		}
+		return isEnded;
 	}
 }

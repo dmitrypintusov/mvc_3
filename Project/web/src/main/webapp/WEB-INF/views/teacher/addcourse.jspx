@@ -18,7 +18,7 @@
             <spring:message code="page.teacher.input.hours"/><br/>
             <input type="text" name="hours" value=""/><br/>
             <spring:message var="button" code="page.teacher.addcourse.button"/><br/>
-            ${operationMessage} <br/>
+            ${successOperation} <br/>
             <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"><jsp:text/></input>
             <input type="submit" value="${button}"/> <br/>
         </form>

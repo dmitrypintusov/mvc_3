@@ -22,4 +22,5 @@ public interface ICourseService extends IService<Course> {
 	public void updateCourseStatus (String courseName, CourseStatusType courseStatus) throws ServiceException;
 	void startCourse (Course course) throws ServiceException;
 	Course getByCourseName (String courseName) throws ServiceException;
+	boolean isCourseStatusEnded (String courseName) throws ServiceException;
 }

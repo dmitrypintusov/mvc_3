@@ -2,6 +2,7 @@ package by.pvt.pintusov.courses.controllers;
 
 import by.pvt.pintusov.courses.constants.PagePath;
 import by.pvt.pintusov.courses.constants.Parameters;
+import by.pvt.pintusov.courses.enums.CourseStatusType;
 import by.pvt.pintusov.courses.exceptions.ServiceException;
 import by.pvt.pintusov.courses.managers.PagePathManager;
 import by.pvt.pintusov.courses.pojos.Course;
@@ -18,6 +19,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Locale;
@@ -53,8 +55,7 @@ public class TeacherController {
 	}
 
 	@RequestMapping(value = "/addcourse", method = GET)
-	public String showAddCoursePage(ModelMap modelMap){
-		modelMap.addAttribute(Parameters.USER, principalUtil.getPrincipal());
+	public String showAddCoursePage(){
 		return pagePathManager.getProperty(PagePath.TEACHER_ADD_COURSE_PATH);
 	}
 
@@ -95,5 +96,35 @@ public class TeacherController {
 			pagePath = pagePathManager.getProperty(PagePath.ERROR_PAGE_PATH);
 		}
 		return pagePath;
+	}
+
+
+	@RequestMapping (value = "/endcourse", method = GET)
+	public String endCoursePage () {
+		return pagePathManager.getProperty(PagePath.TEACHER_END_COURSE_PATH);
+	}
+
+	@RequestMapping (value = "/endcourse", method = POST)
+	public String endCourse (ModelMap modelMap,
+	                           @RequestParam(value = Parameters.COURSE_END, required = false)String endCourse,
+	                           Locale locale) {
+		String pagePath;
+			try {
+				if (!courseService.isCourseStatusEnded(endCourse)) {
+					Course course = courseService.getByCourseName(endCourse);
+					logger.info(course);
+					CourseStatusType courseStatus = CourseStatusType.ENDED;
+					courseService.updateCourseStatus(course.getCourseName(), courseStatus);
+					modelMap.addAttribute(Parameters.SUCCESS_OPERATION, messageSource.getMessage("message.successoperation", null, locale));
+					pagePath = pagePathManager.getProperty(PagePath.TEACHER_END_COURSE_PATH);
+				} else {
+					modelMap.addAttribute(Parameters.COURSE_STATUS_ENDED, messageSource.getMessage("message.courseended", null, locale));
+					pagePath = pagePathManager.getProperty(PagePath.TEACHER_END_COURSE_PATH);
+				}
+			} catch (ServiceException e) {
+				modelMap.addAttribute(Parameters.ERROR_DATABASE, messageSource.getMessage("message.databaseerror", null, locale));
+				pagePath = pagePathManager.getProperty(PagePath.ERROR_PAGE_PATH);
+			}
+			return pagePath;
 	}
 }

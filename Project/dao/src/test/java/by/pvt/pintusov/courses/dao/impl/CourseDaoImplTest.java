@@ -71,7 +71,7 @@ public class CourseDaoImplTest {
 	public void testIsCourseStatusEnded () throws Exception {
 		createEntities();
 		boolean isCourseStatusEnded;
-		isCourseStatusEnded = courseDao.isCourseStatusEnded(expectedCourse.getId());
+		isCourseStatusEnded = courseDao.isCourseStatusEnded(expectedCourse.getCourseName());
 		Assert.assertFalse("isCourseStatusEnded() method failed: ", isCourseStatusEnded);
 	}
 
