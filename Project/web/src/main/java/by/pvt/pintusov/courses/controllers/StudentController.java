@@ -51,8 +51,7 @@ public class StudentController {
 	}
 
 	@RequestMapping(value = "/attendcourse", method = GET)
-	public String showAttendCoursePage (ModelMap modelMap) {
-		modelMap.addAttribute(Parameters.USER, principalUtil.getPrincipal());
+	public String showAttendCoursePage () {
 		return pagePathManager.getProperty(PagePath.STUDENT_ATTEND_COURSE_PATH);
 	}
 
