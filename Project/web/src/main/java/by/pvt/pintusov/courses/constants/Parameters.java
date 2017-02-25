@@ -10,6 +10,7 @@ public class Parameters {
 
 	/*USER PARAMETERS*/
 	public static final String USER = "user";
+	public static final String USER_LOGIN = "login";
 	public static final String NEW_USER = "newUser";
 	public static final String USER_ACCESS_LEVEL = "accessLevel";
 	public static final String USERS_LIST = "userList";

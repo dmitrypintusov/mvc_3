@@ -132,6 +132,7 @@ public class TeacherController {
 	public String showCoursesPage (ModelMap modelMap,
 	                                Locale locale) {
 		String pagePath;
+		//TODO: pagination
 		try {
 			List<Course> courseList = courseService.getAll();
 			modelMap.addAttribute(Parameters.COURSE_LIST, courseList);
