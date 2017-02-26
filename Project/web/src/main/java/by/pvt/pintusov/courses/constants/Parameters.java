@@ -32,9 +32,7 @@ public class Parameters {
 
 	/*PAGINATING PARAMETERS*/
 	public static final String NUMBER_OF_PAGES = "numberOfPages";
-	public static final String CURRENT_PAGE = "currentPage";
-	public static final String RECORDS_PER_PAGE = "recordsPerPage";
-	public static final String ORDERING = "ordering";
+	public static final String FILTER = "filter";
 
 	private Parameters () {}
 }

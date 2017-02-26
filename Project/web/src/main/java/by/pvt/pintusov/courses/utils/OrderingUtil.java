@@ -24,14 +24,8 @@ public class OrderingUtil {
 			case "hours":
 				orderBy = OrderingConstants.ORDER_BY_HOURS;
 				break;
-			case "startDate":
-				orderBy = OrderingConstants.ORDER_BY_START_DATE;
-				break;
-			case "updateDate":
-				orderBy = OrderingConstants.ORDER_BY_UPDATE_DATE;
-				break;
 			default:
-				orderBy = OrderingConstants.ORDER_BY_ID;
+				orderBy = OrderingConstants.ORDER_BY_COURSE_NAME;
 		}
 		return orderBy;
 	}

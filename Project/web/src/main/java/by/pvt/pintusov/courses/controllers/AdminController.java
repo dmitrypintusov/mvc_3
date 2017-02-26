@@ -14,6 +14,8 @@ import by.pvt.pintusov.courses.pojos.User;
 import by.pvt.pintusov.courses.services.IArchiveService;
 import by.pvt.pintusov.courses.services.ICourseService;
 import by.pvt.pintusov.courses.services.IUserService;
+import by.pvt.pintusov.courses.utils.OrderingUtil;
+import by.pvt.pintusov.courses.utils.PaginationUtil;
 import by.pvt.pintusov.courses.utils.PrincipalUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -116,6 +118,32 @@ public class AdminController {
 				modelMap.addAttribute(Parameters.COURSE_STATUS_OPEN, messageSource.getMessage("message.courseopen", null, locale));
 				pagePath = pagePathManager.getProperty(PagePath.ADMIN_ARCHIVE_COURSE_PATH);
 			}
+		} catch (ServiceException e) {
+			modelMap.addAttribute(Parameters.ERROR_DATABASE, messageSource.getMessage("message.databaseerror", null, locale));
+			pagePath = pagePathManager.getProperty(PagePath.ERROR_PAGE_PATH);
+		}
+		return pagePath;
+	}
+
+	@RequestMapping(value = "/courses", method = {GET, POST})
+	public String showCoursesPage (ModelMap modelMap,
+	                               @ModelAttribute ("filter") PaginationFilter filter,
+	                               Locale locale) {
+		String pagePath;
+		Integer currentPage = filter.getCurrentPage();
+		Integer recordsPerPage = filter.getRecordsPerPage();
+		String ordering = filter.getOrdering();
+		String direction = filter.getDirection();
+		filter = PaginationUtil.defineParameters(ordering, direction, currentPage, recordsPerPage);
+		//TODO:resolve problem with sorting
+		try {
+			Integer numberOfPages = courseService.getNumberOfPages(filter.getRecordsPerPage());
+			String order = OrderingUtil.defineOrderingType(filter.getOrdering() + OrderingUtil.defineOrderingDirection(filter.getDirection()));
+			List<Course> courseList = courseService.getAllToPage(filter.getRecordsPerPage(), filter.getCurrentPage(), order);
+			modelMap.addAttribute(Parameters.COURSE_LIST, courseList);
+			modelMap.addAttribute(Parameters.NUMBER_OF_PAGES, numberOfPages);
+			modelMap.addAttribute(Parameters.FILTER, filter);
+			pagePath = pagePathManager.getProperty(PagePath.ADMIN_SHOW_COURSES_PATH);
 		} catch (ServiceException e) {
 			modelMap.addAttribute(Parameters.ERROR_DATABASE, messageSource.getMessage("message.databaseerror", null, locale));
 			pagePath = pagePathManager.getProperty(PagePath.ERROR_PAGE_PATH);

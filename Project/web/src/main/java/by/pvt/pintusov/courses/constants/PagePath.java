@@ -29,6 +29,7 @@ public class PagePath {
 	public static final String ADMIN_PAGE_PATH = "path.page.admin";
 	public static final String ADMIN_MAKE_TEACHER_PATH = "path.page.admin.maketeacher";
 	public static final String ADMIN_ARCHIVE_COURSE_PATH = "path.page.admin.archive";
+	public static final String ADMIN_SHOW_COURSES_PATH = "path.page.admin.courses";
 
 	private PagePath () {}
 }
