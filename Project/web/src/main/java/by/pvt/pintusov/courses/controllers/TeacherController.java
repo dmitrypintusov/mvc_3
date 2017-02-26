@@ -2,12 +2,16 @@ package by.pvt.pintusov.courses.controllers;
 
 import by.pvt.pintusov.courses.constants.PagePath;
 import by.pvt.pintusov.courses.constants.Parameters;
+import by.pvt.pintusov.courses.dao.IMarkDao;
 import by.pvt.pintusov.courses.enums.CourseStatusType;
 import by.pvt.pintusov.courses.exceptions.ServiceException;
 import by.pvt.pintusov.courses.managers.PagePathManager;
+import by.pvt.pintusov.courses.pojos.Archive;
 import by.pvt.pintusov.courses.pojos.Course;
+import by.pvt.pintusov.courses.pojos.Mark;
 import by.pvt.pintusov.courses.pojos.User;
 import by.pvt.pintusov.courses.services.ICourseService;
+import by.pvt.pintusov.courses.services.IMarkService;
 import by.pvt.pintusov.courses.services.IUserService;
 import by.pvt.pintusov.courses.utils.PrincipalUtil;
 import org.apache.log4j.Logger;
@@ -41,6 +45,8 @@ public class TeacherController {
 	private IUserService userService;
 	@Autowired
 	private ICourseService courseService;
+	@Autowired
+	private IMarkService markService;
 	@Autowired
 	private PagePathManager pagePathManager;
 	@Autowired
@@ -137,6 +143,29 @@ public class TeacherController {
 			List<Course> courseList = courseService.getAll();
 			modelMap.addAttribute(Parameters.COURSE_LIST, courseList);
 			pagePath = pagePathManager.getProperty(PagePath.TEACHER_COURSES_PAGE);
+		} catch (ServiceException e) {
+			modelMap.addAttribute(Parameters.ERROR_DATABASE, messageSource.getMessage("message.databaseerror", null, locale));
+			pagePath = pagePathManager.getProperty(PagePath.ERROR_PAGE_PATH);
+		}
+		return pagePath;
+	}
+
+	@RequestMapping (value = "/putmark", method = GET)
+	public String putMarkPage () {
+		return pagePathManager.getProperty(PagePath.TEACHER_PUT_MARK_PATH);
+	}
+
+	@RequestMapping (value = "/putmark", method = POST)
+	public String archiveCourse (ModelMap modelMap,
+	                             @RequestParam(value = Parameters.STUDENT_ID, required = false)Integer studentId,
+	                             @RequestParam(value = Parameters.STUDENT_MARK, required = false)Integer studentMark,
+	                             @RequestParam(value = Parameters.COURSE_NAME, required = false)String courseName,
+	                             Locale locale) {
+		String pagePath;
+		try {
+				markService.addMark(studentId, studentMark, courseName);
+				modelMap.addAttribute(Parameters.SUCCESS_OPERATION, messageSource.getMessage("message.successoperation", null, locale));
+				pagePath = pagePathManager.getProperty(PagePath.TEACHER_PUT_MARK_PATH);
 		} catch (ServiceException e) {
 			modelMap.addAttribute(Parameters.ERROR_DATABASE, messageSource.getMessage("message.databaseerror", null, locale));
 			pagePath = pagePathManager.getProperty(PagePath.ERROR_PAGE_PATH);

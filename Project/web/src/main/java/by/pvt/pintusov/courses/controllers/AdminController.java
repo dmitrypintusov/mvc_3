@@ -104,13 +104,12 @@ public class AdminController {
 		try {
 			if (courseService.isCourseStatusEnded(archiveCourse)) {
 				Course course = courseService.getByCourseName(archiveCourse);
-				CourseStatusType courseStatus = CourseStatusType.ARCHIVE;
 				Archive archive = new Archive();
 				archive.addCourseToArchive(course);
 				logger.info(archive);
 				logger.info(course);
 				archiveService.saveOrUpdate(archive);
-				courseService.updateCourseStatus(course.getCourseName(), courseStatus);
+				courseService.updateCourseStatus(course.getCourseName(), CourseStatusType.ARCHIVE);
 				modelMap.addAttribute(Parameters.SUCCESS_OPERATION, messageSource.getMessage("message.successoperation", null, locale));
 				pagePath = pagePathManager.getProperty(PagePath.ADMIN_ARCHIVE_COURSE_PATH);
 			} else {

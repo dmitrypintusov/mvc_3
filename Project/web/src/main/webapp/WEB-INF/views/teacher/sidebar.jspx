@@ -11,6 +11,7 @@
             <li><a href="${pageContext.request.contextPath}/teacher/endcourse"><s:message code="page.teacher.sidebar.endcourse"/></a></li>
             <li><a href="${pageContext.request.contextPath}/teacher/courses"><s:message code="page.teacher.sidebar.courses"/></a></li>
             <li><a href="${pageContext.request.contextPath}/teacher/students"><s:message code="page.teacher.sidebar.students"/></a></li>
+            <li><a href="${pageContext.request.contextPath}/teacher/putmark"><s:message code="page.teacher.sidebar.putmark"/></a></li>
         </ul>
     </div>
 </jsp:root>

@@ -1,0 +1,29 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: Дмитрий
+  Date: 26.02.2017
+  Time: 11:37
+  To change this template use File | Settings | File Templates.
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:spring="http://www.springframework.org/tags"
+          xmlns="http://www.w3.org/1999/xhtml"
+          version="2.0">
+
+    <div class="content" align="center">
+        <spring:url value="/teacher/putmark" var="putMarkUrl"/>
+        <form name="putMarkForm" method="post" action="${putMarkUrl}">
+            <spring:message code="page.teacher.putmark.banner"/><br/>
+            <spring:message code="page.teacher.input.studentid"/><br/>
+            <input type="text" name="studentId" value=""/><br/>
+            <spring:message code="page.teacher.input.mark"/><br/>
+            <input type="text" name="studentMark" value=""/><br/>
+            <spring:message code="page.teacher.input.coursename"/><br/>
+            <input type="text" name="courseName" value=""/><br/>
+            <spring:message var="button" code="page.teacher.putmark.button"/><br/>
+            ${successOperation} <br/>
+            <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"><jsp:text/></input>
+            <input type="submit" value="${button}"/> <br/>
+        </form>
+    </div><br/>
+</jsp:root>
