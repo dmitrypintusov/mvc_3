@@ -1,0 +1,25 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: Дмитрий
+  Date: 26.02.2017
+  Time: 10:29
+  To change this template use File | Settings | File Templates.
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:spring="http://www.springframework.org/tags"
+          version="2.0">
+
+    <div class="content" align="center">
+        <spring:url value="/admin/archive" var="archiveCourseUrl"/>
+        <form name="archiveCourseForm" method="post" action="${archiveCourseUrl}">
+            <spring:message code="page.admin.archive.banner"/><br/>
+            <input type="text" name="archiveCourse" value=""/><br/>
+            <spring:message var="button" code="page.admin.archive.button"/>
+            ${courseStatusOpen} <br/>
+            ${successOperation} <br/>
+            <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"><jsp:text/></input>
+            <input type="submit" value="${button}"/> <br/>
+        </form>
+    </div>
+</jsp:root>

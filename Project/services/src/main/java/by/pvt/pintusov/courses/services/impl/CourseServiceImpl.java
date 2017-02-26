@@ -88,7 +88,6 @@ public class CourseServiceImpl extends AbstractService<Course> implements ICours
 	public void updateCourseStatus (String courseName, CourseStatusType courseStatus) throws ServiceException {
 		try {
 			Course course = courseDao.getByCourseName(courseName);
-			logger.info(course);
 			course.setCourseStatus(courseStatus);
 			courseDao.saveOrUpdate(course);
 			logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
@@ -117,6 +116,7 @@ public class CourseServiceImpl extends AbstractService<Course> implements ICours
 	}
 
 	@Override
+	@Transactional (propagation = Propagation.SUPPORTS, readOnly = true)
 	public Course getByCourseName(String courseName) throws ServiceException {
 		Course course;
 		try {

@@ -12,12 +12,11 @@ public class Parameters {
 	public static final String USER = "user";
 	public static final String USER_LOGIN = "login";
 	public static final String NEW_USER = "newUser";
-	public static final String USER_ACCESS_LEVEL = "accessLevel";
 	public static final String USERS_LIST = "userList";
 
 	/*COURSE PARAMETERS*/
 	public static final String COURSE_LIST = "courseList";
-	public static final String COURSE_ATTEND = "toAttend";
+	public static final String COURSE_ARCHIVE = "archiveCourse";
 	public static final String COURSE_END = "endCourse";
 
 	/*ERROR PARAMETERS*/
@@ -26,7 +25,7 @@ public class Parameters {
 	public static final String ERROR_USER_EXISTS = "errorUserExists";
 	public static final String SUCCESS_OPERATION = "successOperation";
 	public static final String COURSE_STATUS_ENDED = "courseStatusEnded";
-	public static final String ERROR_EMPTY_LIST = "errorEmptyList";
+	public static final String COURSE_STATUS_OPEN = "courseStatusOpen";
 
 	/*PAGINATING PARAMETERS*/
 	public static final String NUMBER_OF_PAGES = "numberOfPages";

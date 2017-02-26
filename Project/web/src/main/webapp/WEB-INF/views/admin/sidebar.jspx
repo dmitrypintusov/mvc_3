@@ -9,6 +9,7 @@
         <ul class="nav">
             <li><a href="${pageContext.request.contextPath}/logout"><s:message code="page.common.sidebar.logout"/></a></li>
             <li><a href="${pageContext.request.contextPath}/admin/maketeacher"><s:message code="page.admin.sidebar.maketeacher"/></a></li>
+            <li><a href="${pageContext.request.contextPath}/admin/archive"><s:message code="page.admin.sidebar.archive"/></a></li>
         </ul>
     </div>
 </jsp:root>

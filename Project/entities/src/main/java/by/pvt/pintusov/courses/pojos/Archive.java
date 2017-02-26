@@ -1,5 +1,7 @@
 package by.pvt.pintusov.courses.pojos;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,13 +25,35 @@ public class Archive extends AbstractEntity {
 	public void setCourses(Set<Course> coursesInArchive) {
 		this.coursesInArchive = coursesInArchive;
 	}
+	private Set<Course> coursesInArchive;
+
 	public void addCourseToArchive(Course course){
 		if(coursesInArchive == null){
 			coursesInArchive = new HashSet<>();
 		}
 		coursesInArchive.add(course);
 	}
-	private Set<Course> coursesInArchive;
 
-	//TODO: нужно ли equals, HashCode, toString, если одна коллекция
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null ||  !(o instanceof User)) return false;
+		if (!super.equals(o)) return false;
+		Archive archive = (Archive) o;
+		return coursesInArchive != null ? coursesInArchive.equals(archive.coursesInArchive) : archive.coursesInArchive == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		result = 31 * result + (coursesInArchive != null ? coursesInArchive.hashCode() : 0);
+		return result;
+	}
+
+	@Override
+	public String toString() {
+		return "Archive{" +
+				"coursesInArchive=" + coursesInArchive +
+				'}';
+	}
 }
