@@ -10,16 +10,21 @@
           xmlns:spring="http://www.springframework.org/tags"
           version="2.0">
 
-    <div class="content" align="center">
+    <div align="center">
         <spring:url value="/admin/archive" var="archiveCourseUrl"/>
         <form name="archiveCourseForm" method="post" action="${archiveCourseUrl}">
-            <spring:message code="page.admin.archive.banner"/><br/>
-            <input type="text" name="archiveCourse" value=""/><br/>
-            <spring:message var="button" code="page.admin.archive.button"/>
-            ${courseStatusOpen} <br/>
-            ${successOperation} <br/>
-            <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"><jsp:text/></input>
-            <input type="submit" value="${button}"/> <br/>
+            <div class="form-group">
+                <h3><spring:message code="page.admin.archive.banner"/></h3>
+                <input type="text" class="form-control" name="archiveCourse" value=""/>
+                <spring:message var="button" code="page.admin.archive.button"/>
+                ${courseStatusOpen} <br/>
+                ${successOperation} <br/>
+            </div>
+
+            <div class="form-group">
+                <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"><jsp:text/></input>
+                <input type="submit" class="btn btn-success" value="${button}"/>
+            </div>
         </form>
     </div>
 </jsp:root>

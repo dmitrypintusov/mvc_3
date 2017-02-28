@@ -12,8 +12,8 @@
           xmlns:sf="http://www.springframework.org/tags/form"
           version="2.0">
 
-    <div class="content">
-        <table border="1" align="center">
+    <div>
+        <table class="table table-hover table-bordered" align="center">
             <tr bgcolor="#CCCCCC" align="center">
                 <td><strong><spring:message code="page.admin.course.name"/></strong></td>
                 <td><strong><spring:message code="page.admin.course.hours"/></strong></td>
@@ -28,8 +28,8 @@
             </c:forEach>
         </table><br/>
 
-        <table border="1" cellpadding="5" cellspacing="5">
-            <tr>
+        <table class="table table-bordered" align="center">
+            <tr align="center">
                 <c:forEach begin="1" end="${numberOfPages}" var="i">
                     <c:choose>
                         <c:when test="${currentPage eq i}">
@@ -45,37 +45,37 @@
 
         <spring:url value="/admin/courses" var="coursesUrl"/>
         <sf:form name="filterForm" method="post" action="${coursesUrl}" modelAttribute="filter">
-            <table>
-                <tr>
+            <table class="table" align="center">
+                <tr align="center">
                     <td><label for="recordsPerPage"><spring:message code="page.admin.courses.recordsperpage.title"/></label></td>
                     <td><label for="ordering"><spring:message code="page.admin.courses.ordering.title"/></label></td>
                     <td><label for="direction"><spring:message code="page.admin.courses.direction.title"/></label></td>
                 </tr>
-                <tr>
+                <tr align="center">
                     <td>
-                        <sf:select path="recordsPerPage" id="recordsPerPage">
+                        <sf:select cssClass="form-control" path="recordsPerPage" id="recordsPerPage">
                             <sf:option value="3">3</sf:option>
                             <sf:option value="5">5</sf:option>
                             <sf:option value="10">10</sf:option>
                         </sf:select>
                     </td>
                     <td>
-                        <sf:select path="ordering" id="ordering">
+                        <sf:select cssClass="form-control" path="ordering" id="ordering">
                             <sf:option value="courseName"><spring:message code="page.admin.courses.order.name"/></sf:option>
                             <sf:option value="hours"><spring:message code="page.admin.courses.order.hours"/></sf:option>
                             <sf:option value="courseStatus"><spring:message code="page.admin.courses.order.status"/></sf:option>
                         </sf:select>
                     </td>
                     <td>
-                        <sf:select path="direction" id="direction">
+                        <sf:select cssClass="form-control" path="direction" id="direction">
                             <sf:option value="asc"><spring:message code="page.admin.courses.direction.asc"/></sf:option>
                             <sf:option value="desc"><spring:message code="page.admin.courses.direction.desc"/></sf:option>
                         </sf:select>
                     </td>
                 </tr>
             </table>
-            <spring:message var="button" code="page.admin.courses.button"/>
-            <input type="submit" value="${button}" />
+            <div align="center"><spring:message var="button" code="page.admin.courses.button"/>
+            <input type="submit" class="btn btn-info" value="${button}" /></div>
         </sf:form>
     </div>
 </jsp:root>

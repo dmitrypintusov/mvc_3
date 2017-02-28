@@ -3,13 +3,13 @@
 
 .sidebar {
 	float: left;
-	width: 30%;
 }
 
 ul.nav {
 	list-style: none;
 }
 ul.nav li {
+	border-top: 1px solid #666;
 	border-bottom: 1px solid #666;
 	border-left: 1px solid #666;
 	border-right: 1px solid #666;
