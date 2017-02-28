@@ -29,7 +29,7 @@
         </div>
         <p align="center">
             <a href="${pageContext.request.contextPath}/home">
-                <img src="${pageContext.request.contextPath}/assets/img/courses-icon.png"
+                <img src="${pageContext.request.contextPath}/assets/img/courses.png"
                      alt="logo"
                      name="Insert_logo"
                      id="Insert_logo"

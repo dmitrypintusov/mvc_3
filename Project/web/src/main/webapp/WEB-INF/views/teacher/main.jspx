@@ -3,10 +3,9 @@
           xmlns:s="http://www.springframework.org/tags"
           xmlns="http://www.w3.org/1999/xhtml"
           version="2.0">
-    <div class="content" align="center">
-        <br/>
+    <div align="center">
         <h2>${user.firstName} ${user.lastName}</h2>
         <h3><s:message code="page.teacher.main.banner"/> </h3>
-    </div><br/><br/><br/><br/><br/>
+    </div>
 </jsp:root>
 

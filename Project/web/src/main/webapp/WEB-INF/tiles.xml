@@ -4,16 +4,8 @@
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 
-    <!-- PAGES TEMPLATE -->
-    <definition name="default" template="/WEB-INF/views/layouts/home_layout.jspx">
-        <put-attribute name="title" value=""/>
-        <put-attribute name="sidebar" value="/WEB-INF/views/common/sidebar.jspx"/>
-        <put-attribute name="body" value=""/>
-        <put-attribute name="footer" value="/WEB-INF/views/common/footer.jspx"/>
-    </definition>
-
     <!-- HOME PAGE TEMPLATE-->
-    <definition name="home_template" template="/WEB-INF/views/layouts/home_layout.jspx">
+    <definition name="home_template" template="/WEB-INF/views/layouts/layout.jspx">
         <put-attribute name="title" value="page.home.title"/>
         <put-attribute name="header" value="/WEB-INF/views/home/header.jspx"/>
         <put-attribute name="sidebar" value="/WEB-INF/views/home/sidebar.jspx"/>
@@ -104,7 +96,7 @@
     </definition>
 
     <!-- ERROR PAGE -->
-    <definition name="error" extends="default">
+    <definition name="error" extends="home_template">
         <put-attribute name="title" value="page.error.title"/>
         <put-attribute name="body" value="/WEB-INF/views/errors/error.jspx"/>
     </definition>

@@ -10,16 +10,18 @@
           xmlns:spring="http://www.springframework.org/tags"
           version="2.0" >
 
-    <div class="content" align="center">
+    <div align="center">
         <spring:url value="/teacher/endcourse" var="endCourseUrl"/>
         <form name="endCourseForm" method="post" action="${endCourseUrl}">
-            <spring:message code="page.teacher.endcourse.banner"/><br/>
-            <input type="text" name="endCourse" value=""/><br/>
-            <spring:message var="button" code="page.teacher.endcourse.button"/>
+            <h3><spring:message code="page.teacher.endcourse.banner"/><br/></h3>
+            <div class="form-group">
+                <input type="text" class="form-control" name="endCourse" value=""/><br/>
+            </div>
             ${successOperation} <br/>
             ${courseStatusEnded} <br/>
+            <spring:message var="button" code="page.teacher.endcourse.button"/>
             <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"><jsp:text/></input>
-            <input type="submit" value="${button}"/> <br/>
+            <input type="submit" class="btn btn-success" value="${button}"/> <br/>
         </form>
     </div>
 </jsp:root>

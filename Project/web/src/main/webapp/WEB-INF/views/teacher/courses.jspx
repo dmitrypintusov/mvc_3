@@ -11,8 +11,8 @@
           xmlns:spring="http://www.springframework.org/tags"
           version="2.0">
 
-    <div class="content" align="center">
-        <table border="1" align="center">
+    <div align="center">
+        <table class="table table-hover table-bordered" align="center">
             <tr bgcolor="#CCCCCC" align="center">
                 <td><strong><spring:message code="page.teacher.course.name"/></strong></td>
                 <td><strong><spring:message code="page.teacher.course.hours"/></strong></td>
