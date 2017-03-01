@@ -29,8 +29,10 @@ import javax.validation.Valid;
 import java.util.Locale;
 
 /**
+ * User controller
+ * using Spring
  * Project: courses
- * Created by: USER
+ * Created by: dpintusov
  * Date: 15.02.17.
  */
 @Controller
@@ -54,6 +56,14 @@ public class UserController {
 		return pagePathManager.getProperty(PagePath.HOME_PAGE_PATH);
 	}
 
+	/**
+	 * Logout with Spring Security
+	 * @param request - http request
+	 * @param response - http response
+	 * @param redirectAttributes - redirect
+	 * @param locale - locale parameter
+	 * @return path to page
+	 */
 	@RequestMapping(value = "/logout", method = {RequestMethod.GET, RequestMethod.POST})
 	public String logoutUser (HttpServletRequest request,
 	                          HttpServletResponse response,
@@ -75,6 +85,14 @@ public class UserController {
 		return pagePathManager.getProperty(PagePath.REGISTRATION_PAGE_PATH);
 	}
 
+	/**
+	 * Register new user
+	 * @param modelMap - model map parameter
+	 * @param userDTO - user data access object with validation
+	 * @param bindingResult - binding result parameter
+	 * @param locale - locale parameter
+	 * @return path to page
+	 */
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public String registerUser(ModelMap modelMap,
 	                           @ModelAttribute(Parameters.NEW_USER) @Valid UserDTO userDTO,

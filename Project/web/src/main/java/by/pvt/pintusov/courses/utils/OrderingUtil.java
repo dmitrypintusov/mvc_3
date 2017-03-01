@@ -1,17 +1,23 @@
 package by.pvt.pintusov.courses.utils;
 
 import by.pvt.pintusov.courses.constants.OrderingConstants;
-import by.pvt.pintusov.courses.constants.Parameters;
 
 /**
+ * Ordering util
  * Project name: courses
- * Created by Дмитрий
+ * Created by dpintusov
  * Date: 15.02.2017.
  */
+
 public class OrderingUtil {
 
 	private OrderingUtil () {}
 
+	/**
+	 * Define ordering parameter
+	 * @param ordering - type of ordering
+	 * @return orderBy parameter
+	 */
 	public static String defineOrderingType (String ordering) {
 		String orderBy;
 		switch (ordering) {
@@ -30,6 +36,11 @@ public class OrderingUtil {
 		return orderBy;
 	}
 
+	/**
+	 * Define ordering direction
+	 * @param direction - direction parameter
+	 * @return orderDirection parameter
+	 */
 	public static String defineOrderingDirection (String direction) {
 		String orderDirection;
 		switch (direction) {

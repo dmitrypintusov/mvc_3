@@ -2,8 +2,8 @@ package by.pvt.pintusov.courses.constants;
 
 /**
  * Page path constants
- * @author pintusov
- * @version 1.0
+ * @author dpintusov
+ * @version 1.2
  */
 
 public class PagePath {

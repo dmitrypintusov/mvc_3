@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
+ * User REST controller
  * Project: courses
- * Created by: USER
+ * Created by: dpintusov
  * Date: 21.02.17.
  */
 @RestController

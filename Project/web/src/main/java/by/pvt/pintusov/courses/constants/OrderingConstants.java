@@ -1,8 +1,9 @@
 package by.pvt.pintusov.courses.constants;
 
 /**
+ * Ordering constants
  * Project name: courses
- * Created by Дмитрий
+ * Created by: dpintusov
  * Date: 15.02.2017.
  */
 public class OrderingConstants {

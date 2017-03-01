@@ -1,9 +1,9 @@
 package by.pvt.pintusov.courses.constants;
 
 /**
- * Parameters
- * @author pintusov
- * @version 1.0
+ * Parameters constants
+ * @author dpintusov
+ * @version 1.2
  */
 
 public class Parameters {

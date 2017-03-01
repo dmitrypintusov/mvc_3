@@ -45,6 +45,13 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
 		clearAuthenticationAttributes(request);
 	}
 
+	/**
+	 * Check if target url is allowed
+	 * @param request - http request
+	 * @param response - http response
+	 * @param authentication - user authentication
+	 * @throws IOException
+	 */
 	protected void handle (HttpServletRequest request,
 	                       HttpServletResponse response,
 	                       Authentication authentication) throws IOException {
@@ -57,6 +64,12 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
 		redirectStrategy.sendRedirect(request, response, targetUrl);
 	}
 
+	/**
+	 * Determine user authority
+	 * and redirect to allowed pages
+	 * @param authentication - user authentication
+	 * @return path to page
+	 */
 	protected String determineTargetUrl (Authentication authentication) {
 		boolean isTeacher = false;
 		boolean isStudent = false;
@@ -90,6 +103,10 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
 		return pagePath;
 	}
 
+	/**
+	 * Delete user authentication
+	 * @param request - http request
+	 */
 	protected void clearAuthenticationAttributes (HttpServletRequest request) {
 		HttpSession session;
 		session = request.getSession(false);

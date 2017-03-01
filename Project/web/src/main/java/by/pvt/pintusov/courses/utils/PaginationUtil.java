@@ -4,11 +4,22 @@ import by.pvt.pintusov.courses.constants.OrderingConstants;
 import by.pvt.pintusov.courses.filters.PaginationFilter;
 
 /**
+ * Pagination Util
  * Project: courses
- * Created by: USER
+ * Created by: dpintusov
  * Date: 16.02.17.
  */
+
 public class PaginationUtil {
+
+	/**
+	 * Define ordering parameter
+	 * @param ordering - ordering type
+	 * @param direction - ordering direction
+	 * @param currentPage - current page of user
+	 * @param recordsPerPage - records per page
+	 * @return
+	 */
 	public static PaginationFilter defineParameters (String ordering, String direction, Integer currentPage, Integer recordsPerPage) {
 		PaginationFilter filter = new PaginationFilter();
 		if (ordering != null) {

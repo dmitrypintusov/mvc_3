@@ -7,8 +7,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 /**
+ * Principal util
  * Project: courses
- * Created by: USER
+ * Created by: dpintusov
  * Date: 17.02.17.
  */
 

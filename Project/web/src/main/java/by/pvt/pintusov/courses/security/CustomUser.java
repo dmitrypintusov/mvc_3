@@ -6,8 +6,9 @@ import org.springframework.security.core.GrantedAuthority;
 import java.util.Collection;
 
 /**
+ * Custom user with security
  * Project: courses
- * Created by: USER
+ * Created by: dpintusov
  * Date: 16.02.17.
  */
 public class CustomUser extends org.springframework.security.core.userdetails.User {

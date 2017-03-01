@@ -18,8 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Authentication service
  * Project: courses
- * Created by: USER
+ * Created by: dpintusov
  * Date: 16.02.17.
  */
 @Service("authenticationService")
@@ -29,6 +30,12 @@ public class AuthenticationService implements UserDetailsService {
 	@Autowired
 	private IUserService userService;
 
+	/**
+	 * Secured loading user by it login
+	 * @param login
+	 * @return
+	 * @throws UsernameNotFoundException
+	 */
 	@Override
 	@Transactional(readOnly = true)
 	public CustomUser loadUserByUsername (String login) throws UsernameNotFoundException {

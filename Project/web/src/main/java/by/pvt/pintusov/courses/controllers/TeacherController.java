@@ -28,8 +28,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
+ * Teacher controller
+ * with Spring
  * Project: courses
- * Created by: USER
+ * Created by: dpintusov
  * Date: 17.02.17.
  */
 @Controller
@@ -61,6 +63,14 @@ public class TeacherController {
 		return pagePathManager.getProperty(PagePath.TEACHER_ADD_COURSE_PATH);
 	}
 
+	/**
+	 * Adding course
+	 * @param modelMap - model map parameter
+	 * @param course - course entity
+	 * @param bindingResult - binding result parameter
+	 * @param locale - locale parameter
+	 * @return path to page
+	 */
 	@RequestMapping(value = "/addcourse", method = POST)
 	public String addCourse (ModelMap modelMap,
 	                       Course course,
@@ -85,6 +95,12 @@ public class TeacherController {
 		return pagePath;
 	}
 
+	/**
+	 * Showing list of students
+	 * @param modelMap - model map parameter
+	 * @param locale - locale parameter
+	 * @return path to page
+	 */
 	@RequestMapping (value = "/students", method = GET)
 	public String showStudentsPage (ModelMap modelMap,
 	                                Locale locale) {
@@ -106,6 +122,14 @@ public class TeacherController {
 		return pagePathManager.getProperty(PagePath.TEACHER_END_COURSE_PATH);
 	}
 
+	/**
+	 * End course function
+	 * changes course status to ENDED
+	 * @param modelMap - model map parameter
+	 * @param endCourse - course name to end
+	 * @param locale - locale parameter
+	 * @return path to page
+	 */
 	@RequestMapping (value = "/endcourse", method = POST)
 	public String endCourse (ModelMap modelMap,
 	                           @RequestParam(value = Parameters.COURSE_END, required = false)String endCourse,
@@ -130,11 +154,16 @@ public class TeacherController {
 			return pagePath;
 	}
 
+	/**
+	 * Show list of courses
+	 * @param modelMap - model map parameter
+	 * @param locale - locale parameter
+	 * @return path to page
+	 */
 	@RequestMapping (value = "/courses", method = GET)
 	public String showCoursesPage (ModelMap modelMap,
 	                                Locale locale) {
 		String pagePath;
-		//TODO: pagination
 		try {
 			List<Course> courseList = courseService.getAll();
 			modelMap.addAttribute(Parameters.COURSE_LIST, courseList);
@@ -151,6 +180,15 @@ public class TeacherController {
 		return pagePathManager.getProperty(PagePath.TEACHER_PUT_MARK_PATH);
 	}
 
+	/**
+	 * Putting mark to student
+	 * @param modelMap - model map parameter
+	 * @param studentId - student id
+	 * @param studentMark - student mark
+	 * @param courseName - course name
+	 * @param locale - locale parameter
+	 * @return path to page
+	 */
 	@RequestMapping (value = "/putmark", method = POST)
 	public String archiveCourse (ModelMap modelMap,
 	                             @RequestParam(value = Parameters.STUDENT_ID, required = false)Integer studentId,

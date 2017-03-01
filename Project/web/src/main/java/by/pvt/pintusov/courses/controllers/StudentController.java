@@ -23,8 +23,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
+ * Student controller
+ * using Spring
  * Project: courses
- * Created by: USER
+ * Created by: dpintusov
  * Date: 17.02.17.
  */
 
@@ -55,6 +57,13 @@ public class StudentController {
 		return pagePathManager.getProperty(PagePath.STUDENT_ATTEND_COURSE_PATH);
 	}
 
+	/**
+	 * Showing list of courses
+	 * user can attend
+	 * @param modelMap - model map parameter
+	 * @param locale - locale parameter
+	 * @return path to page
+	 */
 	@RequestMapping(value = "/attendcourse", method = POST)
 	public String attendCourse (ModelMap modelMap,
 	                            Locale locale) {
@@ -70,6 +79,12 @@ public class StudentController {
 		return pagePath;
 	}
 
+	/**
+	 * Showing list of teachers
+	 * @param modelMap - model map parameter
+	 * @param locale - locale parameter
+	 * @return path to page
+	 */
 	@RequestMapping (value = "/teachers", method = GET)
 	public String showTeachersPage (ModelMap modelMap,
 	                                Locale locale) {

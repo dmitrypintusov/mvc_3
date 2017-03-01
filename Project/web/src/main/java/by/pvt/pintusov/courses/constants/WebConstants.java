@@ -1,8 +1,9 @@
 package by.pvt.pintusov.courses.constants;
 
 /**
+ * Web constants
  * Project: courses
- * Created by: USER
+ * Created by: dpintusov
  * Date: 15.02.17.
  */
 public class WebConstants {

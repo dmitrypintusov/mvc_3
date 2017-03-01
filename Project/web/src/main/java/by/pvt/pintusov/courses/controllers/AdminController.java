@@ -32,8 +32,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
+ * Admin controller
+ * using Spring
  * Project: courses
- * Created by: USER
+ * Created by: dpintusov
  * Date: 17.02.17.
  */
 
@@ -72,6 +74,13 @@ public class AdminController {
 		return pagePathManager.getProperty(PagePath.ADMIN_MAKE_TEACHER_PATH);
 	}
 
+	/**
+	 * Giving status of TEACHER to User
+	 * @param modelMap - model map parameter
+	 * @param login - user login
+	 * @param locale - locale parameter
+	 * @return path to page
+	 */
 	@RequestMapping (value = "/maketeacher", method = POST)
 	public String makeTeacher (ModelMap modelMap,
 	                         @RequestParam(value = Parameters.USER_LOGIN, required = false)String login,
@@ -98,12 +107,20 @@ public class AdminController {
 		return pagePathManager.getProperty(PagePath.ADMIN_ARCHIVE_COURSE_PATH);
 	}
 
+	/**
+	 * Putting course into archive
+	 * @param modelMap - model map parameter
+	 * @param archiveCourse - course name to put in archive
+	 * @param locale - locale parameter
+	 * @return path to page
+	 */
 	@RequestMapping (value = "/archive", method = POST)
 	public String archiveCourse (ModelMap modelMap,
 	                         @RequestParam(value = Parameters.COURSE_ARCHIVE, required = false)String archiveCourse,
 	                         Locale locale) {
 		String pagePath;
 		try {
+			/*Checking if course status is ended, if not showing message*/
 			if (courseService.isCourseStatusEnded(archiveCourse)) {
 				Course course = courseService.getByCourseName(archiveCourse);
 				Archive archive = new Archive();
@@ -125,6 +142,14 @@ public class AdminController {
 		return pagePath;
 	}
 
+	/**
+	 * Show courses list
+	 * with pagination and sorting option
+	 * @param modelMap - model map parameter
+	 * @param filter - pagination filter
+	 * @param locale - locale parameter
+	 * @return path to page
+	 */
 	@RequestMapping(value = "/courses", method = {GET, POST})
 	public String showCoursesPage (ModelMap modelMap,
 	                               @ModelAttribute ("filter") PaginationFilter filter,
@@ -135,7 +160,6 @@ public class AdminController {
 		String ordering = filter.getOrdering();
 		String direction = filter.getDirection();
 		filter = PaginationUtil.defineParameters(ordering, direction, currentPage, recordsPerPage);
-		//TODO:resolve problem with sorting
 		try {
 			Integer numberOfPages = courseService.getNumberOfPages(filter.getRecordsPerPage());
 			String order = OrderingUtil.defineOrderingType(filter.getOrdering() + OrderingUtil.defineOrderingDirection(filter.getDirection()));

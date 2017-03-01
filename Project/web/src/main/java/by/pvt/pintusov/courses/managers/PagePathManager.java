@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 
 /**
  * Page path manager
- * @author pintusov
+ * @author dpintusov
  * @version 1.2
  */
 @Component
