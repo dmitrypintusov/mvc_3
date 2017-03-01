@@ -1,6 +1,7 @@
 package by.pvt.pintusov.courses.constants;
 
 /**
+ * Dao constants
  * Project: courses
  * Created by: USER
  * Date: 20.01.17.

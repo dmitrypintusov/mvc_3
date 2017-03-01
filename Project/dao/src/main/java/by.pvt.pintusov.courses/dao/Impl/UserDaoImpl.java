@@ -3,26 +3,20 @@ package by.pvt.pintusov.courses.dao.Impl;
 import by.pvt.pintusov.courses.constants.DaoConstants;
 import by.pvt.pintusov.courses.dao.AbstractDao;
 import by.pvt.pintusov.courses.dao.IUserDao;
-import by.pvt.pintusov.courses.enums.AccessLevelType;
-import by.pvt.pintusov.courses.enums.CourseStatusType;
 import by.pvt.pintusov.courses.exceptions.DaoException;
-import by.pvt.pintusov.courses.pojos.AccessLevel;
-import by.pvt.pintusov.courses.pojos.Course;
 import by.pvt.pintusov.courses.pojos.User;
 import org.apache.log4j.Logger;
-import org.hibernate.*;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 /**
  * User Dao implementation
- * @author pintusov
- * @version 1.1
+ * @author dpintusov
+ * @version 1.2
  */
 @Repository
 public class UserDaoImpl extends AbstractDao <User> implements IUserDao {

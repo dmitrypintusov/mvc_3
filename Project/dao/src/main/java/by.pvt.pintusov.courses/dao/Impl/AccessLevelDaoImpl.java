@@ -15,8 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 /**
+ * Access level dao implementation
  * Project name: courses
- * Created by Дмитрий
+ * Created by dpintusov
  * Date: 22.01.2017.
  */
 @Repository

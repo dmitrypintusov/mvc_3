@@ -3,11 +3,14 @@ package by.pvt.pintusov.courses.utils;
 import org.hibernate.cfg.DefaultNamingStrategy;
 
 /**
+ * Custom naming strategy
+ * used for adding prefixes to tables and columns
  * Project: courses
- * Created by: USER
+ * Created by: dpintusov
  * Date: 21.01.17.
  */
 public class CustomNamingStrategy extends DefaultNamingStrategy {
+
 	@Override
 	public String classToTableName(String className) {
 		return "T_" + super.classToTableName(className).toUpperCase();

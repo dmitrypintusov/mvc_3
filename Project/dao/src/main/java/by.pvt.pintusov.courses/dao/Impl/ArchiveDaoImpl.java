@@ -9,8 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 /**
+ * Archive dao implementation
  * Project: courses
- * Created by: USER
+ * Created by: dpintusov
  * Date: 23.01.17.
  */
 @Repository

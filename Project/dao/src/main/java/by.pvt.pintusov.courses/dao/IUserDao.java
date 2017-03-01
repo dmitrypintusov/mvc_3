@@ -4,8 +4,9 @@ import by.pvt.pintusov.courses.exceptions.DaoException;
 import by.pvt.pintusov.courses.pojos.User;
 
 /**
+ * User dao interface
  * Project: courses
- * Created by: USER
+ * Created by: dpintusov
  * Date: 20.01.17.
  */
 public interface IUserDao extends IDao<User> {

@@ -8,7 +8,6 @@ import org.hibernate.*;
 import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 import java.util.List;
@@ -17,7 +16,7 @@ import java.util.List;
  * Describes the abstract class AbstractDao
  * @param <T> - entity of AbstractEntity
  * @author dpintusov
- * @version 1.1
+ * @version 1.2
  */
 
 public abstract class AbstractDao <T extends AbstractEntity> implements IDao <T> {
@@ -27,15 +26,31 @@ public abstract class AbstractDao <T extends AbstractEntity> implements IDao <T>
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	/**
+	 * Constructor for creating Hibernate connection
+	 * for abstract class of Entity
+	 * @param persistentClass - abstract class of Entity
+	 * @param sessionFactory - Hibernate session factory
+	 */
 	protected AbstractDao(Class persistentClass, SessionFactory sessionFactory){
 		this.persistentClass = persistentClass;
 		this.sessionFactory = sessionFactory;
 	}
 
+	/**
+	 * Getting current session from session factory
+	 * @return Session
+	 */
 	protected Session getCurrentSession(){
 		return sessionFactory.getCurrentSession();
 	}
 
+	/**
+	 * Saving or updating entity to/in database
+	 * @param entity - abstract Entity
+	 * @return id - entity id in database
+	 * @throws DaoException
+	 */
 	@Override
 	public Serializable saveOrUpdate(T entity) throws DaoException {
 		Serializable id;
@@ -51,6 +66,12 @@ public abstract class AbstractDao <T extends AbstractEntity> implements IDao <T>
 		return id;
 	}
 
+	/**
+	 * Getting entity by id
+	 * @param id - abstract Entity id
+	 * @return entity - persistent entity from database
+	 * @throws DaoException
+	 */
 	@Override
 	public T getById(Integer id) throws DaoException {
 		T entity;
@@ -64,6 +85,12 @@ public abstract class AbstractDao <T extends AbstractEntity> implements IDao <T>
 		return entity;
 	}
 
+	/**
+	 * Loading entity from database
+	 * @param id - abstract Entity id
+	 * @return entity - persistent entity from database
+	 * @throws DaoException
+	 */
 	@Override
 	public T load(Integer id) throws DaoException {
 		T entity;
@@ -77,6 +104,11 @@ public abstract class AbstractDao <T extends AbstractEntity> implements IDao <T>
 		return entity;
 	}
 
+	/**
+	 * Deleting entity from database
+	 * @param id - abstract Entity id to delete
+	 * @throws DaoException
+	 */
 	@Override
 	public void delete(Integer id) throws DaoException {
 		try {
@@ -89,6 +121,11 @@ public abstract class AbstractDao <T extends AbstractEntity> implements IDao <T>
 		}
 	}
 
+	/**
+	 * Getting List of abstract Entity
+	 * @return list - list of entities
+	 * @throws DaoException
+	 */
 	@Override
 	public List<T> getAll() throws DaoException {
 		List <T> list;
@@ -103,12 +140,20 @@ public abstract class AbstractDao <T extends AbstractEntity> implements IDao <T>
 		return list;
 	}
 
+	/**
+	 * Getting abstract Entities from database
+	 * for creating pagination
+	 * @param recordsPerPage - records of entities
+	 * @param pageNumber - number of pages
+	 * @return list - list of entities for pagination
+	 * @throws DaoException
+	 */
 	@Override
 	public List<T> getAllToPage(int recordsPerPage, int pageNumber) throws DaoException {
 		List <T> list;
 		try {
 			Session session = getCurrentSession();
-			Criteria criteria =session.createCriteria(persistentClass);
+			Criteria criteria = session.createCriteria(persistentClass);
 			criteria.setFirstResult((pageNumber-1) * recordsPerPage);
 			criteria.setMaxResults(recordsPerPage);
 			list = criteria.list();
@@ -119,6 +164,12 @@ public abstract class AbstractDao <T extends AbstractEntity> implements IDao <T>
 		return list;
 	}
 
+	/**
+	 * Getting number of records in database
+	 * for abstract Entity
+	 * @return records - number of records
+	 * @throws DaoException
+	 */
 	@Override
 	public Long getNumberRecords() throws DaoException {
 		Long records;

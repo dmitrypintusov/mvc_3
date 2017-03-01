@@ -8,8 +8,8 @@ import java.util.List;
 
 /**
  * Dao interface
- * @author pintusov
- * @version 1.1
+ * @author dpintusov
+ * @version 1.2
  */
 
 public interface IDao <T extends AbstractEntity> {

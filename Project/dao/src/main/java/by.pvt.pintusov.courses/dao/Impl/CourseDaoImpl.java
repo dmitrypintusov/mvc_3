@@ -6,25 +6,18 @@ import by.pvt.pintusov.courses.dao.ICourseDao;
 import by.pvt.pintusov.courses.enums.CourseStatusType;
 import by.pvt.pintusov.courses.exceptions.DaoException;
 import by.pvt.pintusov.courses.pojos.Course;
-import by.pvt.pintusov.courses.pojos.User;
 import org.apache.log4j.Logger;
 import org.hibernate.*;
-import org.hibernate.criterion.Projection;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.transform.ResultTransformer;
-import org.hibernate.type.StandardBasicTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.io.Serializable;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
+ * Course dao implementation
  * Project name: courses
- * Created by Дмитрий
+ * Created by dpintusov
  * Date: 22.01.2017.
  */
 @Repository
