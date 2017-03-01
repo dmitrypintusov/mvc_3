@@ -1,16 +1,15 @@
 package by.pvt.pintusov.courses.services;
 
-import by.pvt.pintusov.courses.pojos.AbstractEntity;
 import by.pvt.pintusov.courses.exceptions.ServiceException;
+import by.pvt.pintusov.courses.pojos.AbstractEntity;
 
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
  * Service interface
- * @author pintusov
- * @version 1.1
+ * @author dpintusov
+ * @version 1.2
  */
 
 public interface IService <T extends AbstractEntity> {

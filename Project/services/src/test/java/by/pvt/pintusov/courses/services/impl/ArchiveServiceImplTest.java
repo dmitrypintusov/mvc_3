@@ -13,8 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.Serializable;
 
 /**
+ * Testing archive service
  * Project: courses
- * Created by: USER
+ * Created by: dpintusov
  * Date: 24.01.17.
  */
 @Transactional

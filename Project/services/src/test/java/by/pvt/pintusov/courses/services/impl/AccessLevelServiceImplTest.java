@@ -14,8 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.Serializable;
 
 /**
+ * Testing access level
  * Project: courses
- * Created by: USER
+ * Created by: dpintusov
  * Date: 24.01.17.
  */
 @Transactional
@@ -57,6 +58,14 @@ public class AccessLevelServiceImplTest {
 		delete();
 		actualAccessLevel = accessLevelService.getById((Integer) accessLevelId);
 		Assert.assertNull("delete() method failed: ", actualAccessLevel);
+	}
+
+	@Test
+	public void testGetByAccessLevelType () throws Exception {
+		createEntities();
+		actualAccessLevel = accessLevelService.getByAccessLevelType(AccessLevelType.ADMIN);
+		Assert.assertEquals("getByAccessLevelType() method failed: ", expectedAccessLevel, actualAccessLevel);
+		delete();
 	}
 
 	@After

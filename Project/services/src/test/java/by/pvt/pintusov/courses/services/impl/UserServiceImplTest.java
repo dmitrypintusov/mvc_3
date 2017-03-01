@@ -16,7 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.Serializable;
 
 /**
- * Created by USER on 09.01.17.
+ * Testing user service
+ * Created by dpintusov on 09.01.17.
  */
 @Transactional
 @ContextConfiguration ("/test-services-context.xml")
@@ -58,6 +59,22 @@ public class UserServiceImplTest {
 		delete();
 		actualUser = userService.getById((Integer) userId);
 		Assert.assertNull("delete() method failed: ", actualUser);
+	}
+
+	@Test
+	public void testGetUserByLogin () throws  Exception {
+		createEntities();
+		actualUser = userService.getUserByLogin(expectedUser.getLogin());
+		Assert.assertEquals("getUserByLogin() method failed: ", expectedUser, actualUser);
+		delete();
+	}
+
+	@Test
+	public void testCheckIsUserNew () throws Exception {
+		createEntities();
+		boolean isNew;
+		isNew = userService.checkIsNewUser(expectedUser.getLogin());
+		Assert.assertFalse("checkIsUserNew() method failed: ", isNew);
 	}
 
 	@After

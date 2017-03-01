@@ -1,8 +1,9 @@
 package by.pvt.pintusov.courses.enums;
 
 /**
+ * Service constants
  * Project: courses
- * Created by: USER
+ * Created by: dpintusov
  * Date: 24.01.17.
  */
 public class ServiceConstants {

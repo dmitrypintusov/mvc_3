@@ -1,40 +1,28 @@
 package by.pvt.pintusov.courses.services.impl;
 
-import by.pvt.pintusov.courses.dao.IAccessLevelDao;
 import by.pvt.pintusov.courses.dao.ICourseDao;
-import by.pvt.pintusov.courses.dao.Impl.CourseDaoImpl;
 import by.pvt.pintusov.courses.enums.CourseStatusType;
 import by.pvt.pintusov.courses.enums.ServiceConstants;
 import by.pvt.pintusov.courses.exceptions.DaoException;
 import by.pvt.pintusov.courses.exceptions.ServiceException;
-import by.pvt.pintusov.courses.pojos.AccessLevel;
-import by.pvt.pintusov.courses.pojos.Archive;
 import by.pvt.pintusov.courses.pojos.Course;
-import by.pvt.pintusov.courses.pojos.User;
 import by.pvt.pintusov.courses.services.AbstractService;
 import by.pvt.pintusov.courses.services.ICourseService;
-import by.pvt.pintusov.courses.utils.TransactionUtil;
 import org.apache.log4j.Logger;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
-import org.springframework.transaction.support.TransactionCallback;
 
-import java.io.Serializable;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Set;
 
 /**
+ * Course service implementation
+ * with transaction support
  * Project: courses
- * Created by: USER
+ * Created by: dpintusov
  * Date: 24.01.17.
  */
 @Service

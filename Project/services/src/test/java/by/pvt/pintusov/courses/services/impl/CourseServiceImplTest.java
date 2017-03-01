@@ -14,8 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.Serializable;
 
 /**
+ * Testing course service
  * Project: courses
- * Created by: USER
+ * Created by: dpintusov
  * Date: 24.01.17.
  */
 @Transactional
@@ -57,6 +58,23 @@ public class CourseServiceImplTest {
 		delete();
 		actualCourse = courseService.getById((Integer) courseId);
 		Assert.assertNull("delete() method failed: ", actualCourse);
+	}
+
+	@Test
+	public void testGetByCourseName () throws Exception {
+		createEntities();
+		actualCourse = courseService.getByCourseName(expectedCourse.getCourseName());
+		Assert.assertEquals("getByCourseName() method failed: ", expectedCourse, actualCourse);
+		delete();
+	}
+
+	@Test
+	public void testIsCourseStatusEnded () throws Exception {
+		createEntities();
+		boolean isEnded;
+		isEnded = courseService.isCourseStatusEnded(expectedCourse.getCourseName());
+		Assert.assertFalse("isCourseStatusEnded() method failed: ", isEnded);
+		delete();
 	}
 
 	@After

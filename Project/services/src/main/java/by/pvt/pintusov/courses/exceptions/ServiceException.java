@@ -2,8 +2,8 @@ package by.pvt.pintusov.courses.exceptions;
 
 /**
  * Service Exception
- * @author pintusov
- * @version 1.1
+ * @author dpintusov
+ * @version 1.2
  */
 public class ServiceException extends Exception {
 	public ServiceException() {

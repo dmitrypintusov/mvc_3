@@ -1,8 +1,6 @@
 package by.pvt.pintusov.courses.services.impl;
 
 import by.pvt.pintusov.courses.dao.IAccessLevelDao;
-import by.pvt.pintusov.courses.dao.ICourseDao;
-import by.pvt.pintusov.courses.dao.IMarkDao;
 import by.pvt.pintusov.courses.dao.IUserDao;
 import by.pvt.pintusov.courses.enums.AccessLevelType;
 import by.pvt.pintusov.courses.enums.ServiceConstants;
@@ -22,7 +20,8 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 /**
  * User service implementation
- * @author pintusov
+ *  with transaction support
+ * @author dpintusov
  * @version 1.2
  */
 
@@ -35,10 +34,6 @@ public class UserServiceImpl extends AbstractService <User> implements IUserServ
 	private IUserDao userDao;
 	@Autowired
 	private IAccessLevelDao accessLevelDao;
-	@Autowired
-	private ICourseDao courseDao;
-	@Autowired
-	private IMarkDao markDao;
 
 	@Autowired
 	public UserServiceImpl (IUserDao userDao) {

@@ -21,8 +21,10 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import java.util.Calendar;
 
 /**
+ * Mark service implementation
+ * with transaction support
  * Project: courses
- * Created by: USER
+ * Created by: dpintusov
  * Date: 24.01.17.
  */
 @Service

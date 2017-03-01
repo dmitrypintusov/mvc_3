@@ -1,19 +1,17 @@
 package by.pvt.pintusov.courses.services.impl;
 
 import by.pvt.pintusov.courses.dao.IArchiveDao;
-import by.pvt.pintusov.courses.dao.Impl.ArchiveDaoImpl;
 import by.pvt.pintusov.courses.exceptions.DaoException;
 import by.pvt.pintusov.courses.pojos.Archive;
 import by.pvt.pintusov.courses.services.AbstractService;
 import by.pvt.pintusov.courses.services.IArchiveService;
-import org.apache.log4j.Logger;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
+ * Archive service implementation
  * Project: courses
  * Created by: USER
  * Date: 24.01.17.

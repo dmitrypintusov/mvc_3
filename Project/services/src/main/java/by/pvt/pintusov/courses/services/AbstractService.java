@@ -16,9 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Service abstract class implements IService
- * @author pintusov
- * @version 1.1
+ * Service abstract class implementation
+ * Added transaction support
+ * @author dpintusov
+ * @version 1.2
  */
 
 abstract public class AbstractService <T extends AbstractEntity> implements IService <T> {
