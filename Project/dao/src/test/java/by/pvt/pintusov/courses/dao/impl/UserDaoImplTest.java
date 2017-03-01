@@ -23,8 +23,8 @@ import java.util.*;
 
 /**
  * Test User Dao
- * @author pintusov
- * @version 1.1
+ * @author dpintusov
+ * @version 1.2
  */
 
 @ContextConfiguration ("/test-dao-context.xml")
@@ -107,8 +107,6 @@ public class UserDaoImplTest {
 	public void testGetByLogin () throws Exception {
 		createEntities();
 		actualUser = userDao.getUserByLogin(expectedUser.getLogin());
-		User au1 =  userDao.getUserByLogin(expectedUser.getLogin());
-		User au2 =  userDao.getUserByLogin(expectedUser.getLogin());
 		Assert.assertEquals("getByLogin() method failed: ", expectedUser, actualUser);
 		delete();
 	}

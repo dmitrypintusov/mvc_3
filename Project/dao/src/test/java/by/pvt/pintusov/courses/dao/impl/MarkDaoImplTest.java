@@ -15,7 +15,7 @@ import java.util.Calendar;
 
 /**
  * Project: courses
- * Created by: USER
+ * Created by: dpintusov
  * Date: 25.01.17.
  */
 @ContextConfiguration("/test-dao-context.xml")

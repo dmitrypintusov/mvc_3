@@ -4,7 +4,10 @@ import by.pvt.pintusov.courses.dao.ICourseDao;
 import by.pvt.pintusov.courses.enums.CourseStatusType;
 import by.pvt.pintusov.courses.pojos.Course;
 import by.pvt.pintusov.courses.utils.EntityBuilder;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -13,10 +16,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Project: courses
- * Created by: USER
+ * Created by: dpintusov
  * Date: 25.01.17.
  */
 @ContextConfiguration("/test-dao-context.xml")
@@ -26,6 +30,9 @@ public class CourseDaoImplTest {
 	private Course expectedCourse;
 	private Course actualCourse;
 	private Serializable courseId;
+	private int recordsPerPage;
+	private int pageNumber;
+	private String sorting;
 
 	@Autowired
 	private ICourseDao courseDao;
@@ -33,6 +40,9 @@ public class CourseDaoImplTest {
 	@Before
 	public void setUp() throws Exception {
 		expectedCourse = EntityBuilder.buildCourse("TEST", 100, CourseStatusType.OPEN, Calendar.getInstance(), Calendar.getInstance(), null);
+		recordsPerPage = 3;
+		pageNumber = 1;
+		sorting = "";
 	}
 
 	@Test
@@ -73,6 +83,22 @@ public class CourseDaoImplTest {
 		boolean isCourseStatusEnded;
 		isCourseStatusEnded = courseDao.isCourseStatusEnded(expectedCourse.getCourseName());
 		Assert.assertFalse("isCourseStatusEnded() method failed: ", isCourseStatusEnded);
+	}
+
+	@Test
+	public void testGetCourses () throws Exception {
+		createEntities();
+		List<Course> list = courseDao.getCourses(recordsPerPage,pageNumber, "");
+		Assert.assertNotNull(list);
+		delete();
+	}
+
+	@Test
+	public void testGetByCourseName () throws Exception {
+		createEntities();
+		actualCourse = courseDao.getByCourseName(expectedCourse.getCourseName());
+		Assert.assertEquals("getbyCourseName() method failed: ", expectedCourse, actualCourse);
+		delete();
 	}
 
 	@After

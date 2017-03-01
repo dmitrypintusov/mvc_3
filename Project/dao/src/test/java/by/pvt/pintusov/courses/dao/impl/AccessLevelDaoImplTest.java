@@ -59,6 +59,13 @@ public class AccessLevelDaoImplTest {
 	}
 
 	@Test
+	public void testGetByAccessLevelType () throws Exception {
+		createEntities();
+		actualAccessLevel = accessLevelDao.getByAccessLevelType(AccessLevelType.ADMIN);
+		Assert.assertEquals("load() method failed: ", expectedAccessLevel, actualAccessLevel);
+	}
+
+	@Test
 	public void testDelete () throws Exception {
 		createEntities();
 		delete();
