@@ -8,8 +8,8 @@ import java.util.Set;
 
 /**
  * Describes the entity <strong>AccessLevel</strong>
- * @author pintusov
- * @version 1.1
+ * @author dpintusov
+ * @version 1.2
  */
 
 @Entity

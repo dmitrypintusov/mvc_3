@@ -1,12 +1,20 @@
 package by.pvt.pintusov.courses.dto;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.validation.constraints.*;
 
 /**
+ * USER DATA ACCESS OBJECT class
+ * used for validation inputs
  * Project name: courses
- * Created by Дмитрий
+ * Created by dpintusov
  * Date: 22.01.2017.
  */
+
+@Data
+@NoArgsConstructor
 public class UserDTO {
 	@Size(min = 2, max = 20, message = "First name should be between 2 and 20 characters long")
 	@Pattern(regexp = "^[a-zA-Zа-яА-Я0-9]+$", message = "First name should be alphanumeric with no spaces")
@@ -39,64 +47,6 @@ public class UserDTO {
 	@Size(min = 7, max = 7, message = "Incorrect value of access role")
 	@NotNull(message = "Access role cannot be empty")
 	private String accessRole;
-
-	public UserDTO() {}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-	public String getPassword_1() {
-		return password_1;
-	}
-
-	public void setPassword_1(String password_1) {
-		this.password_1 = password_1;
-	}
-
-	public String getPassword_2() {
-		return password_2;
-	}
-
-	public void setPassword_2(String password_2) {
-		this.password_2 = password_2;
-	}
-
-	public String getCourseName() {
-		return courseName;
-	}
-
-	public void setCourseName(String courseName) {
-		this.courseName = courseName;
-	}
-
-	public String getAccessRole() {
-		return accessRole;
-	}
-
-	public void setAccessRole(String accessRole) {
-		this.accessRole = accessRole;
-	}
 
 	@Override
 	public boolean equals(Object o) {

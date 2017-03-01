@@ -9,8 +9,8 @@ import java.util.Set;
 
 /**
  * Utility class for building entities
- * @author pintusov
- * @version 1.1
+ * @author dpintusov
+ * @version 1.2
  */
 public class EntityBuilder {
 	private EntityBuilder() {}

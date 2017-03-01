@@ -1,15 +1,16 @@
 package by.pvt.pintusov.courses.pojos;
 
-import lombok.Data;
-
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Describes the entity <strong>Archive</strong>
- * @author pintusov
- * @version 1.1
+ * @author dpintusov
+ * @version 1.2
  */
 
 @Entity

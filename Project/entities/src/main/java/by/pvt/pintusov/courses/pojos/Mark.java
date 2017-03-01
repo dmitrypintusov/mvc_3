@@ -1,14 +1,17 @@
 package by.pvt.pintusov.courses.pojos;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.Calendar;
 
 /**
  * Describes the entity <strong>Mark</strong>
- * @author pintusov
- * @version 1.1
+ * @author dpintusov
+ * @version 1.2
  */
 
+@Data
 @Entity
 public class Mark extends AbstractEntity {
 	private static final long serialVersionUID = 4L;
@@ -16,12 +19,6 @@ public class Mark extends AbstractEntity {
 	public Mark() { super(); }
 
 	@Column (nullable = false, updatable = false)
-	public Integer getMark() {
-		return mark;
-	}
-	public void setMark(Integer mark) {
-		this.mark = mark;
-	}
 	private Integer mark;
 
 	@ManyToOne
@@ -44,12 +41,6 @@ public class Mark extends AbstractEntity {
 
 	@Column
 	@Temporal(value = TemporalType.TIMESTAMP)
-	public Calendar getDate() {
-		return date;
-	}
-	public void setDate(Calendar date) {
-		this.date = date;
-	}
 	private Calendar date;
 
 	@Override

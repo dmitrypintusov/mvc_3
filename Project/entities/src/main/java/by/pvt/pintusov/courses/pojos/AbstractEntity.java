@@ -1,5 +1,7 @@
 package by.pvt.pintusov.courses.pojos;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -7,16 +9,16 @@ import java.io.Serializable;
 
 /**
  * Describes the abstract entity <strong>AbstractEntity</strong>
- * @author pintusov
- * @version 1.1
+ * @author dpintusov
+ * @version 1.2
  */
 
+@NoArgsConstructor
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
+@Data
 public abstract class AbstractEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	public AbstractEntity() {}
 
 	@Id
 	@GeneratedValue(generator = "identity")

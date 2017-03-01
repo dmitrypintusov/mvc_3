@@ -9,8 +9,8 @@ import java.util.Set;
 
 /**
  * Describes the entity <strong>Course</strong>
- * @author pintusov
- * @version 1.1
+ * @author dpintusov
+ * @version 1.2
  */
 
 @Entity
@@ -76,13 +76,13 @@ public class Course extends AbstractEntity {
 	public void setUser(Set<User> users) {
 		this.users = users;
 	}
+	private Set<User> users;
 	public void addUser(User user){
 		if(users == null){
 			users = new HashSet<>();
 		}
 		users.add(user);
 	}
-	private Set<User> users;
 
 	@Override
 	public boolean equals(Object o) {

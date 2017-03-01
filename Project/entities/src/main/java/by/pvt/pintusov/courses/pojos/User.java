@@ -11,8 +11,8 @@ import java.util.Set;
 
 /**
  * Describes the entity <strong>User</strong>
- * @author pintusov
- * @version 1.1
+ * @author dpintusov
+ * @version 1.2
  */
 
 @Data
