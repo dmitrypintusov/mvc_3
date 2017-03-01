@@ -22,6 +22,7 @@ public class Parameters {
 	public static final String COURSE_ARCHIVE = "archiveCourse";
 	public static final String COURSE_END = "endCourse";
 
+	public static final String MARK_LIST = "markList";
 	/*ERROR PARAMETERS*/
 	public static final String ERROR_DATABASE = "errorDatabase";
 	public static final String ERROR_LOGIN_OR_PASSWORD = "errorLoginOrPassword";

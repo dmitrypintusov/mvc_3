@@ -18,7 +18,7 @@
                 <td align="center"><strong><spring:message code="page.student.teachers.lastname"/></strong></td>
             </tr>
             <c:forEach var="teacher" items="${userList}">
-                <tr>
+                <tr align="center">
                     <td><c:out value="${teacher.firstName}" /></td>
                     <td><c:out value="${teacher.lastName}" /></td>
                 </tr>

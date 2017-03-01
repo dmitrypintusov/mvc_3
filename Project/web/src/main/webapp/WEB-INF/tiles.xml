@@ -94,6 +94,10 @@
         <put-attribute name="title" value="page.common.main.title"/>
         <put-attribute name="body" value="/WEB-INF/views/student/teachers.jspx"/>
     </definition>
+    <definition name="student/marks" extends="student_default">
+        <put-attribute name="title" value="page.common.main.title"/>
+        <put-attribute name="body" value="/WEB-INF/views/student/marks.jspx"/>
+    </definition>
 
     <!-- ERROR PAGE -->
     <definition name="error" extends="home_template">

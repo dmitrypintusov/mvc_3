@@ -5,8 +5,10 @@ import by.pvt.pintusov.courses.constants.Parameters;
 import by.pvt.pintusov.courses.exceptions.ServiceException;
 import by.pvt.pintusov.courses.managers.PagePathManager;
 import by.pvt.pintusov.courses.pojos.Course;
+import by.pvt.pintusov.courses.pojos.Mark;
 import by.pvt.pintusov.courses.pojos.User;
 import by.pvt.pintusov.courses.services.ICourseService;
+import by.pvt.pintusov.courses.services.IMarkService;
 import by.pvt.pintusov.courses.services.IUserService;
 import by.pvt.pintusov.courses.utils.PrincipalUtil;
 import org.apache.log4j.Logger;
@@ -39,6 +41,8 @@ public class StudentController {
 	private IUserService userService;
 	@Autowired
 	private ICourseService courseService;
+	@Autowired
+	private IMarkService markService;
 	@Autowired
 	private PagePathManager pagePathManager;
 	@Autowired
@@ -93,6 +97,21 @@ public class StudentController {
 			List<User> userList = userService.getAll();
 			modelMap.addAttribute(Parameters.USERS_LIST, userList);
 			pagePath = pagePathManager.getProperty(PagePath.STUDENT_SHOW_TEACHERS_PAGE_PATH);
+		} catch (ServiceException e) {
+			modelMap.addAttribute(Parameters.ERROR_DATABASE, messageSource.getMessage("message.databaseerror", null, locale));
+			pagePath = pagePathManager.getProperty(PagePath.ERROR_PAGE_PATH);
+		}
+		return pagePath;
+	}
+
+	@RequestMapping (value = "/marks", method = GET)
+	public String showMarksPage (ModelMap modelMap,
+	                             Locale locale) {
+		String pagePath;
+		try {
+			List<Mark> markList = markService.getAll();
+			modelMap.addAttribute(Parameters.MARK_LIST, markList);
+			pagePath = pagePathManager.getProperty(PagePath.STUDENT_SHOW_MARKS_PAGE_PATH);
 		} catch (ServiceException e) {
 			modelMap.addAttribute(Parameters.ERROR_DATABASE, messageSource.getMessage("message.databaseerror", null, locale));
 			pagePath = pagePathManager.getProperty(PagePath.ERROR_PAGE_PATH);
