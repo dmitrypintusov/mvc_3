@@ -1,7 +1,6 @@
 package by.pvt.pintusov.courses.services;
 
 import by.pvt.pintusov.courses.dao.IDao;
-import by.pvt.pintusov.courses.enums.ServiceConstants;
 import by.pvt.pintusov.courses.exceptions.DaoException;
 import by.pvt.pintusov.courses.exceptions.ServiceException;
 import by.pvt.pintusov.courses.pojos.AbstractEntity;
@@ -41,10 +40,8 @@ abstract public class AbstractService <T extends AbstractEntity> implements ISer
 				Serializable id = null;
 				try {
 					id = abstractDao.saveOrUpdate(entity);
-					logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
-					logger.info(entity);
 				} catch (DaoException e) {
-					logger.error(ServiceConstants.TRANSACTION_FAILED + e);
+					logger.error(e);
 					status.setRollbackOnly();
 				}
 				return id;
@@ -60,11 +57,9 @@ abstract public class AbstractService <T extends AbstractEntity> implements ISer
 				T entity = null;
 				try {
 					entity = (T) abstractDao.getById(id);
-					logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
-					logger.info(entity);
 				}
 				catch (DaoException e) {
-					logger.error(ServiceConstants.TRANSACTION_FAILED + e);
+					logger.error(e);
 					status.setRollbackOnly();
 				}
 				return entity;
@@ -80,10 +75,8 @@ abstract public class AbstractService <T extends AbstractEntity> implements ISer
 				List<T> list = new ArrayList<T>();
 				try {
 					list = abstractDao.getAll();
-					logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
-					logger.info(list);
 				} catch (DaoException e) {
-					logger.error(ServiceConstants.TRANSACTION_FAILED + e);
+					logger.error(e);
 					status.setRollbackOnly();
 				}
 				return list;
@@ -98,11 +91,9 @@ abstract public class AbstractService <T extends AbstractEntity> implements ISer
 			public Void doInTransaction (TransactionStatus status) {
 				try {
 					abstractDao.delete(id);
-					logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
-					logger.info(ServiceConstants.DELETE_MESSAGE + id);
 				}
 				catch (DaoException e) {
-					logger.error(ServiceConstants.TRANSACTION_FAILED + e);
+					logger.error(e);
 					status.setRollbackOnly();
 				}
 				return null;

@@ -57,12 +57,10 @@ public class MarkServiceImpl extends AbstractService<Mark> implements IMarkServi
 			user.addMark(studentMark);
 			userDao.saveOrUpdate(user);
 			markDao.saveOrUpdate(studentMark);
-			logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
-			logger.info(studentMark);
 		} catch (DaoException e) {
-			logger.error(ServiceConstants.TRANSACTION_FAILED + e);
+			logger.error(e);
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED + e);
+			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED, e);
 		};
 	}
 }

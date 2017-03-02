@@ -78,23 +78,4 @@
 
     <tx:annotation-driven transaction-manager="testDaoTransactionManager" proxy-target-class="true"/>
 
-    <bean id="courseDao" class="by.pvt.pintusov.courses.dao.Impl.CourseDaoImpl">
-        <constructor-arg ref="sessionFactory" />
-    </bean>
-
-    <bean id="userDao" class="by.pvt.pintusov.courses.dao.Impl.UserDaoImpl">
-        <constructor-arg ref="sessionFactory" />
-    </bean>
-
-    <bean id="markDao" class="by.pvt.pintusov.courses.dao.Impl.MarkDaoImpl">
-        <constructor-arg ref="sessionFactory" />
-    </bean>
-
-    <bean id="accessLevelDao" class="by.pvt.pintusov.courses.dao.Impl.AccessLevelDaoImpl">
-        <constructor-arg ref="sessionFactory" />
-    </bean>
-
-    <bean id="archiveDao" class="by.pvt.pintusov.courses.dao.Impl.ArchiveDaoImpl">
-        <constructor-arg ref="sessionFactory" />
-    </bean>
 </beans>

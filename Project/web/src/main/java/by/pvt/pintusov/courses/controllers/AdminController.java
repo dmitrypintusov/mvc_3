@@ -17,7 +17,6 @@ import by.pvt.pintusov.courses.services.IUserService;
 import by.pvt.pintusov.courses.utils.OrderingUtil;
 import by.pvt.pintusov.courses.utils.PaginationUtil;
 import by.pvt.pintusov.courses.utils.PrincipalUtil;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -26,7 +25,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Locale;
-
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -43,7 +41,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RequestMapping("/admin")
 @SessionAttributes("filter")
 public class AdminController {
-	private static Logger logger = Logger.getLogger(AdminController.class);
 
 	@Autowired
 	private IUserService userService;
@@ -125,8 +122,6 @@ public class AdminController {
 				Course course = courseService.getByCourseName(archiveCourse);
 				Archive archive = new Archive();
 				archive.addCourseToArchive(course);
-				logger.info(archive);
-				logger.info(course);
 				archiveService.saveOrUpdate(archive);
 				courseService.updateCourseStatus(course.getCourseName(), CourseStatusType.ARCHIVE);
 				modelMap.addAttribute(Parameters.SUCCESS_OPERATION, messageSource.getMessage("message.successoperation", null, locale));

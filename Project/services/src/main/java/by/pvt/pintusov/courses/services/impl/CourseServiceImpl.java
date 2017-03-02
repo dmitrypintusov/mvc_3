@@ -46,12 +46,11 @@ public class CourseServiceImpl extends AbstractService<Course> implements ICours
 		try {
 			Long numberOfRecords = courseDao.getNumberRecords();
 			numberOfPages = (int) Math.ceil(numberOfRecords * 1.0 / recordsPerPage);
-			logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
 		}
 		catch (DaoException e) {
-			logger.error(ServiceConstants.TRANSACTION_FAILED, e);
+			logger.error(e);
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED + e);
+			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED, e);
 		}
 		return numberOfPages;
 	}
@@ -62,12 +61,11 @@ public class CourseServiceImpl extends AbstractService<Course> implements ICours
 		List<Course> results;
 		try {
 			results = courseDao.getCourses(recordsPerPage, pageNumber, sorting);
-			logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
 		}
 		catch (DaoException e) {
-			logger.error(ServiceConstants.TRANSACTION_FAILED, e);
+			logger.error(e);
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED + e);
+			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED, e);
 		}
 		return results;
 	}
@@ -78,12 +76,10 @@ public class CourseServiceImpl extends AbstractService<Course> implements ICours
 			Course course = courseDao.getByCourseName(courseName);
 			course.setCourseStatus(courseStatus);
 			courseDao.saveOrUpdate(course);
-			logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
-			logger.info(course);
 		} catch (DaoException e) {
-			logger.error(ServiceConstants.TRANSACTION_FAILED, e);
+			logger.error(e);
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED + e);
+			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED, e);
 		}
 	}
 
@@ -94,12 +90,10 @@ public class CourseServiceImpl extends AbstractService<Course> implements ICours
 			course.setCourseStatus(courseStatus);
 			course.setStartDate(Calendar.getInstance());
 			courseDao.saveOrUpdate(course);
-			logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
-			logger.info(course);
 		} catch (DaoException e) {
-			logger.error(ServiceConstants.TRANSACTION_FAILED + e);
+			logger.error(e);
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED + e);
+			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED, e);
 		};
 	}
 
@@ -109,10 +103,8 @@ public class CourseServiceImpl extends AbstractService<Course> implements ICours
 		Course course;
 		try {
 			course = courseDao.getByCourseName(courseName);
-			logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
-			logger.info("Course with name " + courseName + " found.");
 		} catch (DaoException e) {
-			logger.error(ServiceConstants.TRANSACTION_FAILED, e);
+			logger.error(e);
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED, e);
 		}
@@ -125,9 +117,8 @@ public class CourseServiceImpl extends AbstractService<Course> implements ICours
 		boolean isEnded;
 		try {
 			isEnded = courseDao.isCourseStatusEnded(courseName);
-			logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
 		} catch (DaoException e) {
-			logger.error(ServiceConstants.TRANSACTION_FAILED, e);
+			logger.error(e);
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED, e);
 		}

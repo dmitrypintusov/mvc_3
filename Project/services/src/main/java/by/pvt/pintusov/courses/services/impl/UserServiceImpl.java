@@ -50,7 +50,7 @@ public class UserServiceImpl extends AbstractService <User> implements IUserServ
 
 		}
 		catch (DaoException e) {
-			logger.error(ServiceConstants.TRANSACTION_FAILED, e);
+			logger.error(e);
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED, e);
 		}
@@ -66,10 +66,8 @@ public class UserServiceImpl extends AbstractService <User> implements IUserServ
 			if (user == null) {
 				isNew = true;
 			}
-			logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
-			logger.info("User with login " +login + " is new");
 		} catch (DaoException e) {
-			logger.error(ServiceConstants.TRANSACTION_FAILED, e);
+			logger.error(e);
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED, e);
 		}
@@ -85,11 +83,8 @@ public class UserServiceImpl extends AbstractService <User> implements IUserServ
 			accessLevel.addUser(user);
 			userDao.saveOrUpdate(user);
 			accessLevelDao.saveOrUpdate(accessLevel);
-			logger.info(ServiceConstants.TRANSACTION_SUCCEEDED);
-			logger.info(user);
-			logger.info(accessLevel);
 		} catch (DaoException e) {
-			logger.error(ServiceConstants.TRANSACTION_FAILED, e);
+			logger.error(e);
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			throw new ServiceException(ServiceConstants.TRANSACTION_FAILED, e);
 		}

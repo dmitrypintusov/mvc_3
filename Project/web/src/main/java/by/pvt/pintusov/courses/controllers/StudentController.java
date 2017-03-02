@@ -11,7 +11,6 @@ import by.pvt.pintusov.courses.services.ICourseService;
 import by.pvt.pintusov.courses.services.IMarkService;
 import by.pvt.pintusov.courses.services.IUserService;
 import by.pvt.pintusov.courses.utils.PrincipalUtil;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -35,7 +34,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @Controller
 @RequestMapping(value = "/student")
 public class StudentController {
-	private static Logger logger = Logger.getLogger(StudentController.class);
 
 	@Autowired
 	private IUserService userService;

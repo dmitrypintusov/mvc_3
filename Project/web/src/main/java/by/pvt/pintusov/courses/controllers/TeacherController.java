@@ -138,7 +138,6 @@ public class TeacherController {
 			try {
 				if (!courseService.isCourseStatusEnded(endCourse)) {
 					Course course = courseService.getByCourseName(endCourse);
-					logger.info(course);
 					CourseStatusType courseStatus = CourseStatusType.ENDED;
 					courseService.updateCourseStatus(course.getCourseName(), courseStatus);
 					modelMap.addAttribute(Parameters.SUCCESS_OPERATION, messageSource.getMessage("message.successoperation", null, locale));
