@@ -1,2 +1,2 @@
-# mvc_2
-Maven+Hibernate
+# mvc_3
+Maven+Hibernate+Spring
